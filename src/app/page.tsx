@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import LoadingScreen from '@/components/LoadingScreen'
 import ScrollReveal from '@/components/ScrollReveal'
+import OceanAnimation from '@/components/OceanAnimation'
 
 // Colourway section data
 const colourways = [
@@ -98,36 +99,34 @@ export default function HomePage() {
         className="relative h-screen min-h-[700px] flex items-end overflow-hidden"
         style={{ backgroundColor: '#2D4F5C' }}
       >
-        {/* Hero background image placeholder (dark gradient as fallback) */}
+        {/* Ocean animation background */}
         <motion.div className="absolute inset-0" style={{ y: heroY }}>
+          {/* Base deep-ocean gradient */}
           <div
             className="absolute inset-0"
             style={{
-              background: `
-                linear-gradient(
-                  to bottom,
-                  rgba(45, 79, 92, 0.2) 0%,
-                  rgba(45, 79, 92, 0.5) 50%,
-                  rgba(45, 79, 92, 0.92) 100%
-                ),
-                linear-gradient(
-                  135deg,
-                  #1a4555 0%,
-                  #2D4F5C 30%,
-                  #1A8080 60%,
-                  #0d3040 100%
-                )
-              `,
+              background: `linear-gradient(
+                160deg,
+                #0a2535 0%,
+                #0d3040 25%,
+                #1a4555 50%,
+                #2D4F5C 75%,
+                #1A8080 100%
+              )`,
             }}
           />
-          {/* Simulated moody photographic atmosphere using layered gradients */}
+          {/* Canvas ocean animation: light beams + bubbles */}
+          <OceanAnimation />
+          {/* Darkening overlay so text remains readable */}
           <div
             className="absolute inset-0"
             style={{
-              backgroundImage: `
-                radial-gradient(ellipse 80% 60% at 60% 40%, rgba(26, 128, 128, 0.15) 0%, transparent 70%),
-                radial-gradient(ellipse 50% 40% at 20% 70%, rgba(184, 92, 56, 0.08) 0%, transparent 60%)
-              `,
+              background: `linear-gradient(
+                to bottom,
+                rgba(10, 37, 53, 0.25) 0%,
+                rgba(13, 48, 64, 0.45) 55%,
+                rgba(10, 30, 42, 0.88) 100%
+              )`,
             }}
           />
         </motion.div>
