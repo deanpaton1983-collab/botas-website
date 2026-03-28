@@ -23,14 +23,23 @@ const categoryStyles: Record<string, { bg: string; text: string; badge: string }
   'museum': { bg: '#2D4F5C', text: '#7ECECE', badge: '#4A9B8E' },
 }
 
-// [PLACEHOLDER: Articles — replace with CMS data]
+// [PLACEHOLDER: Articles - replace with CMS data]
 const articles = [
+  {
+    id: 10,
+    category: 'museum',
+    date: 'March 2026',
+    title: 'The World\'s First Museum Dedicated to the Battle of the Atlantic is Coming to Birkenhead',
+    excerpt: 'Opening Spring 2027, the Battle of the Atlantic Story will open on the banks of the River Mersey in Birkenhead, becoming the world\'s first museum dedicated entirely to the six-year struggle for control of the Atlantic Ocean.',
+    readTime: '12 min read',
+    convoyCode: 'BA 27',
+  },
   {
     id: 1,
     category: 'museum',
     date: 'March 2026',
     title: 'BOTAS Secures Planning Approval for Woodside Development',
-    excerpt: '// [PLACEHOLDER: Article excerpt] Planning consent has been granted for the new Battle of the Atlantic Story visitor centre on the banks of the River Mersey at Woodside, Birkenhead — marking a landmark moment in the project\'s development.',
+    excerpt: '// [PLACEHOLDER: Article excerpt] Planning consent has been granted for the new Battle of the Atlantic Story visitor centre on the banks of the River Mersey at Woodside, Birkenhead - marking a landmark moment in the project\'s development.',
     readTime: '3 min read',
     convoyCode: 'MN 26',
   },
@@ -39,7 +48,7 @@ const articles = [
     category: 'warfare-at-sea',
     date: 'February 2026',
     title: 'New Research Sheds Light on Black May: The Turning Point in the Atlantic Campaign',
-    excerpt: '// [PLACEHOLDER: Article excerpt] May 1943 — known as "Black May" — marked the decisive turning point in the Battle of the Atlantic, when Allied anti-submarine technology finally overwhelmed the U-boat threat. New archival research reveals fresh details about the month that changed everything.',
+    excerpt: '// [PLACEHOLDER: Article excerpt] May 1943 - known as "Black May" - marked the decisive turning point in the Battle of the Atlantic, when Allied anti-submarine technology finally overwhelmed the U-boat threat. New archival research reveals fresh details about the month that changed everything.',
     readTime: '6 min read',
     convoyCode: 'ON 67',
   },
@@ -48,7 +57,7 @@ const articles = [
     category: 'life-at-sea',
     date: 'February 2026',
     title: 'The Lascar Sailors: Recovering the Hidden Story of the Merchant Navy\'s Global Crew',
-    excerpt: '// [PLACEHOLDER: Article excerpt] Yemeni sailors, often referred to as "lascars", were employed on British merchant ships performing essential roles in engine rooms and as deckhands. Their contribution to the Atlantic campaign has long been overlooked — a story this museum is determined to tell.',
+    excerpt: '// [PLACEHOLDER: Article excerpt] Yemeni sailors, often referred to as "lascars", were employed on British merchant ships performing essential roles in engine rooms and as deckhands. Their contribution to the Atlantic campaign has long been overlooked - a story this museum is determined to tell.',
     readTime: '5 min read',
     convoyCode: 'SL 125',
   },
@@ -56,7 +65,7 @@ const articles = [
     id: 4,
     category: 'signals-secrets',
     date: 'January 2026',
-    title: '"Radar Was Our First Great Invention" — The Technology That Won the Atlantic',
+    title: '"Radar Was Our First Great Invention" - The Technology That Won the Atlantic',
     excerpt: '// [PLACEHOLDER: Article excerpt] Roy \'Dick\' Dykes, a radar operator with Coastal Command, knew that the small black box above his station was changing the war. His testimony, along with newly released documents from GCHQ, sheds new light on the intelligence war in the Atlantic.',
     readTime: '7 min read',
     convoyCode: 'HX 236',
@@ -75,7 +84,7 @@ const articles = [
     category: 'supply-lines',
     date: 'December 2025',
     title: 'Convoy HX 236: The Story of a Single Atlantic Crossing',
-    excerpt: '// [PLACEHOLDER: Article excerpt] In April 1943, Convoy HX 236 departed Halifax, Nova Scotia, with 36 merchant vessels carrying vital supplies for a besieged Britain. The story of that crossing — the threats faced, the ships lost, the men who survived — tells the story of the Battle of the Atlantic in microcosm.',
+    excerpt: '// [PLACEHOLDER: Article excerpt] In April 1943, Convoy HX 236 departed Halifax, Nova Scotia, with 36 merchant vessels carrying vital supplies for a besieged Britain. The story of that crossing - the threats faced, the ships lost, the men who survived - tells the story of the Battle of the Atlantic in microcosm.',
     readTime: '8 min read',
     convoyCode: 'HX 236',
   },
@@ -84,7 +93,7 @@ const articles = [
     category: 'warfare-at-sea',
     date: 'December 2025',
     title: 'The Wolf Packs: How German U-boats Coordinated Their Attacks',
-    excerpt: '// [PLACEHOLDER: Article excerpt] The Rudeltaktik — the Wolf Pack tactic — was Grand Admiral Karl Dönitz\'s masterstroke. By coordinating multiple U-boats to attack convoys simultaneously, he hoped to overwhelm the Allied escorts. Understanding how it worked — and why it ultimately failed — is central to understanding the Battle of the Atlantic.',
+    excerpt: '// [PLACEHOLDER: Article excerpt] The Rudeltaktik - the Wolf Pack tactic - was Grand Admiral Karl Dönitz\'s masterstroke. By coordinating multiple U-boats to attack convoys simultaneously, he hoped to overwhelm the Allied escorts. Understanding how it worked - and why it ultimately failed - is central to understanding the Battle of the Atlantic.',
     readTime: '6 min read',
     convoyCode: 'SC 48',
   },
@@ -102,7 +111,7 @@ const articles = [
     category: 'signals-secrets',
     date: 'November 2025',
     title: 'Bletchley Park and the Battle of the Atlantic: How Enigma Changed Everything',
-    excerpt: '// [PLACEHOLDER: Article excerpt] The breaking of the Naval Enigma cipher — and the Allied failure to maintain that intelligence advantage when Germany upgraded its machines in 1942 — is one of the most dramatic intelligence stories of the Second World War.',
+    excerpt: '// [PLACEHOLDER: Article excerpt] The breaking of the Naval Enigma cipher - and the Allied failure to maintain that intelligence advantage when Germany upgraded its machines in 1942 - is one of the most dramatic intelligence stories of the Second World War.',
     readTime: '7 min read',
     convoyCode: 'BP 43',
   },
@@ -117,7 +126,7 @@ export default function NewsPage() {
 
   return (
     <>
-      {/* ── HERO ─────────────────────────────────────────────── */}
+      {/* HERO */}
       <section
         className="relative py-36 overflow-hidden"
         style={{ backgroundColor: '#2D4F5C' }}
@@ -157,7 +166,7 @@ export default function NewsPage() {
         </div>
       </section>
 
-      {/* ── FILTER BAR ───────────────────────────────────────── */}
+      {/* FILTER BAR */}
       <section
         className="sticky top-20 z-50 border-b"
         style={{ backgroundColor: '#2D4F5C', borderColor: 'rgba(126, 206, 206, 0.15)' }}
@@ -187,7 +196,7 @@ export default function NewsPage() {
         </div>
       </section>
 
-      {/* ── ARTICLE GRID ─────────────────────────────────────── */}
+      {/* ARTICLE GRID */}
       <section
         className="relative py-16 lg:py-24 overflow-hidden"
         style={{ backgroundColor: '#2D4F5C' }}
@@ -295,7 +304,7 @@ export default function NewsPage() {
         </div>
       </section>
 
-      {/* ── NEWSLETTER CTA ───────────────────────────────────── */}
+      {/* NEWSLETTER CTA */}
       <section
         className="relative py-20 overflow-hidden"
         style={{ backgroundColor: '#4A9B8E' }}
@@ -338,4 +347,4 @@ export default function NewsPage() {
       </section>
     </>
   )
-}
+              }
