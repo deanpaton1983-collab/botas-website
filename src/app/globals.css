@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --slate-deep: #2D4F5C;
+  --teal-primary: #1A8080;
+  --teal-light: #7ECECE;
+  --teal-mid: #4A9B8E;
+  --orange-burnt: #B85C38;
+  --orange-warm: #E07B45;
+  --sand: #F5ECD7;
+  --offwhite: #F8F4EE;
+  --grey-mid: #9BA8A8;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--slate-deep);
+  color: var(--offwhite);
+  font-family: 'Montserrat', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Naval chart grid texture */
+.naval-grid {
+  background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 79px,
+      rgba(126, 206, 206, 0.12) 79px,
+      rgba(126, 206, 206, 0.12) 80px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 79px,
+      rgba(126, 206, 206, 0.12) 79px,
+      rgba(126, 206, 206, 0.12) 80px
+    );
+}
+
+/* Dashed naval chart grid */
+.naval-grid-dashed {
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 38px,
+      rgba(126, 206, 206, 0.1) 38px,
+      rgba(126, 206, 206, 0.1) 39px,
+      transparent 39px,
+      transparent 46px,
+      rgba(126, 206, 206, 0.1) 46px,
+      rgba(126, 206, 206, 0.1) 47px,
+      transparent 47px,
+      transparent 80px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 38px,
+      rgba(126, 206, 206, 0.1) 38px,
+      rgba(126, 206, 206, 0.1) 39px,
+      transparent 39px,
+      transparent 46px,
+      rgba(126, 206, 206, 0.1) 46px,
+      rgba(126, 206, 206, 0.1) 47px,
+      transparent 47px,
+      transparent 80px
+    );
+}
+
+/* Convoy route diagonal line */
+.convoy-line {
+  position: relative;
+  overflow: hidden;
+}
+
+.convoy-line::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -20%;
+  width: 140%;
+  height: 1px;
+  background: rgba(126, 206, 206, 0.25);
+  transform: rotate(-8deg);
+  transform-origin: center;
+  top: 50%;
+}
+
+/* Quote block style */
+.quote-block {
+  font-family: 'Courier Prime', monospace;
+  background-color: var(--orange-burnt);
+  color: var(--offwhite);
+  display: inline;
+  padding: 2px 6px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  line-height: 1.8;
+}
+
+/* Quote block teal variant */
+.quote-block-teal {
+  background-color: var(--teal-mid);
+}
+
+/* Identification card motif */
+.id-card {
+  background-color: var(--sand);
+  border-radius: 4px;
+  position: relative;
+}
+
+.id-card-badge {
+  background-color: var(--orange-burnt);
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--slate-deep);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--teal-primary);
+  border-radius: 3px;
+}
+
+/* Sonar animation rings */
+@keyframes sonarExpand {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+.sonar-ring {
+  animation: sonarExpand 4s ease-out infinite;
+}
+
+.sonar-ring:nth-child(2) { animation-delay: 1s; }
+.sonar-ring:nth-child(3) { animation-delay: 2s; }
+.sonar-ring:nth-child(4) { animation-delay: 3s; }
+
+/* Page transition */
+.page-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+
+/* Section reveal utility */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Uppercase tracking headings */
+.heading-display {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+/* Thin rule */
+.rule-teal {
+  border-color: var(--teal-light);
+  opacity: 0.3;
+}
+
+/* Ship silhouette SVG helpers */
+.silhouette {
+  opacity: 0.08;
+  pointer-events: none;
+  user-select: none;
+}
