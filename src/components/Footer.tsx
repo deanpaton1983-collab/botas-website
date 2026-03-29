@@ -5,6 +5,7 @@ import Image from 'next/image'
 
 const navLinks = [
   { href: '/', label: 'Home' },
+  { href: '/museum', label: 'Museum' },
   { href: '/u-boat', label: 'The U-Boat' },
   { href: '/memorial', label: 'Memorial' },
   { href: '/news', label: 'News' },
@@ -164,13 +165,13 @@ export default function Footer() {
             className="font-montserrat text-xs"
             style={{ color: 'rgba(248, 244, 238, 0.4)', letterSpacing: '0.05em' }}
           >
-            © 2026 Battle of the Atlantic Story. All rights reserved.
+            Â© 2026 Battle of the Atlantic Story. All rights reserved.
           </p>
           <p
             className="font-montserrat text-xs"
             style={{ color: 'rgba(248, 244, 238, 0.4)' }}
           >
-            Registered charity · Opening Autumn 2026
+            Registered charity Â· Opening Autumn 2026
           </p>
         </div>
       </div>
