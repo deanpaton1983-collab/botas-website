@@ -26,11 +26,34 @@ export default function ContactPage() {
     newsletter: false,
   })
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState('')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // [PLACEHOLDER: Form submission logic — connect to email service / CMS]
-    setSubmitted(true)
+    setSubmitting(true)
+    setError('')
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        setError(data.error || 'Something went wrong. Please try again.')
+        return
+      }
+
+      setSubmitted(true)
+    } catch {
+      setError('Failed to send your message. Please try again or email us directly at info@battleoftheatlantic.org.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   const handleChange = (
@@ -194,7 +217,7 @@ export default function ContactPage() {
                   </p>
                   <div className="space-y-3">
                     {[
-                      { mode: 'Ferry', detail: 'Mersey Ferry from Pier Head Liverpool — 10 minutes' },
+                      { mode: 'Ferry', detail: 'Mersey Ferry from Pier Head Liverpool - 10 minutes' },
                       { mode: 'Bus', detail: 'Routes 432 and 433 from Hamilton Square' },
                       { mode: 'Train', detail: 'Birkenhead Central, 10-minute walk' },
                       { mode: 'Car', detail: 'CH41 6DU · Free visitor parking on site' },
@@ -335,7 +358,7 @@ export default function ContactPage() {
                               style={{ color: 'rgba(248,244,238,0.5)', letterSpacing: '0.12em' }}
                             >
                               Organisation
-                            </label>
+                           </label>
                             <input
                               type="text"
                               name="organisation"
@@ -425,17 +448,39 @@ export default function ContactPage() {
                           </label>
                         </div>
 
+                        {/* Error message */}
+                        {error && (
+                          <div
+                            className="p-4 font-montserrat text-sm"
+                            style={{
+                       </div>
+
+                        {/* Error message */}
+                        {error && (
+                          <div
+                            className="p-4 font-montserrat text-sm"
+                            style={{
+                              background: 'rgba(184,92,56,0.15)',
+                              border: '1px solid rgba(184,92,56,0.4)',
+                              color: '#F5ECD7',
+                            }}
+                          >
+                            {error}
+                          </div>
+                        )}
+
                         {/* Submit */}
                         <button
                           type="submit"
-                          className="w-full font-montserrat font-bold text-sm uppercase py-4 transition-all duration-200 hover:opacity-90 mt-2"
+                          disabled={submitting}
+                          className="w-full font-montserrat font-bold text-sm uppercase py-4 transition-all duration-200 hover:opacity-90 mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
                           style={{
                             background: '#7ECECE',
                             color: '#2D4F5C',
                             letterSpacing: '0.15em',
                           }}
                         >
-                          Send Message
+                          {submitting ? 'Sending...' : 'Send Message'}
                         </button>
 
                         <p
@@ -456,7 +501,7 @@ export default function ContactPage() {
 
       {/* ── MAP EMBED ────────────────────────────────────────── */}
       <section className="relative overflow-hidden" style={{ height: 420 }}>
-        {/* Map placeholder — replace with actual Google Maps embed */}
+        {/* Map placeholder - replace with actual Google Maps embed */}
         <div
           className="absolute inset-0 flex items-center justify-center"
           style={{ backgroundColor: '#1A3040' }}
@@ -502,7 +547,7 @@ export default function ContactPage() {
           </div>
         </div>
 
-        {/* Actual iframe embed — uncomment and fill in when ready */}
+        {/* Actual iframe embed - uncomment and fill in when ready */}
         {/*
         <iframe
           src="https://www.google.com/maps/embed?pb=EMBED_URL_HERE"
