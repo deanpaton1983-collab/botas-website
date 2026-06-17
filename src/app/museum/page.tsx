@@ -1,8 +1,49 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import ScrollReveal from '@/components/ScrollReveal'
+
+// Interior render gallery
+const galleryImages = [
+  {
+    src: '/images/museum/museum-01.jpg',
+    alt: 'Working on a U-Boat — mechanical exhibits with pipes, valves and gauges recreating life below the waves',
+    caption: 'Working on a U-Boat',
+    zone: 'Life at Sea',
+  },
+  {
+    src: '/images/museum/museum-02.jpg',
+    alt: 'Signals & Secrets zone — interactive radar and signals intelligence stations',
+    caption: 'Signals & Secrets',
+    zone: 'HX 236',
+  },
+  {
+    src: '/images/museum/museum-03.jpg',
+    alt: 'Support from the Skies — Warfare at Sea zone with aircraft models and immersive displays',
+    caption: 'Support from the Skies',
+    zone: 'Warfare at Sea',
+  },
+  {
+    src: '/images/museum/museum-04.jpg',
+    alt: 'The Cruel Sea — curved immersive gallery with archive photography and dramatic lighting',
+    caption: 'The Cruel Sea',
+    zone: 'Immersive Gallery',
+  },
+  {
+    src: '/images/museum/museum-05.jpg',
+    alt: 'Shipbuilding & Repair — Life in Merseyside section featuring the Birkenhead Dock display',
+    caption: 'Shipbuilding & Repair',
+    zone: 'Life in Merseyside',
+  },
+  {
+    src: '/images/museum/museum-06.jpg',
+    alt: 'Supply Lines — convoy route map room with Atlantic supply line displays',
+    caption: 'Supply Lines',
+    zone: 'SC 48',
+  },
+]
 
 // Exhibition zone data
 const zones = [
@@ -245,6 +286,132 @@ export default function MuseumPage() {
               </div>
             </ScrollReveal>
           </div>
+        </div>
+      </section>
+
+
+      {/* ── INSIDE THE MUSEUM GALLERY ───────────────────────── */}
+      <section
+        className="relative py-24 lg:py-32 overflow-hidden"
+        style={{ backgroundColor: '#0d1f35' }}
+      >
+        <div className="absolute inset-0 naval-grid-dashed pointer-events-none" style={{ opacity: 0.4 }} />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+          <ScrollReveal>
+            <div className="mb-16">
+              <p
+                className="font-mono text-xs uppercase mb-3"
+                style={{ color: '#7ECECE', letterSpacing: '0.2em' }}
+              >
+                A First Look Inside
+              </p>
+              <h2
+                className="font-montserrat font-black uppercase"
+                style={{
+                  fontSize: 'clamp(1.8rem, 4vw, 3rem)',
+                  letterSpacing: '0.12em',
+                  color: '#F8F4EE',
+                }}
+              >
+                Inside the Museum
+              </h2>
+            </div>
+          </ScrollReveal>
+
+          {/* Primary image — full width */}
+          <ScrollReveal>
+            <div className="relative w-full overflow-hidden mb-4" style={{ aspectRatio: '16/9' }}>
+              <Image
+                src={galleryImages[5].src}
+                alt={galleryImages[5].alt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1280px) 100vw, 1280px"
+              />
+              <div
+                className="absolute bottom-0 left-0 right-0 px-6 py-4 flex items-end justify-between"
+                style={{ background: 'linear-gradient(to top, rgba(6,15,26,0.85) 0%, transparent 100%)' }}
+              >
+                <p className="font-montserrat font-bold text-white text-lg leading-tight">
+                  {galleryImages[5].caption}
+                </p>
+                <span
+                  className="font-mono text-xs px-3 py-1.5 flex-shrink-0 ml-4"
+                  style={{ background: 'rgba(42,173,166,0.15)', color: '#7ECECE', border: '1px solid rgba(42,173,166,0.3)', letterSpacing: '0.12em' }}
+                >
+                  {galleryImages[5].zone}
+                </span>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* Grid of 4 */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+            {galleryImages.slice(0, 4).map((img, i) => (
+              <ScrollReveal key={img.src} delay={i * 0.07}>
+                <div className="relative overflow-hidden" style={{ aspectRatio: '1/1' }}>
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    className="object-cover transition-transform duration-700 hover:scale-105"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 320px"
+                  />
+                  <div
+                    className="absolute bottom-0 left-0 right-0 px-4 py-3"
+                    style={{ background: 'linear-gradient(to top, rgba(6,15,26,0.9) 0%, transparent 100%)' }}
+                  >
+                    <p className="font-montserrat font-bold text-white text-sm leading-tight">
+                      {img.caption}
+                    </p>
+                    <p
+                      className="font-mono text-xs mt-0.5"
+                      style={{ color: '#7ECECE', letterSpacing: '0.1em' }}
+                    >
+                      {img.zone}
+                    </p>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+
+          {/* Fifth image — half width */}
+          <ScrollReveal>
+            <div className="relative overflow-hidden" style={{ aspectRatio: '4/3', maxWidth: '50%' }}>
+              <Image
+                src={galleryImages[4].src}
+                alt={galleryImages[4].alt}
+                fill
+                className="object-cover transition-transform duration-700 hover:scale-105"
+                sizes="(max-width: 1024px) 100vw, 640px"
+              />
+              <div
+                className="absolute bottom-0 left-0 right-0 px-6 py-4 flex items-end justify-between"
+                style={{ background: 'linear-gradient(to top, rgba(6,15,26,0.85) 0%, transparent 100%)' }}
+              >
+                <p className="font-montserrat font-bold text-white text-lg leading-tight">
+                  {galleryImages[4].caption}
+                </p>
+                <span
+                  className="font-mono text-xs px-3 py-1.5 flex-shrink-0 ml-4"
+                  style={{ background: 'rgba(42,173,166,0.15)', color: '#7ECECE', border: '1px solid rgba(42,173,166,0.3)', letterSpacing: '0.12em' }}
+                >
+                  {galleryImages[4].zone}
+                </span>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal>
+            <p
+              className="font-montserrat text-sm mt-8 text-center"
+              style={{ color: 'rgba(248,244,238,0.35)', letterSpacing: '0.05em' }}
+            >
+              Artist impressions — museum interior design subject to change prior to opening Autumn 2026
+            </p>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -517,39 +684,4 @@ export default function MuseumPage() {
             <h2
               className="font-montserrat font-black uppercase mb-6"
               style={{
-                fontSize: 'clamp(1.6rem, 3.5vw, 2.4rem)',
-                letterSpacing: '0.12em',
-                color: '#F5ECD7',
-              }}
-            >
-              Be the First to Visit
-            </h2>
-            <p
-              className="font-montserrat text-lg leading-relaxed mb-8"
-              style={{ color: 'rgba(245, 236, 215, 0.85)' }}
-            >
-              {/* [PLACEHOLDER: Museum CTA copy] */}
-              Opening Autumn 2026 at Woodside, Birkenhead. Register your interest today to be the first to hear about tickets, events, and opening dates.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link
-                href="/contact"
-                className="font-montserrat font-bold text-sm uppercase px-8 py-4"
-                style={{ background: '#F5ECD7', color: '#B85C38', letterSpacing: '0.15em' }}
-              >
-                Register Interest
-              </Link>
-              <Link
-                href="/u-boat"
-                className="font-montserrat font-bold text-sm uppercase px-8 py-4 border"
-                style={{ borderColor: 'rgba(245,236,215,0.5)', color: '#F5ECD7', letterSpacing: '0.15em' }}
-              >
-                Discover U-534 â
-              </Link>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-    </>
-  )
-}
+                fontSize: 'clamp(1
