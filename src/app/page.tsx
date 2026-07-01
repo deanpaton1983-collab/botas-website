@@ -96,7 +96,7 @@ export default function HomePage() {
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section
         ref={heroRef}
-        className="relative h-screen min-h-[700px] flex items-end overflow-hidden"
+        className="relative h-screen min-h-[700px] overflow-hidden"
         style={{ backgroundColor: '#2D4F5C' }}
       >
         {/* Ocean animation background */}
@@ -187,7 +187,7 @@ export default function HomePage() {
 
         {/* Hero content */}
         <motion.div
-          className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 pb-20 w-full"
+          className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 pt-32 pb-20 w-full h-full flex flex-col justify-end"
           style={{ opacity: heroOpacity }}
         >
           <motion.h1
