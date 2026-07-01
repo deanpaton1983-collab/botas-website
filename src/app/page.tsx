@@ -223,23 +223,13 @@ export default function HomePage() {
           </motion.h1>
 
           <motion.p
-            className="font-montserrat font-semibold text-xl max-w-xl mb-4"
-            style={{ color: '#7ECECE' }}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 2.9, duration: 0.8 }}
-          >
-            The Battle of the Atlantic Story Experience in Merseyside
-          </motion.p>
-
-          <motion.p
             className="font-montserrat text-lg max-w-xl mb-10 leading-relaxed"
             style={{ color: 'rgba(248, 244, 238, 0.8)' }}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 3.0, duration: 0.8 }}
+            transition={{ delay: 2.9, duration: 0.8 }}
           >
-            The world's first museum dedicated to the longest continuous military campaign of World War II - centred around the U-534 submarine, the only U-boat raised from the seabed after combat.
+            The Battle of the Atlantic Story Experience in Merseyside. The world's first museum dedicated to the longest continuous military campaign of World War II - centred around the U-534 submarine, the only U-boat raised from the seabed after combat.
           </motion.p>
 
           <motion.div
