@@ -217,8 +217,7 @@ export default function MemorialPage() {
                 className="font-montserrat text-lg leading-relaxed"
                 style={{ color: 'rgba(45, 79, 92, 0.75)' }}
               >
-                {/* [PLACEHOLDER: Memorial wall description] */}
-                An external memorial wall, a bronze work by acclaimed Liverpool sculptor Emma Rodgers, will be created at the entrance to the museum. Executed in traditional sand-cast bronze alloy - 85% copper, 15% tin and zinc - it will bear the names of those who gave their lives in the Battle of the Atlantic, and will develop the characteristic verdigris patina of historic monuments over time.
+                A brand new international Battle of the Atlantic Memorial by artist Emma Rodgers, will be created at the entrance to the museum.
               </p>
             </div>
           </ScrollReveal>
@@ -230,14 +229,25 @@ export default function MemorialPage() {
                   className="font-montserrat text-lg leading-relaxed mb-6"
                   style={{ color: 'rgba(45, 79, 92, 0.75)' }}
                 >
-                  {/* [PLACEHOLDER: Memorial wall continued] */}
-                  Emma Rodgers is recognised as one of Britain's leading sculptors - winner of the prestigious Victoria & Albert Museum Prize, with work held in National Museums Liverpool and celebrated public commissions including the Cilla Black memorial at Liverpool's Cavern Club and the world's largest Liver Bird sculpture.
+                  Emma Rodgers is recognised as one of Britain's leading sculptors, winner of the prestigious Victoria & Albert Museum Prize, with work held in National Museums Liverpool and celebrated public commissions including the Cilla Black memorial at Liverpool's Cavern Club and the world's largest Liver Bird sculpture.
+                </p>
+                <p
+                  className="font-montserrat text-lg leading-relaxed mb-6"
+                  style={{ color: 'rgba(45, 79, 92, 0.75)' }}
+                >
+                  The prominent entrance placement, monumental scale, and artistic heritage of Emma Rodgers' bronze work creates a fitting memorial to all who fought in the longest campaign of the Second World War.
+                </p>
+                <p
+                  className="font-montserrat text-lg leading-relaxed mb-6"
+                  style={{ color: 'rgba(45, 79, 92, 0.75)' }}
+                >
+                  Inspired by the enduring legacy of the Battle of the Atlantic, the museum's cladding traces the fragile yet determined passage of the convoy ships that travelled from the United Kingdom across the Atlantic Ocean. The installation follows the navigational routes once planned within the Western Approaches, echoing the tactical markings and movement of vessels across wartime maps.
                 </p>
                 <p
                   className="font-montserrat text-lg leading-relaxed"
                   style={{ color: 'rgba(45, 79, 92, 0.75)' }}
                 >
-                  The prominent entrance placement, monumental scale, and artistic heritage of Emma Rodgers' bronze work creates a fitting memorial to all who fought in the longest campaign of the Second World War - Allied and German alike.
+                  The memorial will be constructed using steel for strength and endurance and interwoven with genuine pieces of steel from a number of Battle of the Atlantic vessels including U-534. The surfaces are hand-patinated transforming the material to evoke the sense of waves, time, and memory, allowing the work to carry the atmosphere of the sea itself.
                 </p>
               </div>
               {/* Memorial building image */}
@@ -254,6 +264,34 @@ export default function MemorialPage() {
                 />
               </div>
             </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ── EMMA RODGERS QUOTE ───────────────────────────────── */}
+      <section
+        className="relative py-24 overflow-hidden"
+        style={{ backgroundColor: '#1A8080' }}
+      >
+        <div className="absolute inset-0 naval-grid-dashed pointer-events-none" />
+        <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-12 text-center">
+          <ScrollReveal>
+            <blockquote>
+              <p
+                className="font-mono text-xl lg:text-2xl leading-loose mb-4"
+                style={{ color: '#F8F4EE' }}
+              >
+                <span className="quote-block quote-block-teal">
+                  "The composition is conceived as a living memorial: beginning with a small convoy of ships all built on docks on the Mersey, this gradually expands through public donation, each additional vessel becomes both a contribution and an act of remembrance. As the installation grows, so too does the collective narrative of resilience, sacrifice, and survival. The evolving fleet reflects the interconnected nature of those journeys across the Atlantic, transforming the façade into a continually unfolding archive of movement, endurance, and shared history."
+                </span>
+              </p>
+              <cite
+                className="font-mono text-sm not-italic"
+                style={{ color: 'rgba(248,244,238,0.6)', letterSpacing: '0.05em' }}
+              >
+                - Emma Rodgers · Sculptor
+              </cite>
+            </blockquote>
           </ScrollReveal>
         </div>
       </section>
