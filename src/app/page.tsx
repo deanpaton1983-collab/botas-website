@@ -229,7 +229,7 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 2.9, duration: 0.8 }}
           >
-            The Battle of the Atlantic Story Experience in Merseyside. The world's first museum dedicated to the longest continuous military campaign of World War II - centred around the U-534 submarine, the only U-boat raised from the seabed after combat.
+            The Battle of the Atlantic Story Experience is the world's first museum dedicated to the longest continuous military campaign of World War II - centred around the U-534 submarine, the only U-boat raised from the seabed after combat.
           </motion.p>
 
           <motion.div
