@@ -229,7 +229,7 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 2.9, duration: 0.8 }}
           >
-            The Battle of the Atlantic Story Experience is the world's first museum dedicated to the longest continuous military campaign of World War II - centred around the U-534 submarine, the only U-boat raised from the seabed after combat.
+            The Battle of the Atlantic Story Experience is the world's first museum dedicated to the longest continuous military campaign of World War II - centred around the U-534 submarine, the only U-boat raised from the seabed after combat - and home to the world's largest memorial to the Atlantic Campaign.
           </motion.p>
 
           <motion.div
