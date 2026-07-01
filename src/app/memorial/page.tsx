@@ -34,13 +34,6 @@ const rollOfHonour = [
   { name: 'Oberleutnant Horst Dieterich', ship: 'U-663', date: 'May 1943', nationality: 'German' },
 ]
 
-const memorialFacts = [
-  { number: '36,200', label: 'Merchant Navy dead', note: 'All nationalities' },
-  { number: '28,000', label: 'U-boat crew dead', note: 'Of 40,000 who served' },
-  { number: '2,000+', label: 'Allied warships lost' },
-  { number: '175', label: 'Nations represented', note: 'Among the Allied merchant crew' },
-]
-
 const testimonials = [
   {
     text: '"In 1942, at just seventeen, I lied about my age to join the Royal Navy. I couldn\'t have known then that I\'d find myself crossing the Atlantic again and again."',
@@ -139,47 +132,6 @@ export default function MemorialPage() {
         </div>
       </section>
 
-      {/* ── FACTS ────────────────────────────────────────────── */}
-      <section
-        className="relative py-20 overflow-hidden"
-        style={{ backgroundColor: '#2D4F5C' }}
-      >
-        <div className="absolute inset-0 naval-grid-dashed pointer-events-none" />
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            {memorialFacts.map((fact, i) => (
-              <ScrollReveal key={fact.label} delay={i * 0.1}>
-                <div
-                  className="py-10 px-6 text-center"
-                  style={{ background: 'rgba(126, 206, 206, 0.05)', border: '1px solid rgba(126, 206, 206, 0.15)' }}
-                >
-                  <p
-                    className="font-montserrat font-black mb-1"
-                    style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', color: '#7ECECE' }}
-                  >
-                    {fact.number}
-                  </p>
-                  <p
-                    className="font-montserrat font-semibold text-xs uppercase mb-1"
-                    style={{ color: 'rgba(248,244,238,0.7)', letterSpacing: '0.1em' }}
-                  >
-                    {fact.label}
-                  </p>
-                  {fact.note && (
-                    <p
-                      className="font-mono text-xs"
-                      style={{ color: 'rgba(248,244,238,0.35)', letterSpacing: '0.05em' }}
-                    >
-                      {fact.note}
-                    </p>
-                  )}
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── MEMORIAL WALL ────────────────────────────────────── */}
       <section
         className="relative py-24 lg:py-32 overflow-hidden"
@@ -214,8 +166,8 @@ export default function MemorialPage() {
                 The Memorial Wall
               </h2>
               <p
-                className="font-montserrat text-lg leading-relaxed"
-                style={{ color: 'rgba(45, 79, 92, 0.75)' }}
+                className="font-montserrat font-bold text-lg leading-relaxed"
+                style={{ color: '#2D4F5C' }}
               >
                 A brand new international Battle of the Atlantic Memorial by artist Emma Rodgers, will be created at the entrance to the museum.
               </p>
@@ -230,6 +182,21 @@ export default function MemorialPage() {
                   style={{ color: 'rgba(45, 79, 92, 0.75)' }}
                 >
                   Emma Rodgers is recognised as one of Britain's leading sculptors, winner of the prestigious Victoria & Albert Museum Prize, with work held in National Museums Liverpool and celebrated public commissions including the Cilla Black memorial at Liverpool's Cavern Club and the world's largest Liver Bird sculpture.
+                </p>
+                <p
+                  className="font-montserrat text-base leading-relaxed mb-6"
+                  style={{ color: 'rgba(45, 79, 92, 0.75)' }}
+                >
+                  Discover more of Emma Rodgers' work at{' '}
+                  <a
+                    href="https://www.emmarodgers.co.uk/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold underline transition-opacity hover:opacity-70"
+                    style={{ color: '#1A8080' }}
+                  >
+                    emmarodgers.co.uk
+                  </a>
                 </p>
                 <p
                   className="font-montserrat text-lg leading-relaxed mb-6"
