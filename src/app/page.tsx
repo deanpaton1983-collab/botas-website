@@ -96,7 +96,7 @@ export default function HomePage() {
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section
         ref={heroRef}
-        className="relative h-screen min-h-[700px] overflow-hidden"
+        className="relative h-screen min-h-[760px] overflow-hidden"
         style={{ backgroundColor: '#2D4F5C' }}
       >
         {/* Ocean animation background */}
@@ -187,7 +187,7 @@ export default function HomePage() {
 
         {/* Hero content */}
         <motion.div
-          className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 pt-32 pb-20 w-full h-full flex flex-col justify-end"
+          className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 pt-24 pb-12 w-full h-full flex flex-col justify-end"
           style={{ opacity: heroOpacity }}
         >
           <motion.h1
@@ -212,7 +212,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 2.8, duration: 0.8 }}
-            className="mb-6"
+            className="mb-4"
           >
             <span
               className="font-mono text-xs uppercase"
@@ -223,7 +223,7 @@ export default function HomePage() {
           </motion.div>
 
           <motion.p
-            className="font-montserrat text-lg max-w-xl mb-10 leading-relaxed"
+            className="font-montserrat text-lg max-w-xl mb-6 leading-relaxed"
             style={{ color: 'rgba(248, 244, 238, 0.8)' }}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
