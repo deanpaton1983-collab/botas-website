@@ -218,7 +218,7 @@ export default function HomePage() {
               className="font-mono text-xs uppercase"
               style={{ color: '#7ECECE', letterSpacing: '0.2em' }}
             >
-              Opening in 2027 · Birkenhead, Mersey
+              Opening in 2027 · Birkenhead, Liverpool City Region
             </span>
           </motion.div>
 
