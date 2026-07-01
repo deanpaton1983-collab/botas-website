@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/museum', label: 'Museum' },
+  { href: '/museum', label: 'Visit' },
   { href: '/u-boat', label: 'The U-Boat' },
   { href: '/memorial', label: 'Memorial' },
   { href: '/news', label: 'News' },
@@ -45,7 +45,7 @@ export default function Footer() {
               style={{ color: 'rgba(248, 244, 238, 0.75)', maxWidth: 280 }}
             >
               The world's first museum dedicated to the longest continuous military campaign of World War II.
-              Opening Autumn 2026, Birkenhead.
+              Opening in 2027, Birkenhead.
             </p>
             {/* Convoy identification card */}
             <div
@@ -156,22 +156,52 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Partner logos */}
+        <div
+          className="mt-12 pt-8 pb-6 flex flex-col sm:flex-row items-center justify-between gap-6"
+          style={{ borderTop: '1px solid rgba(248, 244, 238, 0.15)' }}
+        >
+          <div className="flex items-center gap-6 flex-wrap justify-center sm:justify-start">
+            <span className="font-montserrat text-xs uppercase" style={{ color: 'rgba(248,244,238,0.4)', letterSpacing: '0.12em' }}>
+              A Big Heritage project
+            </span>
+            <a
+              href="https://bigheritage.co.uk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-montserrat font-bold text-xs uppercase transition-opacity hover:opacity-100"
+              style={{ color: 'rgba(248,244,238,0.65)', letterSpacing: '0.12em', textDecoration: 'none' }}
+            >
+              bigheritage.co.uk
+            </a>
+          </div>
+          <a
+            href="https://www.westwnapproaches.co.uk"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-montserrat text-xs transition-opacity hover:opacity-100"
+            style={{ color: 'rgba(248,244,238,0.5)', letterSpacing: '0.05em' }}
+          >
+            Also visit: Western Approaches Museum, Liverpool →
+          </a>
+        </div>
+
         {/* Bottom bar */}
         <div
-          className="mt-12 pt-6 flex flex-col md:flex-row items-center justify-between gap-4"
-          style={{ borderTop: '1px solid rgba(248, 244, 238, 0.15)' }}
+          className="pt-4 flex flex-col md:flex-row items-center justify-between gap-4"
+          style={{ borderTop: '1px solid rgba(248, 244, 238, 0.1)' }}
         >
           <p
             className="font-montserrat text-xs"
             style={{ color: 'rgba(248, 244, 238, 0.4)', letterSpacing: '0.05em' }}
           >
-            Â© 2026 Battle of the Atlantic Story. All rights reserved.
+            © 2025 Battle of the Atlantic Story. All rights reserved.
           </p>
           <p
             className="font-montserrat text-xs"
             style={{ color: 'rgba(248, 244, 238, 0.4)' }}
           >
-            Registered charity Â· Opening Autumn 2026
+            Registered charity · Opening in 2027
           </p>
         </div>
       </div>

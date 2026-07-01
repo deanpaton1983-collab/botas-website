@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import ScrollReveal from '@/components/ScrollReveal'
 
-// [PLACEHOLDER: Articles - replace with CMS data]
 const articles = [
   {
     id: 10,
@@ -13,78 +12,6 @@ const articles = [
     excerpt: 'Opening Spring 2027, the Battle of the Atlantic Story will open on the banks of the River Mersey in Birkenhead, becoming the world\'s first museum dedicated entirely to the six-year struggle for control of the Atlantic Ocean.',
     readTime: '12 min read',
     convoyCode: 'BA 27',
-  },
-  {
-    id: 1,
-    date: 'March 2026',
-    title: 'BOTAS Secures Planning Approval for Woodside Development',
-    excerpt: '// [PLACEHOLDER: Article excerpt] Planning consent has been granted for the new Battle of the Atlantic Story visitor centre on the banks of the River Mersey at Woodside, Birkenhead - marking a landmark moment in the project\'s development.',
-    readTime: '3 min read',
-    convoyCode: 'MN 26',
-  },
-  {
-    id: 2,
-    date: 'February 2026',
-    title: 'New Research Sheds Light on Black May: The Turning Point in the Atlantic Campaign',
-    excerpt: '// [PLACEHOLDER: Article excerpt] May 1943 - known as "Black May" - marked the decisive turning point in the Battle of the Atlantic, when Allied anti-submarine technology finally overwhelmed the U-boat threat. New archival research reveals fresh details about the month that changed everything.',
-    readTime: '6 min read',
-    convoyCode: 'ON 67',
-  },
-  {
-    id: 3,
-    date: 'February 2026',
-    title: 'The Lascar Sailors: Recovering the Hidden Story of the Merchant Navy\'s Global Crew',
-    excerpt: '// [PLACEHOLDER: Article excerpt] Yemeni sailors, often referred to as "lascars", were employed on British merchant ships performing essential roles in engine rooms and as deckhands. Their contribution to the Atlantic campaign has long been overlooked - a story this museum is determined to tell.',
-    readTime: '5 min read',
-    convoyCode: 'SL 125',
-  },
-  {
-    id: 4,
-    date: 'January 2026',
-    title: '\u201cRadar Was Our First Great Invention\u201d - The Technology That Won the Atlantic',
-    excerpt: '// [PLACEHOLDER: Article excerpt] Roy \'Dick\' Dykes, a radar operator with Coastal Command, knew that the small black box above his station was changing the war. His testimony, along with newly released documents from GCHQ, sheds new light on the intelligence war in the Atlantic.',
-    readTime: '7 min read',
-    convoyCode: 'HX 236',
-  },
-  {
-    id: 5,
-    date: 'January 2026',
-    title: 'Emma Rodgers Confirmed as Sculptor for BOTAS Memorial Wall',
-    excerpt: '// [PLACEHOLDER: Article excerpt] Acclaimed Liverpool sculptor Emma Rodgers has been confirmed as the artist for the memorial wall that will greet visitors at the entrance to the Battle of the Atlantic Story. The bronze work will bear the names of those who gave their lives in the campaign.',
-    readTime: '4 min read',
-    convoyCode: 'BH 26',
-  },
-  {
-    id: 6,
-    date: 'December 2025',
-    title: 'Convoy HX 236: The Story of a Single Atlantic Crossing',
-    excerpt: '// [PLACEHOLDER: Article excerpt] In April 1943, Convoy HX 236 departed Halifax, Nova Scotia, with 36 merchant vessels carrying vital supplies for a besieged Britain. The story of that crossing - the threats faced, the ships lost, the men who survived - tells the story of the Battle of the Atlantic in microcosm.',
-    readTime: '8 min read',
-    convoyCode: 'HX 236',
-  },
-  {
-    id: 7,
-    date: 'December 2025',
-    title: 'The Wolf Packs: How German U-boats Coordinated Their Attacks',
-    excerpt: '// [PLACEHOLDER: Article excerpt] The Rudeltaktik - the Wolf Pack tactic - was Grand Admiral Karl D\u00f6nitz\'s masterstroke. By coordinating multiple U-boats to attack convoys simultaneously, he hoped to overwhelm the Allied escorts. Understanding how it worked - and why it ultimately failed - is central to understanding the Battle of the Atlantic.',
-    readTime: '6 min read',
-    convoyCode: 'SC 48',
-  },
-  {
-    id: 8,
-    date: 'November 2025',
-    title: 'Letters from the Deep: The Personal Effects Recovered from U-534',
-    excerpt: '// [PLACEHOLDER: Article excerpt] When U-534 was raised from the Kattegat in 1993, she yielded an extraordinary collection of personal effects: letters home, diaries, photographs, personal keepsakes. These objects, preserved for nearly five decades on the seabed, offer an intimate portrait of the men who crewed her.',
-    readTime: '5 min read',
-    convoyCode: 'KT 45',
-  },
-  {
-    id: 9,
-    date: 'November 2025',
-    title: 'Bletchley Park and the Battle of the Atlantic: How Enigma Changed Everything',
-    excerpt: '// [PLACEHOLDER: Article excerpt] The breaking of the Naval Enigma cipher - and the Allied failure to maintain that intelligence advantage when Germany upgraded its machines in 1942 - is one of the most dramatic intelligence stories of the Second World War.',
-    readTime: '7 min read',
-    convoyCode: 'BP 43',
   },
 ]
 

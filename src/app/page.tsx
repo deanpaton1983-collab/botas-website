@@ -14,7 +14,7 @@ const colourways = [
     id: 'supply-lines',
     label: 'Supply Lines',
     description:
-      'The merchant convoys that crossed the Atlantic were the arteries of the Allied war effort — 3,000 vessels sailing through submarine-infested waters to keep Britain alive.',
+      'Crossing submarine-infested waters, 3,000 merchant vessels formed the Atlantic convoys that sustained Britain and powered the Allied war effort.',
     bg: '#F5ECD7',
     text: '#B85C38',
     accent: '#E07B45',
@@ -38,7 +38,7 @@ const colourways = [
     id: 'signals-secrets',
     label: 'Signals & Secrets',
     description:
-      '"…radar was our first great invention…" — Roy \'Dick\' Dykes. The breaking of Enigma codes and the race for radar superiority changed the course of the Battle.',
+      '"Radar was our first great invention…" — Roy \'Dick\' Dykes. Alongside the breaking of Enigma, the race for radar superiority helped turn the tide of the battle.',
     bg: '#B85C38',
     text: '#F5ECD7',
     accent: '#E07B45',
@@ -50,7 +50,7 @@ const colourways = [
     id: 'life-at-sea',
     label: 'Life at Sea',
     description:
-      'For the men who crewed the merchant ships and warships, life at sea was a test of endurance, courage, and fellowship — on both sides of the conflict.',
+      'For the crews of merchant ships and warships, life at sea tested endurance, courage and fellowship, qualities forged on both sides of the conflict.',
     bg: '#1A8080',
     text: '#F8F4EE',
     accent: '#7ECECE',
@@ -201,12 +201,12 @@ export default function HomePage() {
               className="font-mono text-xs uppercase"
               style={{ color: '#7ECECE', letterSpacing: '0.2em' }}
             >
-              Opening Autumn 2026 · Birkenhead, Mersey
+              Opening in 2027 · Birkenhead, Mersey
             </span>
           </motion.div>
 
           <motion.h1
-            className="font-montserrat font-black uppercase text-offwhite mb-8"
+            className="font-montserrat font-black uppercase text-offwhite mb-4"
             style={{
               fontSize: 'clamp(2.5rem, 7vw, 6rem)',
               letterSpacing: '0.08em',
@@ -223,13 +223,23 @@ export default function HomePage() {
           </motion.h1>
 
           <motion.p
+            className="font-montserrat font-semibold text-xl max-w-xl mb-4"
+            style={{ color: '#7ECECE' }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 2.9, duration: 0.8 }}
+          >
+            The Battle of the Atlantic Story Experience in Merseyside
+          </motion.p>
+
+          <motion.p
             className="font-montserrat text-lg max-w-xl mb-10 leading-relaxed"
             style={{ color: 'rgba(248, 244, 238, 0.8)' }}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 3.0, duration: 0.8 }}
           >
-            The world's first museum dedicated to the longest continuous military campaign of World War II — centred around U-534, the only U-boat ever raised from the seabed after combat.
+            The world's first museum dedicated to the longest continuous military campaign of World War II — centred around the U-534 submarine, the only U-boat raised from the seabed after combat.
           </motion.p>
 
           <motion.div
@@ -298,8 +308,7 @@ export default function HomePage() {
               className="font-mono text-xs uppercase mb-4"
               style={{ color: '#7ECECE', letterSpacing: '0.2em' }}
             >
-              {/* [PLACEHOLDER: Tagline / strapline] */}
-              Opening Autumn 2026
+              Opening in 2027
             </p>
             <h2
               className="font-montserrat font-black uppercase mb-8"
@@ -317,14 +326,7 @@ export default function HomePage() {
               className="font-montserrat text-lg leading-relaxed max-w-3xl mx-auto mb-6"
               style={{ color: 'rgba(248, 244, 238, 0.8)' }}
             >
-              {/* [PLACEHOLDER: Museum mission statement] */}
-              From 1939 to 1945, the Battle of the Atlantic determined the survival of Britain and the outcome of the entire war. Without victory at sea, there would have been no D-Day, no liberation of Europe. The war would have been lost. This museum exists so that story is never forgotten — told through the artefacts, voices, and experiences of those who lived it.
-            </p>
-            <p
-              className="font-montserrat text-lg leading-relaxed max-w-3xl mx-auto"
-              style={{ color: 'rgba(248, 244, 238, 0.8)' }}
-            >
-              At its heart is U-534: the last U-boat to leave Germany before the surrender, sunk on 5 May 1945, raised from the Kattegat seabed in 1993, and now preserved in sections at Birkenhead — the only U-boat ever recovered after being sunk in combat.
+                From 1939 to 1945, the Battle of the Atlantic determined the survival of Britain and the outcome of the Second World War. Without victory at sea, there would have been no D-Day and liberation of Europe. The war would have been lost. The Battle of the Atlantic museum exists so the story is never forgotten, and is told through the artefacts, voices and experiences of those who bravely lived through the battle. At the heart of the museum, is the U-534, the last U-boat to leave Germany before the surrender. The submarine was sunk on 5 May 1945 and raised from the Kattegat seabed in 1993. The U-534 is now the centre piece of this new museum and is preserved in Woodside.
             </p>
           </ScrollReveal>
         </div>
@@ -647,14 +649,7 @@ export default function HomePage() {
                   className="font-montserrat text-lg leading-relaxed mb-6"
                   style={{ color: 'rgba(248, 244, 238, 0.85)' }}
                 >
-                  {/* [PLACEHOLDER: U-534 introduction] */}
-                  Commissioned in December 1942, U-534 was one of the last U-boats to leave Germany before the surrender. On 5 May 1945, just days before VE Day, she was intercepted by RAF Liberators from No. 86 Squadron and sunk in the Kattegat. For nearly five decades she lay on the seabed, until her remarkable recovery in 1993.
-                </p>
-                <p
-                  className="font-montserrat text-lg leading-relaxed mb-8"
-                  style={{ color: 'rgba(248, 244, 238, 0.85)' }}
-                >
-                  Now carefully preserved in sections at Birkenhead, U-534 offers a rare and extraordinary window into life aboard a WWII German U-boat — and into the personal stories of the men who crewed her.
+                  Commissioned in December 1942, U-534 was one of the last U-boats to leave Germany before the surrender. On 5 May 1945, just days before VE Day, she was intercepted by RAF Liberators from No. 86 Squadron and sunk in the Kattegat. She lay on the seabed for nearly five decades before her remarkable recovery in 1993. Now carefully preserved in sections in the Wirral, the U-534 offers a rare and extraordinary insight into life aboard a Second World War German U-boat, as well as the personal stories of the men who crewed her.
                 </p>
                 <Link
                   href="/u-boat"
@@ -763,8 +758,7 @@ export default function HomePage() {
                   className="font-montserrat text-base leading-relaxed mb-6"
                   style={{ color: '#2D4F5C', opacity: 0.75 }}
                 >
-                  {/* [PLACEHOLDER: Memorial intro text] */}
-                  From merchant seamen to Royal Navy sailors, from RAF aircrew to German submariners — the Battle of the Atlantic claimed lives on all sides. This museum is dedicated to their memory.
+                  From merchant seamen and Royal Navy sailors to RAF aircrew and German submariners, the Battle of the Atlantic claimed lives on all sides. This museum stands in tribute to their memory.
                 </p>
                 <Link
                   href="/memorial"
@@ -789,8 +783,7 @@ export default function HomePage() {
                     className="font-montserrat text-lg leading-relaxed"
                     style={{ color: 'rgba(248, 244, 238, 0.8)' }}
                   >
-                    {/* [PLACEHOLDER: Memorial wall description] */}
-                    An external memorial wall — a bronze work by acclaimed Liverpool sculptor Emma Rodgers — will bear the names of those who gave their lives in the Battle of the Atlantic. Executed in traditional sand-cast bronze alloy, it will become a place of national pilgrimage.
+                    An external memorial wall, a bronze work by acclaimed Liverpool sculptor Emma Rodgers, will carry the names of those who gave their lives in the Battle of the Atlantic. Crafted in traditional sand-cast bronze, it will stand as a place of national remembrance and pilgrimage.
                   </p>
                 </div>
                 <div
@@ -801,7 +794,7 @@ export default function HomePage() {
                     className="font-montserrat font-light text-base italic leading-relaxed"
                     style={{ color: 'rgba(248, 244, 238, 0.7)' }}
                   >
-                    "In 1942, at just seventeen, I lied about my age to join the Royal Navy… The young German sailors we faced were just like us: brave, scared, and far too young to die."
+                    "In 1942, at just seventeen, I lied about my age to join the Royal Navy. The young German sailors we faced were just like us, brave, scared and far too young to die."
                   </p>
                   <p
                     className="font-mono text-xs mt-3"
@@ -836,7 +829,7 @@ export default function HomePage() {
               className="font-mono text-xs uppercase mb-4"
               style={{ color: 'rgba(245, 236, 215, 0.7)', letterSpacing: '0.2em' }}
             >
-              Opening Autumn 2026
+              Opening in 2027
             </p>
             <h2
               className="font-montserrat font-black uppercase mb-6"
@@ -849,15 +842,44 @@ export default function HomePage() {
               Plan Your Visit
             </h2>
             <p
-              className="font-montserrat text-lg leading-relaxed mb-8"
+              className="font-montserrat text-lg leading-relaxed mb-6"
               style={{ color: 'rgba(245, 236, 215, 0.85)' }}
             >
-              {/* [PLACEHOLDER: Visit info teaser] */}
-              Located on the banks of the River Mersey in Birkenhead, with breathtaking views of the Liverpool skyline. Register your interest and be the first to hear about opening events.
+              Register your interest and be the first to hear about opening events, ticket releases, and what to expect when we open in 2027.
             </p>
+
+            {/* Prominent location block */}
+            <div className="mb-8">
+              <a
+                href="https://maps.google.com/maps?q=Woodside+Ferry+Terminal,+Birkenhead,+Merseyside,+CH41+6DU"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 group"
+              >
+                <span
+                  className="font-montserrat font-black text-2xl lg:text-3xl uppercase"
+                  style={{ color: '#F5ECD7', letterSpacing: '0.06em' }}
+                >
+                  Woodside, Birkenhead, Merseyside
+                </span>
+                <span
+                  className="font-mono text-xs uppercase px-3 py-1.5 transition-opacity group-hover:opacity-80 flex-shrink-0"
+                  style={{ background: 'rgba(245,236,215,0.15)', color: '#F5ECD7', border: '1px solid rgba(245,236,215,0.3)', letterSpacing: '0.1em' }}
+                >
+                  Get Directions →
+                </span>
+              </a>
+              <p
+                className="font-mono text-xs mt-2"
+                style={{ color: 'rgba(245,236,215,0.5)', letterSpacing: '0.1em' }}
+              >
+                CH41 6DU · Banks of the River Mersey · Views of the Liverpool skyline
+              </p>
+            </div>
+
             <div className="flex flex-wrap justify-center gap-4">
               <Link
-                href="/contact"
+                href="/museum"
                 className="font-montserrat font-bold text-sm uppercase px-8 py-4 transition-all duration-200 hover:opacity-90"
                 style={{
                   background: '#F5ECD7',
@@ -865,10 +887,10 @@ export default function HomePage() {
                   letterSpacing: '0.15em',
                 }}
               >
-                Register Interest
+                Plan Your Visit →
               </Link>
               <Link
-                href="/memorial"
+                href="/contact"
                 className="font-montserrat font-bold text-sm uppercase px-8 py-4 border transition-all duration-200 hover:bg-sand hover:text-orange-burnt"
                 style={{
                   borderColor: 'rgba(245, 236, 215, 0.5)',
@@ -876,7 +898,7 @@ export default function HomePage() {
                   letterSpacing: '0.15em',
                 }}
               >
-                The Memorial
+                Register Interest
               </Link>
             </div>
           </ScrollReveal>

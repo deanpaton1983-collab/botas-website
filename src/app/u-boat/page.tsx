@@ -508,7 +508,7 @@ export default function UBoatPage() {
               style={{ color: 'rgba(245, 236, 215, 0.85)' }}
             >
               {/* [PLACEHOLDER: Visit CTA copy] */}
-              Opening Autumn 2026 at Woodside, Birkenhead. Register your interest today to be the first to hear about tickets and opening events.
+              Opening in 2027 at Woodside, Birkenhead. Register your interest today to be the first to hear about tickets and opening events.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link

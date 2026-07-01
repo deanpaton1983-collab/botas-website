@@ -426,7 +426,7 @@ export default function MemorialPage() {
                 style={{ color: 'rgba(45, 79, 92, 0.55)', letterSpacing: '0.08em' }}
               >
                 {/* [PLACEHOLDER] */}
-                This is a representative selection. The complete Roll of Honour — including all known casualties from all nations — will be published at the museum's opening in Autumn 2026.
+                This is a representative selection. The complete Roll of Honour — including all known casualties from all nations — will be published at the museum's opening in 2027.
               </p>
             </div>
           </ScrollReveal>

@@ -8,37 +8,37 @@ import ScrollReveal from '@/components/ScrollReveal'
 // Interior render gallery
 const galleryImages = [
   {
-    src: '/images/museum/museum-01.jpg',
+    src: '/images/museum/06Working.jpg',
     alt: 'Working on a U-Boat — mechanical exhibits with pipes, valves and gauges recreating life below the waves',
     caption: 'Working on a U-Boat',
     zone: 'Life at Sea',
   },
   {
-    src: '/images/museum/museum-02.jpg',
+    src: '/images/museum/05Signals.jpg',
     alt: 'Signals & Secrets zone — interactive radar and signals intelligence stations',
     caption: 'Signals & Secrets',
     zone: 'HX 236',
   },
   {
-    src: '/images/museum/museum-03.jpg',
+    src: '/images/museum/04Skies.jpg',
     alt: 'Support from the Skies — Warfare at Sea zone with aircraft models and immersive displays',
     caption: 'Support from the Skies',
     zone: 'Warfare at Sea',
   },
   {
-    src: '/images/museum/museum-04.jpg',
+    src: '/images/museum/03CruelSea.jpg',
     alt: 'The Cruel Sea — curved immersive gallery with archive photography and dramatic lighting',
     caption: 'The Cruel Sea',
     zone: 'Immersive Gallery',
   },
   {
-    src: '/images/museum/museum-05.jpg',
+    src: '/images/museum/02Shipbuilding.jpg',
     alt: 'Shipbuilding & Repair — Life in Merseyside section featuring the Birkenhead Dock display',
     caption: 'Shipbuilding & Repair',
     zone: 'Life in Merseyside',
   },
   {
-    src: '/images/museum/museum-06.jpg',
+    src: '/images/museum/01Supply-lines.jpg',
     alt: 'Supply Lines — convoy route map room with Atlantic supply line displays',
     caption: 'Supply Lines',
     zone: 'SC 48',
@@ -183,7 +183,7 @@ export default function MuseumPage() {
               className="font-mono text-xs uppercase mb-4"
               style={{ color: '#7ECECE', letterSpacing: '0.2em' }}
             >
-              The Museum
+              Plan Your Visit
             </p>
             <h1
               className="font-montserrat font-black uppercase text-offwhite mb-8"
@@ -220,7 +220,7 @@ export default function MuseumPage() {
                   className="font-mono text-xs uppercase mb-4"
                   style={{ color: '#B85C38', letterSpacing: '0.2em' }}
                 >
-                  Opening Autumn 2026
+                  Opening in 2027
                 </p>
                 <h2
                   className="font-montserrat font-black uppercase mb-6"
@@ -409,7 +409,7 @@ export default function MuseumPage() {
               className="font-montserrat text-sm mt-8 text-center"
               style={{ color: 'rgba(248,244,238,0.35)', letterSpacing: '0.05em' }}
             >
-              Artist impressions — museum interior design subject to change prior to opening Autumn 2026
+              Artist impressions — museum interior design subject to change prior to opening in 2027
             </p>
           </ScrollReveal>
         </div>
@@ -684,4 +684,4 @@ export default function MuseumPage() {
             <h2
               className="font-montserrat font-black uppercase mb-6"
               style={{
-                fontSize: 'clamp(1
+                fontSize: 'cl

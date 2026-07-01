@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/museum', label: 'Museum' },
+  { href: '/museum', label: 'Visit' },
   { href: '/u-boat', label: 'The U-Boat' },
   { href: '/memorial', label: 'Memorial' },
   { href: '/news', label: 'News' },
@@ -38,9 +38,9 @@ export default function Navigation() {
       <motion.nav
         className="fixed top-0 left-0 right-0 z-[100] transition-all duration-500"
         style={{
-          backgroundColor: scrolled ? '#2D4F5C' : 'transparent',
-          backdropFilter: scrolled ? 'blur(12px)' : 'none',
-          borderBottom: scrolled ? '1px solid rgba(126, 206, 206, 0.15)' : 'none',
+          backgroundColor: (scrolled || pathname === '/memorial') ? '#2D4F5C' : 'transparent',
+          backdropFilter: (scrolled || pathname === '/memorial') ? 'blur(12px)' : 'none',
+          borderBottom: (scrolled || pathname === '/memorial') ? '1px solid rgba(126, 206, 206, 0.15)' : 'none',
         }}
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}

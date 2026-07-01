@@ -70,7 +70,7 @@ export default function ContactPage() {
     <>
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section
-        className="relative py-36 overflow-hidden"
+        className="relative py-24 overflow-hidden"
         style={{ backgroundColor: '#2D4F5C' }}
       >
         <div className="absolute inset-0 naval-grid-dashed pointer-events-none" />
@@ -82,31 +82,67 @@ export default function ContactPage() {
           </svg>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9 }}
-          >
-            <p
-              className="font-mono text-xs uppercase mb-4"
-              style={{ color: '#7ECECE', letterSpacing: '0.2em' }}
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 pt-16">
+          <div className="grid lg:grid-cols-2 gap-12 items-end">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9 }}
             >
-              Get In Touch
-            </p>
-            <h1
-              className="font-montserrat font-black uppercase"
-              style={{
-                fontSize: 'clamp(2.5rem, 6vw, 5rem)',
-                letterSpacing: '0.08em',
-                lineHeight: 1.0,
-                color: '#F8F4EE',
-              }}
+              <p
+                className="font-mono text-xs uppercase mb-4"
+                style={{ color: '#7ECECE', letterSpacing: '0.2em' }}
+              >
+                Get In Touch
+              </p>
+              <h1
+                className="font-montserrat font-black uppercase"
+                style={{
+                  fontSize: 'clamp(2.5rem, 6vw, 5rem)',
+                  letterSpacing: '0.08em',
+                  lineHeight: 1.0,
+                  color: '#F8F4EE',
+                }}
+              >
+                Contact<br />
+                <span style={{ color: '#7ECECE' }}>Us</span>
+              </h1>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.2 }}
+              className="space-y-6"
             >
-              Contact<br />
-              <span style={{ color: '#7ECECE' }}>Us</span>
-            </h1>
-          </motion.div>
+              <div>
+                <p className="font-mono text-xs uppercase mb-2" style={{ color: '#7ECECE', letterSpacing: '0.2em' }}>Location</p>
+                <address className="not-italic font-montserrat text-sm" style={{ color: 'rgba(248,244,238,0.75)' }}>
+                  Battle of the Atlantic Story, Woodside, Birkenhead, Merseyside, CH41 6DU
+                </address>
+              </div>
+              <div className="flex flex-wrap gap-8">
+                <div>
+                  <p className="font-mono text-xs uppercase mb-2" style={{ color: '#7ECECE', letterSpacing: '0.2em' }}>Email</p>
+                  <a href="mailto:info@battleoftheatlantic.org" className="font-montserrat text-sm transition-colors hover:text-white" style={{ color: 'rgba(248,244,238,0.75)' }}>
+                    info@battleoftheatlantic.org
+                  </a>
+                </div>
+                <div>
+                  <p className="font-mono text-xs uppercase mb-2" style={{ color: '#7ECECE', letterSpacing: '0.2em' }}>Phone</p>
+                  <a href="tel:+441512001943" className="font-montserrat text-sm transition-colors hover:text-white" style={{ color: 'rgba(248,244,238,0.75)' }}>
+                    +44 (0)151 200 1943
+                  </a>
+                </div>
+              </div>
+              <div
+                className="inline-block px-4 py-2"
+                style={{ background: 'rgba(126,206,206,0.1)', border: '1px solid rgba(126,206,206,0.2)' }}
+              >
+                <p className="font-montserrat text-sm font-semibold" style={{ color: '#7ECECE' }}>Opening in 2027 · Woodside, Birkenhead</p>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -193,7 +229,7 @@ export default function ContactPage() {
                       className="font-montserrat font-bold text-sm mb-1"
                       style={{ color: '#7ECECE', letterSpacing: '0.05em' }}
                     >
-                      Opening Autumn 2026
+                      Opening in 2027
                     </p>
                     <p
                       className="font-montserrat text-sm leading-relaxed"
@@ -501,65 +537,37 @@ export default function ContactPage() {
 
       {/* ── MAP EMBED ────────────────────────────────────────── */}
       <section className="relative overflow-hidden" style={{ height: 420 }}>
-        {/* Map placeholder - replace with actual Google Maps embed */}
-        <div
-          className="absolute inset-0 flex items-center justify-center"
-          style={{ backgroundColor: '#1A3040' }}
-        >
-          {/* Naval chart grid texture */}
-          <div className="absolute inset-0 naval-grid pointer-events-none" />
-          {/* Sonar at map centre */}
-          <div className="relative flex items-center justify-center">
-            <svg width="300" height="300" viewBox="0 0 300 300" className="absolute" aria-hidden="true">
-              {[40, 80, 120, 160, 200].map((r, i) => (
-                <circle key={i} cx="150" cy="150" r={r} fill="none" stroke="#7ECECE" strokeWidth="1" opacity={0.08 - i * 0.01} />
-              ))}
-              <circle cx="150" cy="150" r="5" fill="#7ECECE" opacity="0.6" />
-              <circle cx="150" cy="150" r="10" fill="none" stroke="#7ECECE" strokeWidth="1.5" opacity="0.4" />
-            </svg>
-            <div className="relative z-10 text-center">
-              <p
-                className="font-montserrat font-black uppercase mb-2"
-                style={{ color: '#7ECECE', letterSpacing: '0.15em', fontSize: 12 }}
-              >
-                Battle of the Atlantic Story
-              </p>
-              <p
-                className="font-mono text-xs"
-                style={{ color: 'rgba(248,244,238,0.5)', letterSpacing: '0.08em' }}
-              >
-                Woodside, Birkenhead, CH41 6DU
-              </p>
-              <p
-                className="font-mono text-xs mt-1"
-                style={{ color: 'rgba(248,244,238,0.35)' }}
-              >
-                {/* [PLACEHOLDER: Replace with Google Maps iframe embed] */}
-                53.3914° N, 3.0104° W
-              </p>
-            </div>
-          </div>
-          {/* Ship silhouette */}
-          <div className="absolute bottom-0 left-0 right-0 opacity-[0.04] pointer-events-none">
-            <svg viewBox="0 0 1400 80" width="100%" aria-hidden="true">
-              <polygon points="0,60 200,60 220,40 300,32 1100,32 1200,38 1400,30 1400,80 0,80" fill="#7ECECE" />
-            </svg>
-          </div>
-        </div>
-
-        {/* Actual iframe embed - uncomment and fill in when ready */}
-        {/*
         <iframe
-          src="https://www.google.com/maps/embed?pb=EMBED_URL_HERE"
+          src="https://maps.google.com/maps?q=Woodside+Ferry+Terminal,+Birkenhead,+Merseyside,+CH41+6DU&t=&z=15&ie=UTF8&iwloc=&output=embed"
           width="100%"
           height="100%"
-          style={{ border: 0 }}
+          style={{ border: 0, filter: 'grayscale(30%) contrast(1.1)' }}
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-          title="Battle of the Atlantic Story location"
+          title="Battle of the Atlantic Story — Woodside, Birkenhead"
         />
-        */}
+        {/* Overlay label */}
+        <div
+          className="absolute bottom-0 left-0 right-0 pointer-events-none"
+          style={{
+            background: 'linear-gradient(to top, rgba(13,31,53,0.85) 0%, transparent 100%)',
+            padding: '24px 32px 20px',
+          }}
+        >
+          <p
+            className="font-montserrat font-bold uppercase"
+            style={{ color: '#7ECECE', letterSpacing: '0.18em', fontSize: 11 }}
+          >
+            Battle of the Atlantic Story
+          </p>
+          <p
+            className="font-mono text-xs mt-1"
+            style={{ color: 'rgba(248,244,238,0.55)', letterSpacing: '0.06em' }}
+          >
+            Woodside, Birkenhead, Merseyside, CH41 6DU
+          </p>
+        </div>
       </section>
     </>
   )
