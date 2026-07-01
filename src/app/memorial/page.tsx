@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import ScrollReveal from '@/components/ScrollReveal'
 
@@ -239,38 +240,18 @@ export default function MemorialPage() {
                   The prominent entrance placement, monumental scale, and artistic heritage of Emma Rodgers' bronze work creates a fitting memorial to all who fought in the longest campaign of the Second World War — Allied and German alike.
                 </p>
               </div>
-              {/* Memorial wall render placeholder */}
+              {/* Memorial building image */}
               <div
                 className="relative overflow-hidden"
-                style={{ background: '#E07B45', aspectRatio: '4/3' }}
+                style={{ aspectRatio: '4/3' }}
               >
-                <div className="absolute inset-0 flex flex-col items-start justify-end p-8">
-                  <svg width="100%" height="100%" className="absolute inset-0 opacity-10" viewBox="0 0 400 300" aria-hidden="true">
-                    {/* Abstract waves pattern representing the wall */}
-                    {[0,1,2,3,4,5].map((i) => (
-                      <path
-                        key={i}
-                        d={`M ${i * 80 - 40} 0 C ${i * 80 + 20} ${50 + i * 30} ${i * 80 + 60} ${100 + i * 20} ${i * 80 + 40} 300`}
-                        fill="none"
-                        stroke="#F5ECD7"
-                        strokeWidth="1.5"
-                        opacity="0.4"
-                      />
-                    ))}
-                  </svg>
-                  <p
-                    className="font-montserrat font-black uppercase text-sand"
-                    style={{ fontSize: 10, letterSpacing: '0.2em', opacity: 0.8 }}
-                  >
-                    THE BATTLE OF THE ATLANTIC
-                  </p>
-                  <p
-                    className="font-mono text-xs text-sand mt-1"
-                    style={{ opacity: 0.6, letterSpacing: '0.08em' }}
-                  >
-                    Memorial Wall · Artist impression
-                  </p>
-                </div>
+                <Image
+                  src="/images/memorial-building.jpg"
+                  alt="Battle of the Atlantic memorial building at sunset"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
               </div>
             </div>
           </ScrollReveal>
