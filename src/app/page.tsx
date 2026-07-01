@@ -190,21 +190,6 @@ export default function HomePage() {
           className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 pb-20 w-full"
           style={{ opacity: heroOpacity }}
         >
-          {/* Opening tag */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 2.5, duration: 0.8 }}
-            className="mb-6"
-          >
-            <span
-              className="font-mono text-xs uppercase"
-              style={{ color: '#7ECECE', letterSpacing: '0.2em' }}
-            >
-              Opening in 2027 · Birkenhead, Mersey
-            </span>
-          </motion.div>
-
           <motion.h1
             className="font-montserrat font-black uppercase text-offwhite mb-4"
             style={{
@@ -221,6 +206,21 @@ export default function HomePage() {
             <span style={{ color: '#7ECECE' }}>of the</span><br />
             Atlantic Story
           </motion.h1>
+
+          {/* Opening tag */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 2.8, duration: 0.8 }}
+            className="mb-6"
+          >
+            <span
+              className="font-mono text-xs uppercase"
+              style={{ color: '#7ECECE', letterSpacing: '0.2em' }}
+            >
+              Opening in 2027 · Birkenhead, Mersey
+            </span>
+          </motion.div>
 
           <motion.p
             className="font-montserrat text-lg max-w-xl mb-10 leading-relaxed"
