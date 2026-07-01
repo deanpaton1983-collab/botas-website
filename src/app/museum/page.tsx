@@ -684,4 +684,38 @@ export default function MuseumPage() {
             <h2
               className="font-montserrat font-black uppercase mb-6"
               style={{
-                fontSize: 'cl
+                fontSize: 'clamp(1.6rem, 3.5vw, 2.4rem)',
+                letterSpacing: '0.12em',
+                color: '#F5ECD7',
+              }}
+            >
+              Be the First to Visit
+            </h2>
+            <p
+              className="font-montserrat text-lg leading-relaxed mb-8"
+              style={{ color: 'rgba(245, 236, 215, 0.85)' }}
+            >
+              Opening in 2027 at Woodside, Birkenhead. Register your interest today to be the first to hear about tickets, events, and opening dates.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link
+                href="/contact"
+                className="font-montserrat font-bold text-sm uppercase px-8 py-4"
+                style={{ background: '#F5ECD7', color: '#B85C38', letterSpacing: '0.15em' }}
+              >
+                Register Interest
+              </Link>
+              <Link
+                href="/u-boat"
+                className="font-montserrat font-bold text-sm uppercase px-8 py-4 border"
+                style={{ borderColor: 'rgba(245,236,215,0.5)', color: '#F5ECD7', letterSpacing: '0.15em' }}
+              >
+                Discover U-534 →
+              </Link>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+    </>
+  )
+}

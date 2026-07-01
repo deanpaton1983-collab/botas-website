@@ -489,13 +489,6 @@ export default function ContactPage() {
                           <div
                             className="p-4 font-montserrat text-sm"
                             style={{
-                       </div>
-
-                        {/* Error message */}
-                        {error && (
-                          <div
-                            className="p-4 font-montserrat text-sm"
-                            style={{
                               background: 'rgba(184,92,56,0.15)',
                               border: '1px solid rgba(184,92,56,0.4)',
                               color: '#F5ECD7',
