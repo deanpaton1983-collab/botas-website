@@ -20,7 +20,7 @@ export const articleContent: Record<number, ArticleContent> = {
     convoyCode: 'BA 27',
     sections: [
       {
-        body: 'Winston Churchill called it “the dominating factor all through the war.” Without victory at sea, there would have been no D-Day, no liberation of Europe. And yet the Battle of the Atlantic — the longest and most decisive campaign of the Second World War — has never had a museum to call its own.\n\nThat changes in 2027.\n\nThe Battle of the Atlantic Story will open on the banks of the River Mersey in Birkenhead, becoming the world’s first museum dedicated entirely to this six-year struggle for control of the Atlantic Ocean. Situated with sweeping views of the Liverpool skyline, and just minutes from the legendary Western Approaches Command bunker where Allied victory was orchestrated, it’s a place with genuine historic roots and an extraordinary story to tell.',
+        body: 'Winston Churchill called it “the dominating factor all through the war.” Without victory at sea, there would have been no D-Day, no liberation of Europe. And yet the Battle of the Atlantic - the longest and most decisive campaign of the Second World War - has never had a museum to call its own.\n\nThat changes in 2027.\n\nThe Battle of the Atlantic Story will open on the banks of the River Mersey in Birkenhead, becoming the world’s first museum dedicated entirely to this six-year struggle for control of the Atlantic Ocean. Situated with sweeping views of the Liverpool skyline, and just minutes from the legendary Western Approaches Command bunker where Allied victory was orchestrated, it’s a place with genuine historic roots and an extraordinary story to tell.',
       },
       {
         heading: 'Why Birkenhead?',

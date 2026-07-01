@@ -47,7 +47,7 @@ const testimonials = [
     attribution: 'John Dennett · Royal Navy Veteran',
   },
   {
-    text: '"The ocean holds many secrets, both beautiful and terrifying. We knew they were out there — we just never knew exactly where."',
+    text: '"The ocean holds many secrets, both beautiful and terrifying. We knew they were out there - we just never knew exactly where."',
     attribution: '// [PLACEHOLDER: Veteran attribution]',
   },
   {
@@ -133,7 +133,7 @@ export default function MemorialPage() {
               style={{ color: 'rgba(45, 79, 92, 0.75)' }}
             >
               {/* [PLACEHOLDER: Memorial hero strapline] */}
-              Dedicated to all who served and died in the Battle of the Atlantic — Royal Navy, Merchant Navy, Allied air forces, and German Kriegsmarine. Their sacrifice determined the outcome of the Second World War.
+              Dedicated to all who served and died in the Battle of the Atlantic - Royal Navy, Merchant Navy, Allied air forces, and German Kriegsmarine. Their sacrifice determined the outcome of the Second World War.
             </p>
           </motion.div>
         </div>
@@ -218,7 +218,7 @@ export default function MemorialPage() {
                 style={{ color: 'rgba(45, 79, 92, 0.75)' }}
               >
                 {/* [PLACEHOLDER: Memorial wall description] */}
-                An external memorial wall, a bronze work by acclaimed Liverpool sculptor Emma Rodgers, will be created at the entrance to the museum. Executed in traditional sand-cast bronze alloy — 85% copper, 15% tin and zinc — it will bear the names of those who gave their lives in the Battle of the Atlantic, and will develop the characteristic verdigris patina of historic monuments over time.
+                An external memorial wall, a bronze work by acclaimed Liverpool sculptor Emma Rodgers, will be created at the entrance to the museum. Executed in traditional sand-cast bronze alloy - 85% copper, 15% tin and zinc - it will bear the names of those who gave their lives in the Battle of the Atlantic, and will develop the characteristic verdigris patina of historic monuments over time.
               </p>
             </div>
           </ScrollReveal>
@@ -231,13 +231,13 @@ export default function MemorialPage() {
                   style={{ color: 'rgba(45, 79, 92, 0.75)' }}
                 >
                   {/* [PLACEHOLDER: Memorial wall continued] */}
-                  Emma Rodgers is recognised as one of Britain's leading sculptors — winner of the prestigious Victoria & Albert Museum Prize, with work held in National Museums Liverpool and celebrated public commissions including the Cilla Black memorial at Liverpool's Cavern Club and the world's largest Liver Bird sculpture.
+                  Emma Rodgers is recognised as one of Britain's leading sculptors - winner of the prestigious Victoria & Albert Museum Prize, with work held in National Museums Liverpool and celebrated public commissions including the Cilla Black memorial at Liverpool's Cavern Club and the world's largest Liver Bird sculpture.
                 </p>
                 <p
                   className="font-montserrat text-lg leading-relaxed"
                   style={{ color: 'rgba(45, 79, 92, 0.75)' }}
                 >
-                  The prominent entrance placement, monumental scale, and artistic heritage of Emma Rodgers' bronze work creates a fitting memorial to all who fought in the longest campaign of the Second World War — Allied and German alike.
+                  The prominent entrance placement, monumental scale, and artistic heritage of Emma Rodgers' bronze work creates a fitting memorial to all who fought in the longest campaign of the Second World War - Allied and German alike.
                 </p>
               </div>
               {/* Memorial building image */}
@@ -302,7 +302,7 @@ export default function MemorialPage() {
                       borderTop: '1px solid rgba(126,206,206,0.15)',
                     }}
                   >
-                    — {t.attribution}
+                    - {t.attribution}
                   </cite>
                 </div>
               </ScrollReveal>
@@ -407,7 +407,7 @@ export default function MemorialPage() {
                 style={{ color: 'rgba(45, 79, 92, 0.55)', letterSpacing: '0.08em' }}
               >
                 {/* [PLACEHOLDER] */}
-                This is a representative selection. The complete Roll of Honour — including all known casualties from all nations — will be published at the museum's opening in 2027.
+                This is a representative selection. The complete Roll of Honour - including all known casualties from all nations - will be published at the museum's opening in 2027.
               </p>
             </div>
           </ScrollReveal>
@@ -436,7 +436,7 @@ export default function MemorialPage() {
                 style={{ color: 'rgba(248,244,238,0.6)', letterSpacing: '0.05em' }}
               >
                 {/* [PLACEHOLDER: Attribution] */}
-                — John Dennett · Royal Navy Veteran
+                - John Dennett · Royal Navy Veteran
               </cite>
             </blockquote>
           </ScrollReveal>
@@ -496,3 +496,4 @@ export default function MemorialPage() {
     </>
   )
 }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                

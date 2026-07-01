@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     template: '%s | Battle of the Atlantic Story',
   },
   description:
-    "The world's first museum dedicated to the longest continuous military campaign of World War II — the Battle of the Atlantic. Centred around U-534, the only U-boat ever raised from the seabed after combat. Opening in 2027, Birkenhead.",
+    "The world's first museum dedicated to the longest continuous military campaign of World War II - the Battle of the Atlantic. Centred around U-534, the only U-boat ever raised from the seabed after combat. Opening in 2027, Birkenhead.",
   keywords: [
     'Battle of the Atlantic',
     'U-534',
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Battle of the Atlantic Story',
     description:
-      "The world's first museum dedicated to the Battle of the Atlantic. Home of U-534 — the only U-boat ever raised from the seabed after combat. Opening in 2027, Birkenhead.",
+      "The world's first museum dedicated to the Battle of the Atlantic. Home of U-534 - the only U-boat ever raised from the seabed after combat. Opening in 2027, Birkenhead.",
     url: 'https://battleoftheatlantic.org',
     siteName: 'Battle of the Atlantic Story',
     locale: 'en_GB',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
         url: '/images/og/og-default.jpg',
         width: 1200,
         height: 630,
-        alt: 'Battle of the Atlantic Story — Opening in 2027, Birkenhead',
+        alt: 'Battle of the Atlantic Story - Opening in 2027, Birkenhead',
       },
     ],
   },

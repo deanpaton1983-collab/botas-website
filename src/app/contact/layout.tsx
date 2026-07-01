@@ -7,14 +7,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Contact & Visit | Battle of the Atlantic Story',
     description:
-      'Plan your visit to the Battle of the Atlantic Story at Woodside, Birkenhead. Opening in 2027 — register your interest today.',
+      'Plan your visit to the Battle of the Atlantic Story at Woodside, Birkenhead. Opening in 2027 - register your interest today.',
     url: 'https://battleoftheatlantic.org/contact',
     images: [
       {
         url: '/images/og/og-default.jpg',
         width: 1200,
         height: 630,
-        alt: 'Contact — Battle of the Atlantic Story',
+        alt: 'Contact - Battle of the Atlantic Story',
       },
     ],
   },

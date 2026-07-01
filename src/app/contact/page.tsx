@@ -538,7 +538,7 @@ export default function ContactPage() {
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-          title="Battle of the Atlantic Story — Woodside, Birkenhead"
+          title="Battle of the Atlantic Story - Woodside, Birkenhead"
         />
         {/* Overlay label */}
         <div

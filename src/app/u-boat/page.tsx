@@ -14,25 +14,25 @@ const timelineEvents = [
   {
     date: '1943–1944',
     title: 'Atlantic Patrols',
-    body: 'U-534 undertakes patrols in the North Atlantic and Bay of Biscay. By this stage the tide of war has shifted dramatically: Allied anti-submarine technology — radar, Huff-Duff, ASDIC — has given the hunter-killers a decisive advantage. U-534 achieves no confirmed Allied ship sinkings.',
+    body: 'U-534 undertakes patrols in the North Atlantic and Bay of Biscay. By this stage the tide of war has shifted dramatically: Allied anti-submarine technology - radar, Huff-Duff, ASDIC - has given the hunter-killers a decisive advantage. U-534 achieves no confirmed Allied ship sinkings.',
     code: 'BI 44',
   },
   {
     date: 'Early 1945',
     title: 'Last Voyage',
-    body: 'As Germany\'s defeat becomes inevitable, U-534 is ordered to Norway as part of Operation Regenbogen — a plan to scuttle the U-boat fleet to prevent capture. She leaves Kiel on 2 May 1945.',
+    body: 'As Germany\'s defeat becomes inevitable, U-534 is ordered to Norway as part of Operation Regenbogen - a plan to scuttle the U-boat fleet to prevent capture. She leaves Kiel on 2 May 1945.',
     code: 'NO 45',
   },
   {
     date: '5 May 1945',
     title: 'The Sinking',
-    body: 'Just two days before VE Day, U-534 is intercepted by RAF Liberators from No. 86 Squadron in the Kattegat — the strait between Denmark and Sweden. Hit by depth charges, she sinks rapidly. Of the 52 crew, 49 survive.',
+    body: 'Just two days before VE Day, U-534 is intercepted by RAF Liberators from No. 86 Squadron in the Kattegat - the strait between Denmark and Sweden. Hit by depth charges, she sinks rapidly. Of the 52 crew, 49 survive.',
     code: 'KT 45',
   },
   {
     date: '1993',
     title: 'Recovery',
-    body: 'After nearly five decades on the seabed, U-534 is discovered and raised in an extraordinary salvage operation. She is the only U-boat in the world ever to have been recovered after being sunk in combat — a fact that gives her unique historical value.',
+    body: 'After nearly five decades on the seabed, U-534 is discovered and raised in an extraordinary salvage operation. She is the only U-boat in the world ever to have been recovered after being sunk in combat - a fact that gives her unique historical value.',
     code: 'RC 93',
   },
   {
@@ -44,7 +44,7 @@ const timelineEvents = [
   {
     date: '2026',
     title: 'Battle of the Atlantic Story',
-    body: 'U-534 is reinterpreted and integrated into the new Battle of the Atlantic Story museum at Woodside, Birkenhead — alongside the collection of personal artefacts, diaries, letters, and photographs recovered with her from the seabed, offering an unparalleled insight into the German perspective on the campaign.',
+    body: 'U-534 is reinterpreted and integrated into the new Battle of the Atlantic Story museum at Woodside, Birkenhead - alongside the collection of personal artefacts, diaries, letters, and photographs recovered with her from the seabed, offering an unparalleled insight into the German perspective on the campaign.',
     code: 'BA 26',
   },
 ]
@@ -168,20 +168,20 @@ export default function UBoatPage() {
                   style={{ color: 'rgba(248, 244, 238, 0.85)' }}
                 >
                   {/* [PLACEHOLDER: Introduction paragraph 1] */}
-                  U-534 was commissioned in December 1942 and joined the German Kriegsmarine under the command of Kapitänleutnant Herbert Nollau. As a Type IXC/40 ocean-going submarine, she was designed for long-range patrols across the full breadth of the Atlantic — capable of reaching the Caribbean and beyond.
+                  U-534 was commissioned in December 1942 and joined the German Kriegsmarine under the command of Kapitänleutnant Herbert Nollau. As a Type IXC/40 ocean-going submarine, she was designed for long-range patrols across the full breadth of the Atlantic - capable of reaching the Caribbean and beyond.
                 </p>
                 <p
                   className="font-montserrat text-lg leading-relaxed mb-4"
                   style={{ color: 'rgba(248, 244, 238, 0.85)' }}
                 >
-                  Unlike many of her counterparts, U-534 did not achieve any confirmed sinkings of Allied ships. By the time she became fully operational, the tide of the war had shifted. The Allies had developed devastating countermeasures: radar, the Leigh light, ASDIC, improved depth charges, and — crucially — the breaking of the Enigma codes. U-534's lack of success reflects this broader strategic reality.
+                  Unlike many of her counterparts, U-534 did not achieve any confirmed sinkings of Allied ships. By the time she became fully operational, the tide of the war had shifted. The Allies had developed devastating countermeasures: radar, the Leigh light, ASDIC, improved depth charges, and - crucially - the breaking of the Enigma codes. U-534's lack of success reflects this broader strategic reality.
                 </p>
                 <p
                   className="font-montserrat text-lg leading-relaxed"
                   style={{ color: 'rgba(248, 244, 238, 0.85)' }}
                 >
                   {/* [PLACEHOLDER: Introduction paragraph 3] */}
-                  What makes U-534 unique among the four surviving U-boats worldwide is her fate: sunk on 5 May 1945 — just two days before Germany's surrender — and recovered from the seabed 48 years later in a remarkable engineering achievement. She is the only U-boat ever raised after being sunk in combat.
+                  What makes U-534 unique among the four surviving U-boats worldwide is her fate: sunk on 5 May 1945 - just two days before Germany's surrender - and recovered from the seabed 48 years later in a remarkable engineering achievement. She is the only U-boat ever raised after being sunk in combat.
                 </p>
               </div>
             </ScrollReveal>
@@ -234,7 +234,7 @@ export default function UBoatPage() {
                     className="font-mono text-xs mt-3"
                     style={{ color: 'rgba(248, 244, 238, 0.5)', letterSpacing: '0.08em' }}
                   >
-                    — Montserrat · {/* [PLACEHOLDER: quote attribution] */}
+                    - Montserrat · {/* [PLACEHOLDER: quote attribution] */}
                   </p>
                 </div>
               </div>
@@ -398,13 +398,13 @@ export default function UBoatPage() {
               style={{ color: 'rgba(248, 244, 238, 0.85)', maxWidth: 800, margin: '0 auto 24px' }}
             >
               {/* [PLACEHOLDER: Sinking narrative] */}
-              On 5 May 1945 — two days before Germany's official surrender — U-534 was running on the surface in the Kattegat when she was spotted by aircraft of No. 86 Squadron RAF. Three Liberator bombers attacked with depth charges. The crew fought desperately to save their vessel, but U-534 was mortally wounded. She sank within hours.
+              On 5 May 1945 - two days before Germany's official surrender - U-534 was running on the surface in the Kattegat when she was spotted by aircraft of No. 86 Squadron RAF. Three Liberator bombers attacked with depth charges. The crew fought desperately to save their vessel, but U-534 was mortally wounded. She sank within hours.
             </p>
             <p
               className="font-montserrat text-lg leading-relaxed"
               style={{ color: 'rgba(248, 244, 238, 0.85)', maxWidth: 800, margin: '0 auto' }}
             >
-              Of the 52 men aboard, 49 survived — testament to the crew's composure under fire. Three men were lost. The survivors were taken prisoner and the war, for them, was over. The submarine sank to a depth of 60 metres, where she would remain for nearly five decades.
+              Of the 52 men aboard, 49 survived - testament to the crew's composure under fire. Three men were lost. The survivors were taken prisoner and the war, for them, was over. The submarine sank to a depth of 60 metres, where she would remain for nearly five decades.
             </p>
           </ScrollReveal>
         </div>
@@ -441,13 +441,13 @@ export default function UBoatPage() {
                   style={{ color: 'rgba(248, 244, 238, 0.8)' }}
                 >
                   {/* [PLACEHOLDER: Recovery narrative] */}
-                  In 1993, nearly five decades after her sinking, U-534 was rediscovered and raised in a painstaking salvage operation. The recovery yielded an extraordinary collection of personal artefacts: letters home, diaries, photographs, personal effects — a deeply human record of life aboard a wartime U-boat.
+                  In 1993, nearly five decades after her sinking, U-534 was rediscovered and raised in a painstaking salvage operation. The recovery yielded an extraordinary collection of personal artefacts: letters home, diaries, photographs, personal effects - a deeply human record of life aboard a wartime U-boat.
                 </p>
                 <p
                   className="font-montserrat text-lg leading-relaxed"
                   style={{ color: 'rgba(248, 244, 238, 0.8)' }}
                 >
-                  These items, preserved by the cold, dark waters of the Kattegat, now form the core of the U-534 collection — offering an unparalleled insight into the German perspective on the Battle of the Atlantic, and into the humanity of those who fought on both sides.
+                  These items, preserved by the cold, dark waters of the Kattegat, now form the core of the U-534 collection - offering an unparalleled insight into the German perspective on the Battle of the Atlantic, and into the humanity of those who fought on both sides.
                 </p>
               </div>
             </ScrollReveal>

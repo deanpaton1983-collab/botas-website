@@ -38,7 +38,7 @@ const colourways = [
     id: 'signals-secrets',
     label: 'Signals & Secrets',
     description:
-      '"Radar was our first great invention…" — Roy \'Dick\' Dykes. Alongside the breaking of Enigma, the race for radar superiority helped turn the tide of the battle.',
+      '"Radar was our first great invention…" - Roy \'Dick\' Dykes. Alongside the breaking of Enigma, the race for radar superiority helped turn the tide of the battle.',
     bg: '#B85C38',
     text: '#F5ECD7',
     accent: '#E07B45',
@@ -239,7 +239,7 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 3.0, duration: 0.8 }}
           >
-            The world's first museum dedicated to the longest continuous military campaign of World War II — centred around the U-534 submarine, the only U-boat raised from the seabed after combat.
+            The world's first museum dedicated to the longest continuous military campaign of World War II - centred around the U-534 submarine, the only U-boat raised from the seabed after combat.
           </motion.p>
 
           <motion.div
@@ -353,7 +353,7 @@ export default function HomePage() {
                 className="font-mono text-sm not-italic"
                 style={{ color: 'rgba(248, 244, 238, 0.6)', letterSpacing: '0.05em' }}
               >
-                — {quotes[0].attribution}
+                - {quotes[0].attribution}
               </cite>
             </blockquote>
           </ScrollReveal>
@@ -590,7 +590,7 @@ export default function HomePage() {
                 className="font-mono text-sm not-italic"
                 style={{ color: 'rgba(248, 244, 238, 0.6)', letterSpacing: '0.05em' }}
               >
-                — {quotes[1].attribution}
+                - {quotes[1].attribution}
               </cite>
             </blockquote>
           </ScrollReveal>

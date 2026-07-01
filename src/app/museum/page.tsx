@@ -9,37 +9,37 @@ import ScrollReveal from '@/components/ScrollReveal'
 const galleryImages = [
   {
     src: '/images/museum/06Working.jpg',
-    alt: 'Working on a U-Boat — mechanical exhibits with pipes, valves and gauges recreating life below the waves',
+    alt: 'Working on a U-Boat - mechanical exhibits with pipes, valves and gauges recreating life below the waves',
     caption: 'Working on a U-Boat',
     zone: 'Life at Sea',
   },
   {
     src: '/images/museum/05Signals.jpg',
-    alt: 'Signals & Secrets zone — interactive radar and signals intelligence stations',
+    alt: 'Signals & Secrets zone - interactive radar and signals intelligence stations',
     caption: 'Signals & Secrets',
     zone: 'HX 236',
   },
   {
     src: '/images/museum/04Skies.jpg',
-    alt: 'Support from the Skies — Warfare at Sea zone with aircraft models and immersive displays',
+    alt: 'Support from the Skies - Warfare at Sea zone with aircraft models and immersive displays',
     caption: 'Support from the Skies',
     zone: 'Warfare at Sea',
   },
   {
     src: '/images/museum/03CruelSea.jpg',
-    alt: 'The Cruel Sea — curved immersive gallery with archive photography and dramatic lighting',
+    alt: 'The Cruel Sea - curved immersive gallery with archive photography and dramatic lighting',
     caption: 'The Cruel Sea',
     zone: 'Immersive Gallery',
   },
   {
     src: '/images/museum/02Shipbuilding.jpg',
-    alt: 'Shipbuilding & Repair — Life in Merseyside section featuring the Birkenhead Dock display',
+    alt: 'Shipbuilding & Repair - Life in Merseyside section featuring the Birkenhead Dock display',
     caption: 'Shipbuilding & Repair',
     zone: 'Life in Merseyside',
   },
   {
     src: '/images/museum/01Supply-lines.jpg',
-    alt: 'Supply Lines — convoy route map room with Atlantic supply line displays',
+    alt: 'Supply Lines - convoy route map room with Atlantic supply line displays',
     caption: 'Supply Lines',
     zone: 'SC 48',
   },
@@ -319,7 +319,7 @@ export default function MuseumPage() {
             </div>
           </ScrollReveal>
 
-          {/* Primary image — full width */}
+          {/* Primary image - full width */}
           <ScrollReveal>
             <div className="relative w-full overflow-hidden mb-4" style={{ aspectRatio: '16/9' }}>
               <Image
@@ -377,7 +377,7 @@ export default function MuseumPage() {
             ))}
           </div>
 
-          {/* Fifth image — half width */}
+          {/* Fifth image - half width */}
           <ScrollReveal>
             <div className="relative overflow-hidden" style={{ aspectRatio: '4/3', maxWidth: '50%' }}>
               <Image
@@ -409,7 +409,7 @@ export default function MuseumPage() {
               className="font-montserrat text-sm mt-8 text-center"
               style={{ color: 'rgba(248,244,238,0.35)', letterSpacing: '0.05em' }}
             >
-              Artist impressions — museum interior design subject to change prior to opening in 2027
+              Artist impressions - museum interior design subject to change prior to opening in 2027
             </p>
           </ScrollReveal>
         </div>
@@ -684,38 +684,4 @@ export default function MuseumPage() {
             <h2
               className="font-montserrat font-black uppercase mb-6"
               style={{
-                fontSize: 'clamp(1.6rem, 3.5vw, 2.4rem)',
-                letterSpacing: '0.12em',
-                color: '#F5ECD7',
-              }}
-            >
-              Be the First to Visit
-            </h2>
-            <p
-              className="font-montserrat text-lg leading-relaxed mb-8"
-              style={{ color: 'rgba(245, 236, 215, 0.85)' }}
-            >
-              Opening in 2027 at Woodside, Birkenhead. Register your interest today to be the first to hear about tickets, events, and opening dates.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link
-                href="/contact"
-                className="font-montserrat font-bold text-sm uppercase px-8 py-4"
-                style={{ background: '#F5ECD7', color: '#B85C38', letterSpacing: '0.15em' }}
-              >
-                Register Interest
-              </Link>
-              <Link
-                href="/u-boat"
-                className="font-montserrat font-bold text-sm uppercase px-8 py-4 border"
-                style={{ borderColor: 'rgba(245,236,215,0.5)', color: '#F5ECD7', letterSpacing: '0.15em' }}
-              >
-                Discover U-534 →
-              </Link>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-    </>
-  )
-}
+                fontSize: 'cl
