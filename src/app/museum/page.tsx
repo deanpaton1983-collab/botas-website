@@ -53,7 +53,7 @@ const zones = [
     code: 'SC 48',
     tagline: 'The Convoys That Kept Britain Alive',
     description:
-      'Step into the world of the merchant convoys â vast armadas of ships that crossed the Atlantic carrying food, fuel, and munitions to a besieged Britain. Through personal accounts, original artefacts, and immersive displays, discover the courage of the ordinary men and women who risked everything to keep the supply lines open.',
+      'Step into the world of the merchant convoys - vast armadas of ships that crossed the Atlantic carrying food, fuel, and munitions to a besieged Britain. Through personal accounts, original artefacts, and immersive displays, discover the courage of the ordinary men and women who risked everything to keep the supply lines open.',
     highlights: [
       'Original convoy route charts and shipping manifests',
       'Personal diaries and letters from merchant seamen',
@@ -71,7 +71,7 @@ const zones = [
     code: 'ON 67',
     tagline: 'The Deadly Arms Race Beneath the Waves',
     description:
-      'Explore the technological arms race that defined the longest continuous military campaign of the Second World War. From the lethal "Wolf Pack" tactics of the German U-boat fleet to the Allied countermeasures that eventually turned the tide, this zone brings you face to face with U-534 â the centrepiece of the museum.',
+      'Explore the technological arms race that defined the longest continuous military campaign of the Second World War. From the lethal "Wolf Pack" tactics of the German U-boat fleet to the Allied countermeasures that eventually turned the tide, this zone brings you face to face with U-534 - the centrepiece of the museum.',
     highlights: [
       'Walk inside the sectioned hull of U-534',
       'Artefacts recovered from the seabed',
@@ -89,7 +89,7 @@ const zones = [
     code: 'HX 236',
     tagline: 'The Intelligence War That Changed Everything',
     description:
-      'Uncover the secret war that raged behind the scenes â from the codebreakers of Bletchley Park to the radar pioneers of the Mersey. This zone reveals how the breaking of the Enigma codes and the race for technological superiority became the decisive turning point of the Battle of the Atlantic.',
+      'Uncover the secret war that raged behind the scenes - from the codebreakers of Bletchley Park to the radar pioneers of the Mersey. This zone reveals how the breaking of the Enigma codes and the race for technological superiority became the decisive turning point of the Battle of the Atlantic.',
     highlights: [
       'Enigma machine and signals intelligence displays',
       'Radar and Huff-Duff direction-finding technology',
@@ -107,7 +107,7 @@ const zones = [
     code: 'SL 125',
     tagline: 'The Human Stories Behind the Battle',
     description:
-      'At its heart, the Battle of the Atlantic is a story of people. In this zone, hear the voices of those who lived through it â submariners and merchant seamen, Wrens and dockworkers, families waiting at home. Through diaries, photographs, oral histories, and personal effects, discover the humanity on both sides of the conflict.',
+      'At its heart, the Battle of the Atlantic is a story of people. In this zone, hear the voices of those who lived through it - submariners and merchant seamen, Wrens and dockworkers, families waiting at home. Through diaries, photographs, oral histories, and personal effects, discover the humanity on both sides of the conflict.',
     highlights: [
       'Oral history listening stations',
       'Personal effects and photographs of those who served',
@@ -124,7 +124,7 @@ const zones = [
 export default function MuseumPage() {
   return (
     <>
-      {/* ââ HERO âââââââââââââââââââââââââââââââââââââââââââââââ */}
+      {/* -- HERO ----------------------------------------------- */}
       <section
         className="relative min-h-screen flex items-end overflow-hidden"
         style={{ backgroundColor: '#2D4F5C' }}
@@ -201,13 +201,13 @@ export default function MuseumPage() {
               style={{ color: 'rgba(248, 244, 238, 0.8)' }}
             >
               {/* [PLACEHOLDER: Museum hero strapline] */}
-              Four immersive exhibition zones. Thousands of original artefacts. One extraordinary story â the longest, most pivotal naval campaign of the Second World War, told from the shores of the Mersey where it was won.
+              Four immersive exhibition zones. Thousands of original artefacts. One extraordinary story - the longest, most pivotal naval campaign of the Second World War, told from the shores of the Mersey where it was won.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* ââ INTRO ââââââââââââââââââââââââââââââââââââââââââââââ */}
+      {/* -- INTRO ---------------------------------------------- */}
       <section
         className="relative py-24 lg:py-32 overflow-hidden"
         style={{ backgroundColor: '#F8F4EE' }}
@@ -237,14 +237,14 @@ export default function MuseumPage() {
                   style={{ color: 'rgba(45, 79, 92, 0.85)' }}
                 >
                   {/* [PLACEHOLDER: Museum introduction paragraph 1] */}
-                  The Battle of the Atlantic Story is the world's most comprehensive museum dedicated to the longest continuous campaign of the Second World War. Located at Woodside, Birkenhead â on the very waterfront where convoy escorts assembled and merchant crews said their goodbyes â the museum brings together original artefacts, personal testimonies, and cutting-edge immersive technology.
+                  The Battle of the Atlantic Story is the world's most comprehensive museum dedicated to the longest continuous campaign of the Second World War. Located at Woodside, Birkenhead - on the very waterfront where convoy escorts assembled and merchant crews said their goodbyes - the museum brings together original artefacts, personal testimonies, and cutting-edge immersive technology.
                 </p>
                 <p
                   className="font-montserrat text-lg leading-relaxed"
                   style={{ color: 'rgba(45, 79, 92, 0.85)' }}
                 >
                   {/* [PLACEHOLDER: Museum introduction paragraph 2] */}
-                  At its heart stands U-534 â the only U-boat ever raised after being sunk in combat â alongside the extraordinary collection of personal effects recovered from her hull. Four themed exhibition zones guide visitors through the full story: the convoys, the combat, the intelligence war, and the human experience on both sides.
+                  At its heart stands U-534 - the only U-boat ever raised after being sunk in combat - alongside the extraordinary collection of personal effects recovered from her hull. Four themed exhibition zones guide visitors through the full story: the convoys, the combat, the intelligence war, and the human experience on both sides.
                 </p>
               </div>
             </ScrollReveal>
@@ -415,7 +415,7 @@ export default function MuseumPage() {
         </div>
       </section>
 
-      {/* ââ EXHIBITION ZONES âââââââââââââââââââââââââââââââââââ */}
+      {/* -- EXHIBITION ZONES ----------------------------------- */}
       <section
         className="relative py-24 lg:py-32 overflow-hidden"
         style={{ backgroundColor: '#2D4F5C' }}
@@ -474,7 +474,7 @@ export default function MuseumPage() {
 
                   <div className="p-8 lg:p-12">
                     <div className="grid lg:grid-cols-5 gap-8 lg:gap-12 items-start">
-                      {/* Main content â 3 cols */}
+                      {/* Main content - 3 cols */}
                       <div className="lg:col-span-3">
                         <p
                           className="font-mono text-xs uppercase mb-3"
@@ -507,7 +507,7 @@ export default function MuseumPage() {
                         </p>
                       </div>
 
-                      {/* Highlights â 2 cols */}
+                      {/* Highlights - 2 cols */}
                       <div className="lg:col-span-2">
                         <p
                           className="font-mono text-xs uppercase mb-4"
@@ -551,7 +551,7 @@ export default function MuseumPage() {
         </div>
       </section>
 
-      {/* ââ QUOTE BREAK ââââââââââââââââââââââââââââââââââââââââ */}
+      {/* -- QUOTE BREAK ---------------------------------------- */}
       <section
         className="relative py-20 lg:py-28 overflow-hidden"
         style={{ backgroundColor: '#4A9B8E' }}
@@ -577,7 +577,7 @@ export default function MuseumPage() {
         </div>
       </section>
 
-      {/* ââ VISITOR INFORMATION âââââââââââââââââââââââââââââââââ */}
+      {/* -- VISITOR INFORMATION --------------------------------- */}
       <section
         className="relative py-24 lg:py-32 overflow-hidden"
         style={{ backgroundColor: '#F8F4EE' }}
@@ -618,7 +618,7 @@ export default function MuseumPage() {
                   {
                     title: 'Families',
                     body: 'Interactive displays, hands-on activities, and storytelling stations designed for visitors of all ages. Children can explore what life was like aboard a submarine and follow the journey of a convoy across the Atlantic.',
-                    icon: 'â',
+                    icon: '⚓',
                   },
                   {
                     title: 'Schools & Groups',
@@ -628,11 +628,11 @@ export default function MuseumPage() {
                   {
                     title: 'Accessibility',
                     body: 'The museum is fully wheelchair accessible with step-free access throughout. Audio guides, large-print materials, and sensory-friendly sessions are available. Assistance dogs are welcome.',
-                    icon: 'â¿',
+                    icon: '♿',
                   },
                   {
                     title: 'Getting Here',
-                    body: 'Located at Woodside, Birkenhead â directly across the Mersey from Liverpool\'s Pier Head. Easily accessible by Mersey Ferry, bus, and car. Visitor parking is available on site.',
+                    body: 'Located at Woodside, Birkenhead - directly across the Mersey from Liverpool\'s Pier Head. Easily accessible by Mersey Ferry, bus, and car. Visitor parking is available on site.',
                     icon: 'ð',
                   },
                 ].map((card, i) => (
@@ -673,7 +673,7 @@ export default function MuseumPage() {
         </div>
       </section>
 
-      {/* ââ CTA ââââââââââââââââââââââââââââââââââââââââââââââââ */}
+      {/* -- CTA ------------------------------------------------ */}
       <section
         className="relative py-20 text-center overflow-hidden"
         style={{ backgroundColor: '#B85C38' }}
@@ -684,4 +684,38 @@ export default function MuseumPage() {
             <h2
               className="font-montserrat font-black uppercase mb-6"
               style={{
-                fontSize: 'cl
+                fontSize: 'clamp(1.6rem, 3.5vw, 2.4rem)',
+                letterSpacing: '0.12em',
+                color: '#F5ECD7',
+              }}
+            >
+              Be the First to Visit
+            </h2>
+            <p
+              className="font-montserrat text-lg leading-relaxed mb-8"
+              style={{ color: 'rgba(245, 236, 215, 0.85)' }}
+            >
+              Opening in 2027 at Woodside, Birkenhead. Register your interest today to be the first to hear about tickets, events, and opening dates.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link
+                href="/contact"
+                className="font-montserrat font-bold text-sm uppercase px-8 py-4"
+                style={{ background: '#F5ECD7', color: '#B85C38', letterSpacing: '0.15em' }}
+              >
+                Register Interest
+              </Link>
+              <Link
+                href="/u-boat"
+                className="font-montserrat font-bold text-sm uppercase px-8 py-4 border"
+                style={{ borderColor: 'rgba(245,236,215,0.5)', color: '#F5ECD7', letterSpacing: '0.15em' }}
+              >
+                Discover U-534 →
+              </Link>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+    </>
+  )
+}

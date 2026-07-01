@@ -21,7 +21,7 @@ export async function POST(request: Request) {
       from: 'BOTAS Website <noreply@battleoftheatlantic.org>',
       to: ['info@battleoftheatlantic.org'],
       replyTo: email,
-      subject: `[Website Enquiry] ${type} â ${name}`,
+      subject: `[Website Enquiry] ${type} - ${name}`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #2D4F5C; border-bottom: 2px solid #1A8080; padding-bottom: 12px;">
@@ -52,7 +52,7 @@ export async function POST(request: Request) {
             </tr>
             <tr style="background: #f8f8f8;">
               <td style="padding: 8px 12px; font-weight: bold; color: #2D4F5C; vertical-align: top;">Newsletter</td>
-              <td style="padding: 8px 12px; color: #333;">${newsletter ? 'Yes â opted in' : 'No'}</td>
+              <td style="padding: 8px 12px; color: #333;">${newsletter ? 'Yes - opted in' : 'No'}</td>
             </tr>
           </table>
           <div style="margin-top: 20px; padding: 16px; background: #f0f7f7; border-left: 3px solid #1A8080;">
