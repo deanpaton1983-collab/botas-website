@@ -5,26 +5,8 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import ScrollReveal from '@/components/ScrollReveal'
 
-// Interior render gallery
+// Interior render gallery (renders not shown in the zone cards below)
 const galleryImages = [
-  {
-    src: '/images/museum/06Working.jpg',
-    alt: 'Working on a U-Boat - mechanical exhibits with pipes, valves and gauges recreating life below the waves',
-    caption: 'Working on a U-Boat',
-    zone: 'Life at Sea',
-  },
-  {
-    src: '/images/museum/05Signals.jpg',
-    alt: 'Signals & Secrets zone - interactive radar and signals intelligence stations',
-    caption: 'Signals & Secrets',
-    zone: 'HX 236',
-  },
-  {
-    src: '/images/museum/04Skies.jpg',
-    alt: 'Support from the Skies - Warfare at Sea zone with aircraft models and immersive displays',
-    caption: 'Support from the Skies',
-    zone: 'Warfare at Sea',
-  },
   {
     src: '/images/museum/03CruelSea.jpg',
     alt: 'The Cruel Sea - curved immersive gallery with archive photography and dramatic lighting',
@@ -36,12 +18,6 @@ const galleryImages = [
     alt: 'Shipbuilding & Repair - Life in Merseyside section featuring the Birkenhead Dock display',
     caption: 'Shipbuilding & Repair',
     zone: 'Life in Merseyside',
-  },
-  {
-    src: '/images/museum/01Supply-lines.jpg',
-    alt: 'Supply Lines - convoy route map room with Atlantic supply line displays',
-    caption: 'Supply Lines',
-    zone: 'SC 48',
   },
 ]
 
@@ -59,6 +35,8 @@ const zones = [
       'Personal diaries and letters from merchant seamen',
       'Interactive convoy formation display',
     ],
+    img: '/images/museum/01Supply-lines.jpg',
+    imgAlt: 'Supply Lines zone - convoy route map room with Atlantic supply line displays',
     bg: '#F5ECD7',
     text: '#B85C38',
     accent: '#E07B45',
@@ -77,6 +55,8 @@ const zones = [
       'Artefacts recovered from the seabed',
       'Depth charge and ASDIC demonstrations',
     ],
+    img: '/images/museum/04Skies.jpg',
+    imgAlt: 'Support from the Skies - Warfare at Sea zone with aircraft models and immersive displays',
     bg: '#7ECECE',
     text: '#2D4F5C',
     accent: '#4A9B8E',
@@ -95,6 +75,8 @@ const zones = [
       'Radar and Huff-Duff direction-finding technology',
       'The story of Western Approaches HQ in Liverpool',
     ],
+    img: '/images/museum/05Signals.jpg',
+    imgAlt: 'Signals & Secrets zone - interactive radar and signals intelligence stations',
     bg: '#B85C38',
     text: '#F5ECD7',
     accent: '#E07B45',
@@ -113,6 +95,8 @@ const zones = [
       'Personal effects and photographs of those who served',
       'Life aboard: recreated living quarters',
     ],
+    img: '/images/museum/06Working.jpg',
+    imgAlt: 'Working on a U-Boat - mechanical exhibits with pipes, valves and gauges recreating life below the waves',
     bg: '#1A8080',
     text: '#F8F4EE',
     accent: '#7ECECE',
@@ -321,12 +305,12 @@ export default function MuseumPage() {
 
           {/* Primary image - full width */}
           <ScrollReveal>
-            <div className="relative w-full overflow-hidden mb-4" style={{ aspectRatio: '16/9' }}>
+            <div className="relative w-full overflow-hidden mb-4 group" style={{ aspectRatio: '16/9' }}>
               <Image
-                src={galleryImages[5].src}
-                alt={galleryImages[5].alt}
+                src={galleryImages[0].src}
+                alt={galleryImages[0].alt}
                 fill
-                className="object-cover"
+                className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]"
                 sizes="(max-width: 1280px) 100vw, 1280px"
               />
               <div
@@ -334,75 +318,65 @@ export default function MuseumPage() {
                 style={{ background: 'linear-gradient(to top, rgba(6,15,26,0.85) 0%, transparent 100%)' }}
               >
                 <p className="font-montserrat font-bold text-white text-lg leading-tight">
-                  {galleryImages[5].caption}
+                  {galleryImages[0].caption}
                 </p>
                 <span
                   className="font-mono text-xs px-3 py-1.5 flex-shrink-0 ml-4"
                   style={{ background: 'rgba(42,173,166,0.15)', color: '#7ECECE', border: '1px solid rgba(42,173,166,0.3)', letterSpacing: '0.12em' }}
                 >
-                  {galleryImages[5].zone}
+                  {galleryImages[0].zone}
                 </span>
               </div>
             </div>
           </ScrollReveal>
 
-          {/* Grid of 4 */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
-            {galleryImages.slice(0, 4).map((img, i) => (
-              <ScrollReveal key={img.src} delay={i * 0.07}>
-                <div className="relative overflow-hidden" style={{ aspectRatio: '1/1' }}>
-                  <Image
-                    src={img.src}
-                    alt={img.alt}
-                    fill
-                    className="object-cover transition-transform duration-700 hover:scale-105"
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 320px"
-                  />
-                  <div
-                    className="absolute bottom-0 left-0 right-0 px-4 py-3"
-                    style={{ background: 'linear-gradient(to top, rgba(6,15,26,0.9) 0%, transparent 100%)' }}
+          {/* Second image + note */}
+          <div className="grid lg:grid-cols-3 gap-4">
+            <ScrollReveal className="lg:col-span-2">
+              <div className="relative overflow-hidden group h-full" style={{ aspectRatio: '16/9' }}>
+                <Image
+                  src={galleryImages[1].src}
+                  alt={galleryImages[1].alt}
+                  fill
+                  className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]"
+                  sizes="(max-width: 1024px) 100vw, 850px"
+                />
+                <div
+                  className="absolute bottom-0 left-0 right-0 px-6 py-4 flex items-end justify-between"
+                  style={{ background: 'linear-gradient(to top, rgba(6,15,26,0.85) 0%, transparent 100%)' }}
+                >
+                  <p className="font-montserrat font-bold text-white text-lg leading-tight">
+                    {galleryImages[1].caption}
+                  </p>
+                  <span
+                    className="font-mono text-xs px-3 py-1.5 flex-shrink-0 ml-4"
+                    style={{ background: 'rgba(42,173,166,0.15)', color: '#7ECECE', border: '1px solid rgba(42,173,166,0.3)', letterSpacing: '0.12em' }}
                   >
-                    <p className="font-montserrat font-bold text-white text-sm leading-tight">
-                      {img.caption}
-                    </p>
-                    <p
-                      className="font-mono text-xs mt-0.5"
-                      style={{ color: '#7ECECE', letterSpacing: '0.1em' }}
-                    >
-                      {img.zone}
-                    </p>
-                  </div>
+                    {galleryImages[1].zone}
+                  </span>
                 </div>
-              </ScrollReveal>
-            ))}
-          </div>
-
-          {/* Fifth image - half width */}
-          <ScrollReveal>
-            <div className="relative overflow-hidden" style={{ aspectRatio: '4/3', maxWidth: '50%' }}>
-              <Image
-                src={galleryImages[4].src}
-                alt={galleryImages[4].alt}
-                fill
-                className="object-cover transition-transform duration-700 hover:scale-105"
-                sizes="(max-width: 1024px) 100vw, 640px"
-              />
-              <div
-                className="absolute bottom-0 left-0 right-0 px-6 py-4 flex items-end justify-between"
-                style={{ background: 'linear-gradient(to top, rgba(6,15,26,0.85) 0%, transparent 100%)' }}
-              >
-                <p className="font-montserrat font-bold text-white text-lg leading-tight">
-                  {galleryImages[4].caption}
-                </p>
-                <span
-                  className="font-mono text-xs px-3 py-1.5 flex-shrink-0 ml-4"
-                  style={{ background: 'rgba(42,173,166,0.15)', color: '#7ECECE', border: '1px solid rgba(42,173,166,0.3)', letterSpacing: '0.12em' }}
-                >
-                  {galleryImages[4].zone}
-                </span>
               </div>
-            </div>
-          </ScrollReveal>
+            </ScrollReveal>
+            <ScrollReveal delay={0.1}>
+              <div
+                className="h-full flex flex-col justify-center p-8"
+                style={{ background: 'rgba(126, 206, 206, 0.05)', border: '1px solid rgba(126, 206, 206, 0.15)' }}
+              >
+                <p
+                  className="font-mono text-xs uppercase mb-4"
+                  style={{ color: '#7ECECE', letterSpacing: '0.2em' }}
+                >
+                  Four More Zones Below
+                </p>
+                <p
+                  className="font-montserrat text-base leading-relaxed"
+                  style={{ color: 'rgba(248,244,238,0.75)' }}
+                >
+                  Every exhibition zone has been designed around original artefacts and first-hand testimony - scroll on to explore each zone and see how it will look inside.
+                </p>
+              </div>
+            </ScrollReveal>
+          </div>
 
           <ScrollReveal>
             <p
@@ -429,7 +403,7 @@ export default function MuseumPage() {
                 className="font-mono text-xs uppercase mb-3"
                 style={{ color: '#7ECECE', letterSpacing: '0.2em' }}
               >
-                Four Zones Â· One Story
+                Four Zones · One Story
               </p>
               <h2
                 className="font-montserrat font-black uppercase"
@@ -472,7 +446,22 @@ export default function MuseumPage() {
                     </span>
                   </div>
 
-                  <div className="p-8 lg:p-12">
+                  {/* Zone interior render */}
+                  <div className="relative overflow-hidden group" style={{ aspectRatio: '21/8' }}>
+                    <Image
+                      src={zone.img}
+                      alt={zone.imgAlt}
+                      fill
+                      className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
+                      sizes="(max-width: 1280px) 100vw, 1280px"
+                    />
+                    <div
+                      className="absolute inset-0 pointer-events-none"
+                      style={{ background: `linear-gradient(to top, ${zone.bg} 0%, transparent 35%)` }}
+                    />
+                  </div>
+
+                  <div className="p-8 lg:p-12 pt-4 lg:pt-6">
                     <div className="grid lg:grid-cols-5 gap-8 lg:gap-12 items-start">
                       {/* Main content - 3 cols */}
                       <div className="lg:col-span-3">
@@ -623,7 +612,7 @@ export default function MuseumPage() {
                   {
                     title: 'Schools & Groups',
                     body: 'Curriculum-linked workshops and guided tours tailored to KS2, KS3, and GCSE History. Our education programme brings the Battle of the Atlantic to life through primary sources and immersive experiences.',
-                    icon: 'ð',
+                    icon: '🎓',
                   },
                   {
                     title: 'Accessibility',
@@ -633,7 +622,7 @@ export default function MuseumPage() {
                   {
                     title: 'Getting Here',
                     body: 'Located at Woodside, Birkenhead - directly across the Mersey from Liverpool\'s Pier Head. Easily accessible by Mersey Ferry, bus, and car. Visitor parking is available on site.',
-                    icon: 'ð',
+                    icon: '⛴️',
                   },
                 ].map((card, i) => (
                   <ScrollReveal key={card.title} delay={i * 0.1}>

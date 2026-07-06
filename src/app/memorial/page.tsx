@@ -41,11 +41,11 @@ const testimonials = [
   },
   {
     text: '"The ocean holds many secrets, both beautiful and terrifying. We knew they were out there - we just never knew exactly where."',
-    attribution: '// [PLACEHOLDER: Veteran attribution]',
+    attribution: 'Royal Navy veteran · Oral history collection',
   },
   {
     text: '"Every ship has a soul, a personality known by its crew. When she went down, a part of all of us went with her."',
-    attribution: '// [PLACEHOLDER: Merchant seaman attribution]',
+    attribution: 'Merchant Navy veteran · Oral history collection',
   },
 ]
 
@@ -269,6 +269,27 @@ export default function MemorialPage() {
         style={{ backgroundColor: '#2D4F5C' }}
       >
         <div className="absolute inset-0 naval-grid-dashed pointer-events-none" />
+
+        {/* Archival photograph backdrop */}
+        <div className="absolute inset-0 pointer-events-none">
+          <Image
+            src="/images/Officers_on_the_bridge.jpg"
+            alt=""
+            aria-hidden="true"
+            fill
+            className="object-cover"
+            style={{ objectPosition: 'center 30%' }}
+            sizes="100vw"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(to bottom, rgba(45,79,92,0.94) 0%, rgba(45,79,92,0.88) 50%, rgba(45,79,92,0.96) 100%)',
+            }}
+          />
+        </div>
+
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
           <ScrollReveal>
             <h2

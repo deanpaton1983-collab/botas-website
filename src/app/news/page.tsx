@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import ScrollReveal from '@/components/ScrollReveal'
 
@@ -12,6 +13,8 @@ const articles = [
     excerpt: 'Opening Spring 2027, the Battle of the Atlantic Story will open on the banks of the River Mersey in Birkenhead, becoming the world\'s first museum dedicated entirely to the six-year struggle for control of the Atlantic Ocean.',
     readTime: '12 min read',
     convoyCode: 'BA 27',
+    image: '/images/1280px-Casablanca_convoy.jpg',
+    imageAlt: 'An Allied convoy at sea, seen from the air',
   },
 ]
 
@@ -69,22 +72,25 @@ export default function NewsPage() {
             {articles.map((article, i) => (
               <ScrollReveal key={article.id} delay={(i % 3) * 0.1}>
                 <article className="group h-full flex flex-col">
-                  {/* Card header */}
+                  {/* Card header - archival image */}
                   <div
-                    className="relative overflow-hidden px-6 py-8 flex-shrink-0"
-                    style={{ backgroundColor: '#2D4F5C', minHeight: 140, border: '1px solid rgba(126, 206, 206, 0.15)', borderBottom: 'none' }}
+                    className="relative overflow-hidden flex-shrink-0"
+                    style={{ aspectRatio: '16/9', border: '1px solid rgba(126, 206, 206, 0.15)', borderBottom: 'none' }}
                   >
-                    {/* Sonar rings in card */}
-                    <div className="absolute bottom-0 right-0 translate-x-1/3 translate-y-1/3 pointer-events-none">
-                      <svg width="150" height="150" viewBox="0 0 150 150" aria-hidden="true">
-                        {[20, 40, 60, 80].map((r, j) => (
-                          <circle key={j} cx="75" cy="75" r={r} fill="none" stroke="#7ECECE" strokeWidth="0.5" opacity={0.08 - j * 0.015} />
-                        ))}
-                      </svg>
-                    </div>
+                    <Image
+                      src={article.image}
+                      alt={article.imageAlt}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 420px"
+                    />
+                    <div
+                      className="absolute inset-0 pointer-events-none"
+                      style={{ background: 'linear-gradient(to top, rgba(13,48,64,0.8) 0%, transparent 45%)' }}
+                    />
 
                     {/* Convoy code & date */}
-                    <div className="flex items-center gap-3 mb-3">
+                    <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between">
                       <span
                         className="font-mono text-xs font-bold uppercase px-2 py-1"
                         style={{
@@ -95,15 +101,13 @@ export default function NewsPage() {
                       >
                         {article.convoyCode}
                       </span>
+                      <p
+                        className="font-mono text-xs"
+                        style={{ color: '#7ECECE', letterSpacing: '0.08em', textShadow: '0 1px 6px rgba(0,0,0,0.6)' }}
+                      >
+                        {article.date}
+                      </p>
                     </div>
-
-                    {/* Date */}
-                    <p
-                      className="font-mono text-xs"
-                      style={{ color: '#7ECECE', opacity: 0.6, letterSpacing: '0.08em' }}
-                    >
-                      {article.date}
-                    </p>
                   </div>
 
                   {/* Card body */}
@@ -135,7 +139,7 @@ export default function NewsPage() {
                         className="font-montserrat font-bold text-xs uppercase flex items-center gap-1.5 transition-colors hover:text-teal-light"
                         style={{ color: '#7ECECE', letterSpacing: '0.12em' }}
                       >
-                        Read More <span>\u2192</span>
+                        Read More <span>→</span>
                       </Link>
                     </div>
                   </div>
@@ -182,11 +186,11 @@ export default function NewsPage() {
               className="inline-block font-montserrat font-bold text-sm uppercase px-8 py-4 transition-all duration-200 hover:opacity-90"
               style={{ background: '#F5ECD7', color: '#4A9B8E', letterSpacing: '0.15em' }}
             >
-              Sign Up \u2192
+              Sign Up →
             </Link>
           </ScrollReveal>
         </div>
       </section>
     </>
   )
-                }
+}

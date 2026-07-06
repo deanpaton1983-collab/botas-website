@@ -7,6 +7,8 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import LoadingScreen from '@/components/LoadingScreen'
 import ScrollReveal from '@/components/ScrollReveal'
 import OceanAnimation from '@/components/OceanAnimation'
+import AnimatedCounter from '@/components/AnimatedCounter'
+import ParallaxImage from '@/components/ParallaxImage'
 
 // Colourway section data
 const colourways = [
@@ -21,6 +23,10 @@ const colourways = [
     link: '/news',
     linkLabel: 'Explore the Exhibition',
     code: 'SC 48',
+    img: '/images/1280px-Casablanca_convoy.jpg',
+    imgAlt: 'An Allied convoy at sea, seen from the air',
+    imgCaption: 'An Allied convoy at sea',
+    imgCredit: 'US Navy',
   },
   {
     id: 'warfare-at-sea',
@@ -33,6 +39,10 @@ const colourways = [
     link: '/u-boat',
     linkLabel: 'Discover U-534',
     code: 'ON 67',
+    img: '/images/Depth_charges_explode_astern_of_HMS_STARLING_of_the_2nd_Escort_Group_in_the_Atlantic,_January_1944._A21992.jpg',
+    imgAlt: 'Depth charges exploding astern of HMS Starling in the Atlantic, January 1944',
+    imgCaption: 'Depth charges astern of HMS Starling, 1944',
+    imgCredit: '© IWM A 21992',
   },
   {
     id: 'signals-secrets',
@@ -45,6 +55,10 @@ const colourways = [
     link: '/news',
     linkLabel: 'Uncover the Intelligence War',
     code: 'HX 236',
+    img: '/images/A_convoy_conference_in_progress,_August_1942._A11796.jpg',
+    imgAlt: 'A convoy conference in progress, August 1942 - masters and naval officers planning the crossing',
+    imgCaption: 'A convoy conference in progress, 1942',
+    imgCredit: '© IWM A 11796',
   },
   {
     id: 'life-at-sea',
@@ -57,6 +71,10 @@ const colourways = [
     link: '/memorial',
     linkLabel: 'Remember Those Who Served',
     code: 'SL 125',
+    img: '/images/Officers_on_the_bridge.jpg',
+    imgAlt: 'Officers keeping watch on the bridge of an escort vessel in the Atlantic',
+    imgCaption: 'Officers on the bridge of an escort vessel',
+    imgCredit: '© IWM',
   },
 ]
 
@@ -352,30 +370,55 @@ export default function HomePage() {
 
       {/* ── KEY FACTS ────────────────────────────────────────── */}
       <section
-        className="relative py-20 lg:py-28 overflow-hidden"
-        style={{ backgroundColor: '#2D4F5C' }}
+        className="relative py-24 lg:py-36 overflow-hidden"
+        style={{ backgroundColor: '#0d3040' }}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        {/* Archival convoy photograph background */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/Allied_convoy_underway_in_the_Atlantic_Ocean_near_Iceland,_circa_in_1942_(80-G-72409).jpg"
+            alt="An Allied convoy underway in the Atlantic Ocean near Iceland, 1942"
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(to bottom, rgba(13,48,64,0.88) 0%, rgba(13,48,64,0.72) 50%, rgba(13,48,64,0.9) 100%)',
+            }}
+          />
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+          <ScrollReveal>
+            <p
+              className="font-mono text-xs uppercase mb-10 text-center"
+              style={{ color: '#7ECECE', letterSpacing: '0.2em' }}
+            >
+              The Cost of the Atlantic · 1939–1945
+            </p>
+          </ScrollReveal>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {facts.map((fact, i) => (
               <ScrollReveal key={fact.label} delay={i * 0.1}>
                 <div
-                  className="text-center py-8 px-4 border"
-                  style={{ borderColor: 'rgba(126, 206, 206, 0.2)' }}
+                  className="text-center py-8 px-4 border backdrop-blur-[2px] transition-colors duration-300 hover:border-teal-light/50"
+                  style={{ borderColor: 'rgba(126, 206, 206, 0.25)', background: 'rgba(13,48,64,0.35)' }}
                 >
-                  <p
-                    className="font-montserrat font-black mb-2"
+                  <AnimatedCounter
+                    value={fact.number}
+                    className="font-montserrat font-black mb-2 block"
                     style={{
                       fontSize: 'clamp(2rem, 4vw, 3rem)',
                       color: '#7ECECE',
                       letterSpacing: '0.02em',
                     }}
-                  >
-                    {fact.number}
-                  </p>
+                  />
                   <p
                     className="font-montserrat font-medium text-sm uppercase"
-                    style={{ color: 'rgba(248, 244, 238, 0.6)', letterSpacing: '0.1em' }}
+                    style={{ color: 'rgba(248, 244, 238, 0.7)', letterSpacing: '0.1em' }}
                   >
                     {fact.label}
                   </p>
@@ -383,6 +426,14 @@ export default function HomePage() {
               </ScrollReveal>
             ))}
           </div>
+          <ScrollReveal>
+            <p
+              className="font-mono text-xs mt-8 text-center"
+              style={{ color: 'rgba(248,244,238,0.35)', letterSpacing: '0.08em' }}
+            >
+              An Allied convoy underway near Iceland, 1942 · US Navy 80-G-72409
+            </p>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -478,7 +529,6 @@ export default function HomePage() {
                       className="font-montserrat text-lg leading-relaxed mb-8 max-w-lg"
                       style={{ color: zone.text, opacity: 0.85 }}
                     >
-                      {/* [PLACEHOLDER: Exhibition zone description] */}
                       {zone.description}
                     </p>
 
@@ -496,47 +546,52 @@ export default function HomePage() {
                     </Link>
                   </div>
 
-                  {/* Identification card decorative element */}
-                  <div className="flex-shrink-0 flex items-center justify-center w-full lg:w-64">
+                  {/* Archival photograph - presented like a filed record */}
+                  <div className="flex-shrink-0 w-full lg:w-[420px]">
                     <div
-                      className="relative shadow-2xl"
-                      style={{ transform: `rotate(${i % 2 === 0 ? '-3' : '3'}deg)` }}
+                      className="relative shadow-2xl transition-transform duration-500 hover:rotate-0"
+                      style={{ transform: `rotate(${i % 2 === 0 ? '-1.5' : '1.5'}deg)` }}
                     >
-                      {/* ID Card */}
                       <div
-                        className="rounded overflow-hidden shadow-xl"
-                        style={{ background: '#F5ECD7', width: 200 }}
+                        className="p-3 pb-2"
+                        style={{ background: '#F5ECD7' }}
                       >
-                        <div
-                          className="px-4 py-2"
-                          style={{ background: zone.accent }}
+                        <ParallaxImage
+                          src={zone.img}
+                          alt={zone.imgAlt}
+                          aspectRatio="3/2"
+                          strength={5}
+                          sizes="(max-width: 1024px) 100vw, 420px"
+                        />
+                        <div className="flex items-center justify-between pt-2 px-1">
+                          <p
+                            className="font-mono"
+                            style={{ fontSize: 10, color: '#2D4F5C', letterSpacing: '0.06em' }}
+                          >
+                            {zone.imgCaption}
+                          </p>
+                          <p
+                            className="font-mono flex-shrink-0 ml-3"
+                            style={{ fontSize: 9, color: '#9BA8A8', letterSpacing: '0.08em' }}
+                          >
+                            {zone.imgCredit}
+                          </p>
+                        </div>
+                      </div>
+                      {/* Convoy code stamp */}
+                      <div
+                        className="absolute -top-3 -right-3 px-3 py-1.5 shadow-lg"
+                        style={{
+                          background: zone.accent,
+                          transform: 'rotate(4deg)',
+                        }}
+                      >
+                        <p
+                          className="font-mono font-bold text-xs uppercase"
+                          style={{ color: '#F8F4EE', letterSpacing: '0.15em' }}
                         >
-                          <p
-                            className="font-mono text-white uppercase"
-                            style={{ fontSize: 8, letterSpacing: '0.15em' }}
-                          >
-                            CONVOY IDENTIFICATION
-                          </p>
-                        </div>
-                        <div className="px-4 py-4">
-                          <p
-                            className="font-montserrat font-black uppercase"
-                            style={{ fontSize: 28, color: '#2D4F5C', letterSpacing: '0.05em' }}
-                          >
-                            {zone.code}
-                          </p>
-                          <p
-                            className="font-mono mt-1"
-                            style={{ fontSize: 9, color: '#9BA8A8', letterSpacing: '0.1em' }}
-                          >
-                            {zone.label.toUpperCase()}
-                          </p>
-                          <div className="mt-3 space-y-1">
-                            <div className="h-1 rounded" style={{ background: '#B85C38', width: '75%' }} />
-                            <div className="h-0.5 rounded" style={{ background: '#9BA8A8', width: '55%' }} />
-                            <div className="h-0.5 rounded" style={{ background: '#9BA8A8', width: '65%' }} />
-                          </div>
-                        </div>
+                          Convoy {zone.code}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -655,50 +710,31 @@ export default function HomePage() {
               </div>
             </ScrollReveal>
 
-            {/* Submarine silhouette block */}
+            {/* Archival U-boat photograph */}
             <ScrollReveal delay={0.2}>
               <div className="relative">
-                <div
-                  className="relative overflow-hidden"
-                  style={{ background: 'rgba(45, 79, 92, 0.4)', aspectRatio: '4/3' }}
-                >
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <svg viewBox="0 0 400 160" width="90%" aria-hidden="true">
-                      {/* Submarine body */}
-                      <ellipse cx="200" cy="90" rx="170" ry="38" fill="none" stroke="#7ECECE" strokeWidth="1.5" opacity="0.4" />
-                      <ellipse cx="200" cy="90" rx="170" ry="38" fill="#2D4F5C" opacity="0.5" />
-                      {/* Conning tower */}
-                      <rect x="155" y="48" width="55" height="44" rx="6" fill="none" stroke="#7ECECE" strokeWidth="1.5" opacity="0.4" />
-                      <rect x="155" y="48" width="55" height="44" rx="6" fill="#2D4F5C" opacity="0.5" />
-                      {/* Periscope */}
-                      <rect x="178" y="30" width="5" height="20" fill="none" stroke="#7ECECE" strokeWidth="1.5" opacity="0.4" />
-                      {/* Propellers */}
-                      <ellipse cx="30" cy="90" rx="20" ry="8" fill="none" stroke="#7ECECE" strokeWidth="1" opacity="0.3" />
-                      {/* Torpedo tubes */}
-                      <rect x="355" y="85" width="30" height="8" rx="4" fill="none" stroke="#7ECECE" strokeWidth="1" opacity="0.3" />
-                      <rect x="355" y="97" width="30" height="8" rx="4" fill="none" stroke="#7ECECE" strokeWidth="1" opacity="0.3" />
-                      {/* Sonar rings emanating */}
-                      {[40, 70, 100].map((r, i) => (
-                        <circle key={i} cx="370" cy="90" r={r} fill="none" stroke="#7ECECE" strokeWidth="0.5" opacity={0.1 - i * 0.03} />
-                      ))}
-                    </svg>
-                  </div>
-                  {/* U-534 designation */}
-                  <div className="absolute bottom-4 left-4">
-                    <p
-                      className="font-montserrat font-black"
-                      style={{ color: '#7ECECE', fontSize: 48, opacity: 0.15, letterSpacing: '0.05em' }}
-                    >
-                      U-534
-                    </p>
-                  </div>
+                <ParallaxImage
+                  src="/images/U-boat_Warfare_1939-1945_C3780.jpg"
+                  alt="A German U-boat running on the surface during the Second World War"
+                  caption="A German U-boat at sea, 1939–45"
+                  credit="© IWM C 3780"
+                  aspectRatio="4/3"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                {/* U-534 designation overlay */}
+                <div className="absolute top-4 left-4 pointer-events-none">
+                  <p
+                    className="font-montserrat font-black"
+                    style={{ color: '#7ECECE', fontSize: 40, opacity: 0.35, letterSpacing: '0.05em', textShadow: '0 2px 12px rgba(0,0,0,0.5)' }}
+                  >
+                    U-534
+                  </p>
                 </div>
                 {/* Caption */}
                 <p
                   className="font-mono text-xs mt-3"
                   style={{ color: 'rgba(248, 244, 238, 0.4)', letterSpacing: '0.08em' }}
                 >
-                  {/* [PLACEHOLDER: Image caption] */}
                   U-534 · Type IXC/40 · Commissioned December 1942 · Recovered 1993
                 </p>
               </div>
