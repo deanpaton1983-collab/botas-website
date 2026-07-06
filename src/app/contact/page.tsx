@@ -1,71 +1,9 @@
 'use client'
 
-import { useState } from 'react'
 import { motion } from 'framer-motion'
 import ScrollReveal from '@/components/ScrollReveal'
 
-const enquiryTypes = [
-  'General Enquiry',
-  'Register Interest (Opening)',
-  'Educational Visit',
-  'Corporate Partnership',
-  'Donation / Fundraising',
-  'Media & Press',
-  'Research & Archives',
-  'Other',
-]
-
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    organisation: '',
-    type: '',
-    message: '',
-    newsletter: false,
-  })
-  const [submitted, setSubmitted] = useState(false)
-  const [submitting, setSubmitting] = useState(false)
-  const [error, setError] = useState('')
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setSubmitting(true)
-    setError('')
-
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      })
-
-      const data = await res.json()
-
-      if (!res.ok) {
-        setError(data.error || 'Something went wrong. Please try again.')
-        return
-      }
-
-      setSubmitted(true)
-    } catch {
-      setError('Failed to send your message. Please try again or email us directly at info@battleoftheatlantic.org.')
-    } finally {
-      setSubmitting(false)
-    }
-  }
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    const { name, value, type } = e.target
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value,
-    }))
-  }
-
   return (
     <>
       {/* ── HERO ─────────────────────────────────────────────── */}
@@ -130,8 +68,8 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="font-mono text-xs uppercase mb-2" style={{ color: '#7ECECE', letterSpacing: '0.2em' }}>Phone</p>
-                  <a href="tel:+441512001943" className="font-montserrat text-sm transition-colors hover:text-white" style={{ color: 'rgba(248,244,238,0.75)' }}>
-                    +44 (0)151 200 1943
+                  <a href="tel:+441512272008" className="font-montserrat text-sm transition-colors hover:text-white" style={{ color: 'rgba(248,244,238,0.75)' }}>
+                    0151 227 2008
                   </a>
                 </div>
               </div>
@@ -153,377 +91,158 @@ export default function ContactPage() {
       >
         <div className="absolute inset-0 naval-grid-dashed pointer-events-none" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid lg:grid-cols-5 gap-16">
-
-            {/* ── CONTACT INFO ──────────────────────────── */}
-            <div className="lg:col-span-2 space-y-10">
-              <ScrollReveal>
-                {/* Address */}
-                <div>
-                  <p
-                    className="font-mono text-xs uppercase mb-4"
-                    style={{ color: '#7ECECE', letterSpacing: '0.2em' }}
-                  >
-                    Location
-                  </p>
-                  <address className="not-italic space-y-1">
-                    <p className="font-montserrat font-semibold text-sm" style={{ color: '#F8F4EE' }}>
-                      Battle of the Atlantic Story
-                    </p>
-                    <p className="font-montserrat text-sm" style={{ color: 'rgba(248,244,238,0.7)' }}>
-                      Woodside<br />
-                      Birkenhead<br />
-                      Merseyside<br />
-                      CH41 6DU
-                    </p>
-                  </address>
-                </div>
-              </ScrollReveal>
-
-              <ScrollReveal delay={0.1}>
-                {/* Contact details */}
-                <div>
-                  <p
-                    className="font-mono text-xs uppercase mb-4"
-                    style={{ color: '#7ECECE', letterSpacing: '0.2em' }}
-                  >
-                    Contact Details
-                  </p>
-                  <div className="space-y-2">
-                    <p>
-                      <a
-                        href="tel:+441512001943"
-                        className="font-montserrat text-sm transition-colors hover:text-teal-light"
-                        style={{ color: 'rgba(248,244,238,0.7)' }}
-                      >
-                        +44 (0)151 200 1943
-                      </a>
-                    </p>
-                    <p>
-                      <a
-                        href="mailto:info@battleoftheatlantic.org"
-                        className="font-montserrat text-sm transition-colors hover:text-teal-light"
-                        style={{ color: 'rgba(248,244,238,0.7)' }}
-                      >
-                        info@battleoftheatlantic.org
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </ScrollReveal>
-
-              <ScrollReveal delay={0.15}>
-                {/* Opening */}
-                <div>
-                  <p
-                    className="font-mono text-xs uppercase mb-4"
-                    style={{ color: '#7ECECE', letterSpacing: '0.2em' }}
-                  >
-                    Opening
-                  </p>
-                  <div
-                    className="p-5"
-                    style={{ background: 'rgba(126,206,206,0.06)', border: '1px solid rgba(126,206,206,0.15)' }}
-                  >
-                    <p
-                      className="font-montserrat font-bold text-sm mb-1"
-                      style={{ color: '#7ECECE', letterSpacing: '0.05em' }}
-                    >
-                      Opening in 2027
-                    </p>
-                    <p
-                      className="font-montserrat text-sm leading-relaxed"
-                      style={{ color: 'rgba(248,244,238,0.6)' }}
-                    >
-                      {/* [PLACEHOLDER: Opening hours] */}
-                      Opening times and ticket prices will be announced closer to the opening date. Register your interest to be the first to hear.
-                    </p>
-                  </div>
-                </div>
-              </ScrollReveal>
-
-              <ScrollReveal delay={0.2}>
-                {/* Getting here */}
-                <div>
-                  <p
-                    className="font-mono text-xs uppercase mb-4"
-                    style={{ color: '#7ECECE', letterSpacing: '0.2em' }}
-                  >
-                    Getting Here
-                  </p>
-                  <div className="space-y-3">
-                    {[
-                      { mode: 'Ferry', detail: 'Mersey Ferry from Pier Head Liverpool - 10 minutes' },
-                      { mode: 'Bus', detail: 'Routes 432 and 433 from Hamilton Square' },
-                      { mode: 'Train', detail: 'Birkenhead Central, 10-minute walk' },
-                      { mode: 'Car', detail: 'CH41 6DU · Free visitor parking on site' },
-                    ].map((item) => (
-                      <div key={item.mode} className="flex gap-3">
-                        <span
-                          className="font-mono text-xs flex-shrink-0 pt-0.5"
-                          style={{ color: '#7ECECE', letterSpacing: '0.1em', minWidth: 40 }}
-                        >
-                          {item.mode}
-                        </span>
-                        <span
-                          className="font-montserrat text-sm"
-                          style={{ color: 'rgba(248,244,238,0.6)' }}
-                        >
-                          {item.detail}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </ScrollReveal>
+          {/* Email callout */}
+          <ScrollReveal>
+            <div
+              className="text-center p-10 lg:p-14 mb-14"
+              style={{ background: 'rgba(126,206,206,0.05)', border: '1px solid rgba(126,206,206,0.15)' }}
+            >
+              <p
+                className="font-mono text-xs uppercase mb-4"
+                style={{ color: '#7ECECE', letterSpacing: '0.2em' }}
+              >
+                Send Us an Email
+              </p>
+              <a
+                href="mailto:info@battleoftheatlantic.org"
+                className="font-montserrat font-black inline-block transition-colors hover:text-teal-light"
+                style={{
+                  fontSize: 'clamp(1.2rem, 3.5vw, 2.4rem)',
+                  letterSpacing: '0.03em',
+                  color: '#F8F4EE',
+                  wordBreak: 'break-word',
+                }}
+              >
+                info@battleoftheatlantic.org
+              </a>
+              <p
+                className="font-montserrat text-sm mt-4"
+                style={{ color: 'rgba(248,244,238,0.55)' }}
+              >
+                For all enquiries - general, educational visits, partnerships, donations, media, and research.
+              </p>
             </div>
+          </ScrollReveal>
 
-            {/* ── CONTACT FORM ──────────────────────────── */}
-            <div className="lg:col-span-3">
-              <ScrollReveal>
-                <div
-                  className="p-8 lg:p-10"
-                  style={{ background: 'rgba(126,206,206,0.04)', border: '1px solid rgba(126,206,206,0.12)' }}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            <ScrollReveal>
+              {/* Address */}
+              <div>
+                <p
+                  className="font-mono text-xs uppercase mb-4"
+                  style={{ color: '#7ECECE', letterSpacing: '0.2em' }}
                 >
-                  {submitted ? (
-                    <div className="py-12 text-center">
-                      <div className="mb-6">
-                        <svg width="60" height="60" viewBox="0 0 60 60" className="mx-auto" aria-hidden="true">
-                          <circle cx="30" cy="30" r="28" fill="none" stroke="#7ECECE" strokeWidth="1.5" />
-                          <polyline points="18,30 26,38 42,22" fill="none" stroke="#7ECECE" strokeWidth="2" strokeLinecap="round" />
-                        </svg>
-                      </div>
-                      <h3
-                        className="font-montserrat font-black uppercase mb-3"
-                        style={{ fontSize: '1.4rem', letterSpacing: '0.1em', color: '#7ECECE' }}
-                      >
-                        Message Received
-                      </h3>
-                      <p
-                        className="font-montserrat text-base"
-                        style={{ color: 'rgba(248,244,238,0.7)' }}
-                      >
-                        Thank you for getting in touch. We'll respond as soon as possible.
-                      </p>
-                    </div>
-                  ) : (
-                    <>
-                      <h2
-                        className="font-montserrat font-black uppercase mb-8"
-                        style={{
-                          fontSize: 'clamp(1.2rem, 2.5vw, 1.6rem)',
-                          letterSpacing: '0.12em',
-                          color: '#F8F4EE',
-                        }}
-                      >
-                        Send a Message
-                      </h2>
+                  Location
+                </p>
+                <address className="not-italic space-y-1">
+                  <p className="font-montserrat font-semibold text-sm" style={{ color: '#F8F4EE' }}>
+                    Battle of the Atlantic Story
+                  </p>
+                  <p className="font-montserrat text-sm" style={{ color: 'rgba(248,244,238,0.7)' }}>
+                    Woodside<br />
+                    Birkenhead<br />
+                    Merseyside<br />
+                    CH41 6DU
+                  </p>
+                </address>
+              </div>
+            </ScrollReveal>
 
-                      <form onSubmit={handleSubmit} className="space-y-5">
-                        {/* Name + email */}
-                        <div className="grid sm:grid-cols-2 gap-5">
-                          <div>
-                            <label
-                              className="block font-montserrat font-semibold text-xs uppercase mb-2"
-                              style={{ color: 'rgba(248,244,238,0.5)', letterSpacing: '0.12em' }}
-                            >
-                              Full Name *
-                            </label>
-                            <input
-                              type="text"
-                              name="name"
-                              required
-                              value={formData.name}
-                              onChange={handleChange}
-                              className="w-full px-4 py-3 font-montserrat text-sm bg-transparent outline-none transition-colors"
-                              style={{
-                                border: '1px solid rgba(126,206,206,0.25)',
-                                color: '#F8F4EE',
-                              }}
-                              placeholder="Your full name"
-                            />
-                          </div>
-                          <div>
-                            <label
-                              className="block font-montserrat font-semibold text-xs uppercase mb-2"
-                              style={{ color: 'rgba(248,244,238,0.5)', letterSpacing: '0.12em' }}
-                            >
-                              Email Address *
-                            </label>
-                            <input
-                              type="email"
-                              name="email"
-                              required
-                              value={formData.email}
-                              onChange={handleChange}
-                              className="w-full px-4 py-3 font-montserrat text-sm bg-transparent outline-none transition-colors"
-                              style={{
-                                border: '1px solid rgba(126,206,206,0.25)',
-                                color: '#F8F4EE',
-                              }}
-                              placeholder="your@email.com"
-                            />
-                          </div>
-                        </div>
-
-                        {/* Phone + org */}
-                        <div className="grid sm:grid-cols-2 gap-5">
-                          <div>
-                            <label
-                              className="block font-montserrat font-semibold text-xs uppercase mb-2"
-                              style={{ color: 'rgba(248,244,238,0.5)', letterSpacing: '0.12em' }}
-                            >
-                              Phone Number
-                            </label>
-                            <input
-                              type="tel"
-                              name="phone"
-                              value={formData.phone}
-                              onChange={handleChange}
-                              className="w-full px-4 py-3 font-montserrat text-sm bg-transparent outline-none"
-                              style={{
-                                border: '1px solid rgba(126,206,206,0.25)',
-                                color: '#F8F4EE',
-                              }}
-                              placeholder="+44 (0)151..."
-                            />
-                          </div>
-                          <div>
-                            <label
-                              className="block font-montserrat font-semibold text-xs uppercase mb-2"
-                              style={{ color: 'rgba(248,244,238,0.5)', letterSpacing: '0.12em' }}
-                            >
-                              Organisation
-                           </label>
-                            <input
-                              type="text"
-                              name="organisation"
-                              value={formData.organisation}
-                              onChange={handleChange}
-                              className="w-full px-4 py-3 font-montserrat text-sm bg-transparent outline-none"
-                              style={{
-                                border: '1px solid rgba(126,206,206,0.25)',
-                                color: '#F8F4EE',
-                              }}
-                              placeholder="School, charity, business..."
-                            />
-                          </div>
-                        </div>
-
-                        {/* Enquiry type */}
-                        <div>
-                          <label
-                            className="block font-montserrat font-semibold text-xs uppercase mb-2"
-                            style={{ color: 'rgba(248,244,238,0.5)', letterSpacing: '0.12em' }}
-                          >
-                            Nature of Enquiry *
-                          </label>
-                          <select
-                            name="type"
-                            required
-                            value={formData.type}
-                            onChange={handleChange}
-                            className="w-full px-4 py-3 font-montserrat text-sm bg-transparent outline-none appearance-none cursor-pointer"
-                            style={{
-                              border: '1px solid rgba(126,206,206,0.25)',
-                              color: formData.type ? '#F8F4EE' : 'rgba(248,244,238,0.35)',
-                              background: '#2D4F5C',
-                            }}
-                          >
-                            <option value="" disabled style={{ color: '#2D4F5C', background: '#2D4F5C' }}>
-                              Select enquiry type
-                            </option>
-                            {enquiryTypes.map((t) => (
-                              <option key={t} value={t} style={{ color: '#F8F4EE', background: '#2D4F5C' }}>
-                                {t}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-
-                        {/* Message */}
-                        <div>
-                          <label
-                            className="block font-montserrat font-semibold text-xs uppercase mb-2"
-                            style={{ color: 'rgba(248,244,238,0.5)', letterSpacing: '0.12em' }}
-                          >
-                            Message *
-                          </label>
-                          <textarea
-                            name="message"
-                            required
-                            rows={5}
-                            value={formData.message}
-                            onChange={handleChange}
-                            className="w-full px-4 py-3 font-montserrat text-sm bg-transparent outline-none resize-none"
-                            style={{
-                              border: '1px solid rgba(126,206,206,0.25)',
-                              color: '#F8F4EE',
-                            }}
-                            placeholder="How can we help you?"
-                          />
-                        </div>
-
-                        {/* Newsletter checkbox */}
-                        <div className="flex items-start gap-3">
-                          <input
-                            type="checkbox"
-                            id="newsletter"
-                            name="newsletter"
-                            checked={formData.newsletter}
-                            onChange={handleChange}
-                            className="mt-0.5 flex-shrink-0 cursor-pointer"
-                            style={{ accentColor: '#7ECECE' }}
-                          />
-                          <label
-                            htmlFor="newsletter"
-                            className="font-montserrat text-sm cursor-pointer"
-                            style={{ color: 'rgba(248,244,238,0.6)' }}
-                          >
-                            I would like to receive news and updates about the Battle of the Atlantic Story, including opening announcements and events.
-                          </label>
-                        </div>
-
-                        {/* Error message */}
-                        {error && (
-                          <div
-                            className="p-4 font-montserrat text-sm"
-                            style={{
-                              background: 'rgba(184,92,56,0.15)',
-                              border: '1px solid rgba(184,92,56,0.4)',
-                              color: '#F5ECD7',
-                            }}
-                          >
-                            {error}
-                          </div>
-                        )}
-
-                        {/* Submit */}
-                        <button
-                          type="submit"
-                          disabled={submitting}
-                          className="w-full font-montserrat font-bold text-sm uppercase py-4 transition-all duration-200 hover:opacity-90 mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
-                          style={{
-                            background: '#7ECECE',
-                            color: '#2D4F5C',
-                            letterSpacing: '0.15em',
-                          }}
-                        >
-                          {submitting ? 'Sending...' : 'Send Message'}
-                        </button>
-
-                        <p
-                          className="font-mono text-xs text-center"
-                          style={{ color: 'rgba(248,244,238,0.3)', letterSpacing: '0.05em' }}
-                        >
-                          Your data will be processed in accordance with our Privacy Policy.
-                        </p>
-                      </form>
-                    </>
-                  )}
+            <ScrollReveal delay={0.1}>
+              {/* Contact details */}
+              <div>
+                <p
+                  className="font-mono text-xs uppercase mb-4"
+                  style={{ color: '#7ECECE', letterSpacing: '0.2em' }}
+                >
+                  Contact Details
+                </p>
+                <div className="space-y-2">
+                  <p>
+                    <a
+                      href="mailto:info@battleoftheatlantic.org"
+                      className="font-montserrat text-sm transition-colors hover:text-teal-light"
+                      style={{ color: 'rgba(248,244,238,0.7)' }}
+                    >
+                      info@battleoftheatlantic.org
+                    </a>
+                  </p>
+                  <p>
+                    <a
+                      href="tel:+441512272008"
+                      className="font-montserrat text-sm transition-colors hover:text-teal-light"
+                      style={{ color: 'rgba(248,244,238,0.7)' }}
+                    >
+                      0151 227 2008
+                    </a>
+                  </p>
                 </div>
-              </ScrollReveal>
-            </div>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.15}>
+              {/* Opening */}
+              <div>
+                <p
+                  className="font-mono text-xs uppercase mb-4"
+                  style={{ color: '#7ECECE', letterSpacing: '0.2em' }}
+                >
+                  Opening
+                </p>
+                <div
+                  className="p-5"
+                  style={{ background: 'rgba(126,206,206,0.06)', border: '1px solid rgba(126,206,206,0.15)' }}
+                >
+                  <p
+                    className="font-montserrat font-bold text-sm mb-1"
+                    style={{ color: '#7ECECE', letterSpacing: '0.05em' }}
+                  >
+                    Opening in 2027
+                  </p>
+                  <p
+                    className="font-montserrat text-sm leading-relaxed"
+                    style={{ color: 'rgba(248,244,238,0.6)' }}
+                  >
+                    Opening times and ticket prices will be announced closer to the opening date. Register your interest to be the first to hear.
+                  </p>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.2}>
+              {/* Getting here */}
+              <div>
+                <p
+                  className="font-mono text-xs uppercase mb-4"
+                  style={{ color: '#7ECECE', letterSpacing: '0.2em' }}
+                >
+                  Getting Here
+                </p>
+                <div className="space-y-3">
+                  {[
+                    { mode: 'Ferry', detail: 'Mersey Ferry from Pier Head Liverpool - 10 minutes' },
+                    { mode: 'Bus', detail: 'Routes 432 and 433 from Hamilton Square' },
+                    { mode: 'Train', detail: 'Hamilton Square, 5-minute walk' },
+                    { mode: 'Car', detail: 'CH41 6DU · Free visitor parking on site' },
+                  ].map((item) => (
+                    <div key={item.mode} className="flex gap-3">
+                      <span
+                        className="font-mono text-xs flex-shrink-0 pt-0.5"
+                        style={{ color: '#7ECECE', letterSpacing: '0.1em', minWidth: 40 }}
+                      >
+                        {item.mode}
+                      </span>
+                      <span
+                        className="font-montserrat text-sm"
+                        style={{ color: 'rgba(248,244,238,0.6)' }}
+                      >
+                        {item.detail}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>

@@ -129,11 +129,11 @@ export default function Footer() {
               </p>
               <p>
                 <a
-                  href="tel:+441512001943"
+                  href="tel:+441512272008"
                   className="font-montserrat text-sm transition-colors hover:text-offwhite"
                   style={{ color: 'rgba(248, 244, 238, 0.75)' }}
                 >
-                  +44 (0)151 200 1943
+                  0151 227 2008
                 </a>
               </p>
             </address>
