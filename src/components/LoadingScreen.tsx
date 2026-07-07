@@ -198,14 +198,16 @@ export default function LoadingScreen() {
     ping(MORSE_END, 1250, 680, 0.9, 0.22)
     ping(MORSE_END + 550, 1250, 680, 0.9, 0.07)
 
-    // Radar sweep pings — one per rotation, for the whole map sequence
+    // Submarine sonar ping — one per sweep rotation, with an echoing tail
     const mapTotal = RADAR_MS + UK_MS + LCR_MS
     const sweeps = Math.floor(mapTotal / SWEEP_MS)
     for (let i = 0; i <= sweeps; i++) {
       const at = RADAR_START + i * SWEEP_MS
       if (at > TOTAL_MS - 400) break
-      ping(at, 1350, 720, 0.75, Math.max(0.08, 0.17 - i * 0.015))
-      ping(at + 420, 1350, 720, 0.75, 0.045) // faint echo
+      const level = Math.max(0.09, 0.2 - i * 0.015)
+      ping(at, 1150, 980, 1.5, level) // main ping, slow decay
+      ping(at + 650, 1150, 980, 1.1, level * 0.28) // first echo
+      ping(at + 1150, 1150, 980, 0.8, level * 0.12) // distant echo
     }
 
     // Rising blips on each zoom step
