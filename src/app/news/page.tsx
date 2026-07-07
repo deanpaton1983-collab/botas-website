@@ -7,6 +7,16 @@ import ScrollReveal from '@/components/ScrollReveal'
 
 const articles = [
   {
+    id: 11,
+    date: 'July 2026',
+    title: 'Pier Head Memorial Service to Honour WWII Naval Hero Captain Johnnie Walker',
+    excerpt: 'Big Heritage will host a memorial service at 11am on Thursday 9th July at Captain Walker\'s statue on Liverpool\'s Pier Head, marking 82 years since the death of the Royal Navy\'s most successful anti-submarine commander.',
+    readTime: '5 min read',
+    convoyCode: 'JW 82',
+    image: '/images/captain-johnnie-walker.jpg',
+    imageAlt: 'Captain Frederic "Johnnie" Walker, Royal Navy, in 1944',
+  },
+  {
     id: 10,
     date: 'March 2026',
     title: 'The World\'s First Museum Dedicated to the Battle of the Atlantic is Coming to Birkenhead',

@@ -32,10 +32,10 @@ export function generateMetadata({
       type: 'article',
       images: [
         {
-          url: '/images/1280px-Casablanca_convoy.jpg',
+          url: article.image || '/images/1280px-Casablanca_convoy.jpg',
           width: 1200,
           height: 630,
-          alt: 'An Allied convoy at sea - Battle of the Atlantic Story',
+          alt: article.imageAlt || 'An Allied convoy at sea - Battle of the Atlantic Story',
         },
       ],
     },
@@ -65,7 +65,7 @@ export default function ArticleLayout({
         headline: article.title,
         description: article.subtitle || undefined,
         url: `${BASE}/news/${article.id}`,
-        image: `${BASE}/images/1280px-Casablanca_convoy.jpg`,
+        image: `${BASE}${article.image || '/images/1280px-Casablanca_convoy.jpg'}`,
         author: {
           '@type': 'Organization',
           name: 'Battle of the Atlantic Story',

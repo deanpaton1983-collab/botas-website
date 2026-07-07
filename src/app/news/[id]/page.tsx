@@ -12,6 +12,7 @@ const categoryLabels: Record<string, string> = {
   'signals-secrets': 'Signals & Secrets',
   'life-at-sea': 'Life at Sea',
   'museum': 'Museum News',
+  'memorial': 'Memorial Service',
 }
 
 const categoryStyles: Record<string, { bg: string; text: string; badge: string }> = {
@@ -20,6 +21,7 @@ const categoryStyles: Record<string, { bg: string; text: string; badge: string }
   'signals-secrets': { bg: '#B85C38', text: '#F5ECD7', badge: '#E07B45' },
   'life-at-sea': { bg: '#1A8080', text: '#F8F4EE', badge: '#7ECECE' },
   'museum': { bg: '#2D4F5C', text: '#7ECECE', badge: '#4A9B8E' },
+  'memorial': { bg: '#F5ECD7', text: '#2D4F5C', badge: '#1A8080' },
 }
 
 export default function ArticlePage() {
