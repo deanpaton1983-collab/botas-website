@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import LoadingScreen from '@/components/LoadingScreen'
 import ScrollReveal from '@/components/ScrollReveal'
-import OceanAnimation from '@/components/OceanAnimation'
+import HeroSlideshow from '@/components/HeroSlideshow'
 import AnimatedCounter from '@/components/AnimatedCounter'
 import ParallaxImage from '@/components/ParallaxImage'
 
@@ -117,33 +117,18 @@ export default function HomePage() {
         className="relative h-screen min-h-[760px] overflow-hidden"
         style={{ backgroundColor: '#2D4F5C' }}
       >
-        {/* Ocean animation background */}
+        {/* Dynamic archival image background */}
         <motion.div className="absolute inset-0" style={{ y: heroY }}>
-          {/* Base deep-ocean gradient */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background: `linear-gradient(
-                160deg,
-                #0a2535 0%,
-                #0d3040 25%,
-                #1a4555 50%,
-                #2D4F5C 75%,
-                #1A8080 100%
-              )`,
-            }}
-          />
-          {/* Canvas ocean animation: light beams + bubbles */}
-          <OceanAnimation />
+          <HeroSlideshow />
           {/* Darkening overlay so text remains readable */}
           <div
-            className="absolute inset-0"
+            className="absolute inset-0 z-[3]"
             style={{
               background: `linear-gradient(
                 to bottom,
-                rgba(10, 37, 53, 0.25) 0%,
-                rgba(13, 48, 64, 0.45) 55%,
-                rgba(10, 30, 42, 0.88) 100%
+                rgba(10, 37, 53, 0.35) 0%,
+                rgba(13, 48, 64, 0.30) 55%,
+                rgba(10, 30, 42, 0.92) 100%
               )`,
             }}
           />
@@ -211,10 +196,10 @@ export default function HomePage() {
           <motion.h1
             className="font-montserrat font-black uppercase text-offwhite mb-4"
             style={{
-              fontSize: 'clamp(2.5rem, 7vw, 6rem)',
+              fontSize: 'clamp(1.9rem, 4.5vw, 3.75rem)',
               letterSpacing: '0.08em',
-              lineHeight: 1.0,
-              textShadow: '0 4px 40px rgba(0,0,0,0.4)',
+              lineHeight: 1.05,
+              textShadow: '0 4px 40px rgba(0,0,0,0.55)',
             }}
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -241,7 +226,7 @@ export default function HomePage() {
           </motion.div>
 
           <motion.p
-            className="font-montserrat text-lg max-w-xl mb-6 leading-relaxed"
+            className="font-montserrat text-base max-w-xl mb-6 leading-relaxed"
             style={{ color: 'rgba(248, 244, 238, 0.8)' }}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
