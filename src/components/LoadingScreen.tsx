@@ -15,8 +15,12 @@ import { motion, AnimatePresence } from 'framer-motion'
    Phase 5 (uk)         : sweep continues, zoom into Great Britain
    Phase 6 (lcr)        : zoom into the Liverpool City Region —
                           pulsing contact dot on Birkenhead (Woodside)
-   Audio: WebAudio oscillator. Starts automatically if the browser
-   allows; otherwise unlocks on first click / tap / keypress.
+   Audio: WebAudio oscillator. A click-to-enter gate is always shown
+   first. Because browsers block autoplay of sound without a user
+   gesture, the click both starts the intro AND unlocks audio — so the
+   sequence always plays with sound on from its very first frame.
+   "Enter silently" is offered for those who prefer no sound (audio can
+   still be toggled on later via the speaker control).
    ──────────────────────────────────────────────────────────────── */
 
 const MORSE: Record<string, string> = {
@@ -79,6 +83,7 @@ const LCR_START = UK_START + UK_MS
 const TOTAL_MS = LCR_START + LCR_MS
 
 type Phase = 'signal' | 'title' | 'radar' | 'uk' | 'lcr'
+type Gate = 'checking' | 'shown' | 'passed'
 const PHASE_ORDER: Record<Phase, number> = {
   signal: 0,
   title: 1,
@@ -125,6 +130,7 @@ export default function LoadingScreen() {
   const [imgIndex, setImgIndex] = useState(0)
   const [soundOn, setSoundOn] = useState(false)
   const [audioReady, setAudioReady] = useState(false)
+  const [gate, setGate] = useState<Gate>('checking')
 
   const ctxRef = useRef<AudioContext | null>(null)
   const gainRef = useRef<GainNode | null>(null)
@@ -134,6 +140,7 @@ export default function LoadingScreen() {
   const finishedRef = useRef(false)
   const enabledAtRef = useRef(0)
   const sonarDataRef = useRef<ArrayBuffer | null>(null)
+  const sonarBufferRef = useRef<AudioBuffer | null>(null)
 
   // Prefetch the sonar ping sample so it's ready when audio unlocks
   useEffect(() => {
@@ -232,30 +239,62 @@ export default function LoadingScreen() {
       }
     }
 
-    const sonarData = sonarDataRef.current
-    if (sonarData) {
+    // Schedule the recorded sonar pings from an already-decoded buffer.
+    const playSonarBuffer = (
+      buffer: AudioBuffer,
+      baseNow: number,
+      baseElapsed: number
+    ) => {
+      for (const { at, level } of pingTimes) {
+        if (at + buffer.duration * 1000 <= baseElapsed) continue
+        const start = baseNow + Math.max(0, at - baseElapsed) / 1000
+        const src = ctx.createBufferSource()
+        src.buffer = buffer
+        const env = ctx.createGain()
+        env.gain.value = 0.9 * level
+        src.connect(env)
+        env.connect(gain)
+        src.start(start)
+      }
+    }
+
+    const decodeThenPlay = (data: ArrayBuffer) =>
       ctx
-        .decodeAudioData(sonarData.slice(0))
+        .decodeAudioData(data.slice(0))
         .then((buffer) => {
-          const nowAfterDecode = ctx.currentTime
-          const elapsedAfterDecode =
-            fromElapsed + (nowAfterDecode - now) * 1000
-          for (const { at, level } of pingTimes) {
-            if (at + buffer.duration * 1000 <= elapsedAfterDecode) continue
-            const start =
-              nowAfterDecode + Math.max(0, at - elapsedAfterDecode) / 1000
-            const src = ctx.createBufferSource()
-            src.buffer = buffer
-            const env = ctx.createGain()
-            env.gain.value = 0.9 * level
-            src.connect(env)
-            env.connect(gain)
-            src.start(start)
-          }
+          sonarBufferRef.current = buffer
+          playSonarBuffer(
+            buffer,
+            ctx.currentTime,
+            fromElapsed + (ctx.currentTime - now) * 1000
+          )
         })
         .catch(synthFallback)
+
+    if (sonarBufferRef.current) {
+      // Pre-decoded — play immediately, no fallback risk.
+      playSonarBuffer(sonarBufferRef.current, now, fromElapsed)
+    } else if (sonarDataRef.current) {
+      decodeThenPlay(sonarDataRef.current)
     } else {
-      synthFallback()
+      // Sample is still downloading. Wait for it (up to 3s) rather than
+      // dropping to the synthesised beeps — the recorded ping is the
+      // intended sound.
+      let waited = 0
+      const iv = setInterval(() => {
+        if (finishedRef.current) {
+          clearInterval(iv)
+          return
+        }
+        waited += 80
+        if (sonarDataRef.current) {
+          clearInterval(iv)
+          decodeThenPlay(sonarDataRef.current)
+        } else if (waited >= 3000) {
+          clearInterval(iv)
+          synthFallback()
+        }
+      }, 80)
     }
 
     // Rising blips on each zoom step
@@ -325,21 +364,50 @@ export default function LoadingScreen() {
     }
   }, [])
 
+  // Click-to-enter: the gesture unlocks audio, so the intro plays with
+  // sound on from its very first frame. `withSound = false` lets visitors
+  // enter silently (sound can still be toggled on later).
+  const begin = useCallback(
+    (withSound: boolean) => {
+      setGate((g) => (g === 'passed' ? g : 'passed'))
+      startRef.current = performance.now()
+      if (withSound) enableSound()
+    },
+    [enableSound]
+  )
+
   /* ── main timeline ── */
 
+  // Decide, on mount, whether to show the gate. Reduced-motion visitors
+  // skip the cinematic sequence (and its audio) entirely.
   useEffect(() => {
     const reducedMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)'
     ).matches
 
     if (reducedMotion) {
+      setGate('passed')
       setDecoded(SCHEDULE.letters.length)
       setPhase('title')
       const t = setTimeout(finish, 1800)
       return () => clearTimeout(t)
     }
 
-    startRef.current = performance.now()
+    setGate('shown')
+  }, [finish])
+
+  /* ── main timeline (runs only once the visitor clicks "Enter") ── */
+
+  useEffect(() => {
+    if (gate !== 'passed' || finishedRef.current) return
+    const reducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
+    if (reducedMotion) return
+
+    // startRef is set the moment the gate is clicked (see `begin`); fall
+    // back to now in case this effect somehow runs first.
+    if (!startRef.current) startRef.current = performance.now()
 
     const loop = () => {
       const e = performance.now() - startRef.current
@@ -380,20 +448,10 @@ export default function LoadingScreen() {
     }
     rafRef.current = requestAnimationFrame(loop)
 
-    // Try to start audio immediately; fall back to first interaction
-    enableSound()
-    const unlock = () => enableSound()
-    window.addEventListener('pointerdown', unlock)
-    window.addEventListener('keydown', unlock)
-    window.addEventListener('touchstart', unlock)
-
     return () => {
       cancelAnimationFrame(rafRef.current)
-      window.removeEventListener('pointerdown', unlock)
-      window.removeEventListener('keydown', unlock)
-      window.removeEventListener('touchstart', unlock)
     }
-  }, [enableSound, finish])
+  }, [gate, finish])
 
   /* ── rendering ── */
 
@@ -1013,6 +1071,88 @@ export default function LoadingScreen() {
               </div>
             </motion.div>
           )}
+
+          {/* ── Click-to-enter gate (unlocks audio) ── */}
+          <AnimatePresence>
+            {gate === 'shown' && (
+              <motion.div
+                className="absolute inset-0 z-30 flex flex-col items-center justify-center px-6 text-center"
+                style={{
+                  background:
+                    'radial-gradient(ellipse at center, rgba(6,15,26,0.72) 0%, rgba(6,15,26,0.92) 100%)',
+                  backdropFilter: 'blur(2px)',
+                }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0, transition: { duration: 0.6, ease: 'easeInOut' } }}
+              >
+                <motion.div
+                  className="mb-6 flex items-center gap-3"
+                  animate={{ opacity: [1, 0.45, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                  <span
+                    className="inline-block h-2 w-2 rounded-full"
+                    style={{ backgroundColor: TEAL, boxShadow: `0 0 12px 2px ${TEAL}` }}
+                  />
+                  <span className="font-montserrat text-[10px] md:text-xs font-bold uppercase tracking-[0.5em] text-offwhite/70">
+                    Incoming Transmission
+                  </span>
+                  <span
+                    className="inline-block h-2 w-2 rounded-full"
+                    style={{ backgroundColor: TEAL, boxShadow: `0 0 12px 2px ${TEAL}` }}
+                  />
+                </motion.div>
+
+                <h1 className="font-montserrat font-black uppercase leading-[1.05] tracking-[0.08em] text-offwhite text-4xl sm:text-5xl md:text-6xl">
+                  {TITLE_LINES.map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
+                </h1>
+
+                <motion.span
+                  className="mt-6 block h-px w-24"
+                  style={{ backgroundColor: AMBER }}
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                />
+                <p className="mt-6 max-w-sm font-montserrat text-[11px] md:text-xs uppercase tracking-[0.3em] text-offwhite/55">
+                  This experience is best with sound
+                </p>
+
+                <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
+                  <button
+                    type="button"
+                    onClick={() => begin(true)}
+                    className="group flex items-center gap-3 rounded-full border px-8 py-3.5 font-montserrat text-xs font-bold uppercase tracking-[0.3em] transition-colors"
+                    style={{ borderColor: TEAL, color: TEAL }}
+                    autoFocus
+                  >
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                      <path d="M2 6v4h3l4 3V3L5 6H2z" fill="currentColor" />
+                      <path
+                        d="M11 5.5c1 .8 1 4.2 0 5M12.5 4c1.8 1.5 1.8 6.5 0 8"
+                        stroke="currentColor"
+                        strokeWidth="1.2"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                    Enter with Sound
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => begin(false)}
+                    className="font-montserrat text-[11px] font-bold uppercase tracking-[0.25em] text-offwhite/50 transition-colors hover:text-offwhite/80"
+                  >
+                    Enter silently
+                  </button>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Sound toggle / hint */}
           <button
