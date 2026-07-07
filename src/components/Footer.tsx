@@ -5,8 +5,9 @@ import Image from 'next/image'
 
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/museum', label: 'Visit' },
-  { href: '/u-boat', label: 'The U-Boat' },
+  { href: '/museum', label: 'Visit the Museum' },
+  { href: '/u-boat', label: 'U-534: The U-Boat' },
+  { href: '/history', label: 'Battle of the Atlantic History' },
   { href: '/memorial', label: 'Memorial' },
   { href: '/news', label: 'News' },
   { href: '/contact', label: 'Contact' },
@@ -44,8 +45,9 @@ export default function Footer() {
               className="font-montserrat text-sm leading-relaxed"
               style={{ color: 'rgba(248, 244, 238, 0.75)', maxWidth: 280 }}
             >
-              The world's first museum dedicated to the longest continuous military campaign of World War II.
-              Opening in 2027, Birkenhead.
+              The world's first museum dedicated to the Battle of the Atlantic - the longest continuous
+              military campaign of World War II. Opening in 2027 at Woodside Ferry, Birkenhead, on the
+              River Mersey opposite Liverpool.
             </p>
             {/* Convoy identification card */}
             <div
@@ -176,7 +178,7 @@ export default function Footer() {
             </a>
           </div>
           <a
-            href="https://www.westwnapproaches.co.uk"
+            href="https://liverpoolwarmuseum.co.uk"
             target="_blank"
             rel="noopener noreferrer"
             className="font-montserrat text-xs transition-opacity hover:opacity-100"

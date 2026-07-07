@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import ScrollReveal from '@/components/ScrollReveal'
+import { visitorFaqs } from '@/data/faqs'
 
 // Interior render gallery (renders not shown in the zone cards below)
 const galleryImages = [
@@ -177,8 +178,8 @@ export default function MuseumPage() {
                 lineHeight: 1.0,
               }}
             >
-              Discover the<br />
-              <span style={{ color: '#7ECECE', fontSize: '85%' }}>Atlantic Story</span>
+              The Battle of the<br />
+              <span style={{ color: '#7ECECE', fontSize: '85%' }}>Atlantic Museum</span>
             </h1>
             <p
               className="font-montserrat text-xl max-w-2xl leading-relaxed"
@@ -230,6 +231,13 @@ export default function MuseumPage() {
                   {/* [PLACEHOLDER: Museum introduction paragraph 2] */}
                   At its heart stands U-534 - the only U-boat ever raised after being sunk in combat - alongside the extraordinary collection of personal effects recovered from her hull. Four themed exhibition zones guide visitors through the full story: the convoys, the combat, the intelligence war, and the human experience on both sides.
                 </p>
+                <Link
+                  href="/history"
+                  className="inline-flex items-center gap-2 font-montserrat font-bold text-xs uppercase mt-6"
+                  style={{ color: '#B85C38', letterSpacing: '0.15em' }}
+                >
+                  New to the story? What was the Battle of the Atlantic? →
+                </Link>
               </div>
             </ScrollReveal>
 
@@ -621,7 +629,7 @@ export default function MuseumPage() {
                   },
                   {
                     title: 'Getting Here',
-                    body: 'Located at Woodside, Birkenhead - directly across the Mersey from Liverpool\'s Pier Head. Easily accessible by Mersey Ferry, bus, and car. Visitor parking is available on site.',
+                    body: 'Located beside the Woodside Ferry terminal in Birkenhead - directly across the Mersey from Liverpool\'s Pier Head. Easily accessible by Mersey Ferry, Merseyrail to Hamilton Square, bus, and car. Visitor parking is available on site.',
                     icon: '⛴️',
                   },
                 ].map((card, i) => (
@@ -658,6 +666,61 @@ export default function MuseumPage() {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* -- FAQ ------------------------------------------------ */}
+      <section
+        className="relative py-24 lg:py-32 overflow-hidden"
+        style={{ backgroundColor: '#F5ECD7' }}
+      >
+        <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-12">
+          <ScrollReveal>
+            <div className="mb-12">
+              <p
+                className="font-mono text-xs uppercase mb-3"
+                style={{ color: '#B85C38', letterSpacing: '0.2em' }}
+              >
+                Visitor Information
+              </p>
+              <h2
+                className="font-montserrat font-black uppercase"
+                style={{
+                  fontSize: 'clamp(1.6rem, 3.5vw, 2.6rem)',
+                  letterSpacing: '0.12em',
+                  color: '#2D4F5C',
+                }}
+              >
+                Frequently Asked Questions
+              </h2>
+            </div>
+          </ScrollReveal>
+          <div className="space-y-6">
+            {visitorFaqs.map((faq, i) => (
+              <ScrollReveal key={faq.question} delay={i * 0.05}>
+                <div
+                  className="p-6 lg:p-8"
+                  style={{
+                    background: 'rgba(45, 79, 92, 0.04)',
+                    border: '1px solid rgba(45, 79, 92, 0.12)',
+                  }}
+                >
+                  <h3
+                    className="font-montserrat font-bold text-base lg:text-lg mb-3"
+                    style={{ color: '#2D4F5C', letterSpacing: '0.03em' }}
+                  >
+                    {faq.question}
+                  </h3>
+                  <p
+                    className="font-montserrat text-base leading-relaxed"
+                    style={{ color: 'rgba(45, 79, 92, 0.8)' }}
+                  >
+                    {faq.answer}
+                  </p>
+                </div>
+              </ScrollReveal>
+            ))}
           </div>
         </div>
       </section>

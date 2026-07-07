@@ -613,11 +613,11 @@ export default function UBoatPage() {
                 Register Interest
               </Link>
               <Link
-                href="/memorial"
+                href="/history"
                 className="font-montserrat font-bold text-sm uppercase px-8 py-4 border transition-colors duration-200 hover:bg-sand hover:text-orange-burnt"
                 style={{ borderColor: 'rgba(245,236,215,0.5)', color: '#F5ECD7', letterSpacing: '0.15em' }}
               >
-                The Memorial →
+                The Battle of the Atlantic →
               </Link>
             </div>
           </ScrollReveal>

@@ -321,6 +321,13 @@ export default function HomePage() {
             >
                 From 1939 to 1945, the Battle of the Atlantic determined the survival of Britain and the outcome of the Second World War. Without victory at sea, there would have been no D-Day and liberation of Europe. The war would have been lost. The Battle of the Atlantic museum exists so the story is never forgotten, and is told through the artefacts, voices and experiences of those who bravely lived through the battle. At the heart of the museum, is the U-534, the last U-boat to leave Germany before the surrender. The submarine was sunk on 5 May 1945 and raised from the Kattegat seabed in 1993. The U-534 is now the centre piece of this new museum and is preserved in Woodside.
             </p>
+            <Link
+              href="/history"
+              className="inline-flex items-center gap-2 font-montserrat font-bold text-xs uppercase"
+              style={{ color: '#7ECECE', letterSpacing: '0.15em' }}
+            >
+              What was the Battle of the Atlantic? →
+            </Link>
           </ScrollReveal>
         </div>
       </section>
