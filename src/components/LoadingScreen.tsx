@@ -133,6 +133,23 @@ export default function LoadingScreen() {
   const scheduledRef = useRef(false)
   const finishedRef = useRef(false)
   const enabledAtRef = useRef(0)
+  const sonarDataRef = useRef<ArrayBuffer | null>(null)
+
+  // Prefetch the sonar ping sample so it's ready when audio unlocks
+  useEffect(() => {
+    let cancelled = false
+    fetch('/dragon-studio-deepsea-sonar-386156.mp3')
+      .then((r) => (r.ok ? r.arrayBuffer() : Promise.reject()))
+      .then((buf) => {
+        if (!cancelled) sonarDataRef.current = buf
+      })
+      .catch(() => {
+        /* sample unavailable — synthesised fallback is used */
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   const atLeast = useCallback(
     (p: Phase) => PHASE_ORDER[phase] >= PHASE_ORDER[p],
@@ -194,20 +211,51 @@ export default function LoadingScreen() {
       osc.stop(t0 + dur + 0.05)
     }
 
-    // Sonar ping at the title reveal (+ faint echo)
-    ping(MORSE_END, 1250, 680, 0.9, 0.22)
-    ping(MORSE_END + 550, 1250, 680, 0.9, 0.07)
-
-    // Submarine sonar ping — one per sweep rotation, with an echoing tail
+    // Sonar pings (recorded sample): once at the title reveal, then one per
+    // radar sweep rotation. Falls back to a synthesised ping if the sample
+    // hasn't loaded or can't be decoded.
     const mapTotal = RADAR_MS + UK_MS + LCR_MS
     const sweeps = Math.floor(mapTotal / SWEEP_MS)
+    const pingTimes: { at: number; level: number }[] = [
+      { at: MORSE_END, level: 1 },
+    ]
     for (let i = 0; i <= sweeps; i++) {
       const at = RADAR_START + i * SWEEP_MS
       if (at > TOTAL_MS - 400) break
-      const level = Math.max(0.09, 0.2 - i * 0.015)
-      ping(at, 1150, 980, 1.5, level) // main ping, slow decay
-      ping(at + 650, 1150, 980, 1.1, level * 0.28) // first echo
-      ping(at + 1150, 1150, 980, 0.8, level * 0.12) // distant echo
+      pingTimes.push({ at, level: Math.max(0.45, 1 - i * 0.08) })
+    }
+
+    const synthFallback = () => {
+      for (const { at, level } of pingTimes) {
+        ping(at, 1250, 680, 0.9, 0.22 * level)
+        ping(at + 550, 1250, 680, 0.9, 0.07 * level)
+      }
+    }
+
+    const sonarData = sonarDataRef.current
+    if (sonarData) {
+      ctx
+        .decodeAudioData(sonarData.slice(0))
+        .then((buffer) => {
+          const nowAfterDecode = ctx.currentTime
+          const elapsedAfterDecode =
+            fromElapsed + (nowAfterDecode - now) * 1000
+          for (const { at, level } of pingTimes) {
+            if (at + buffer.duration * 1000 <= elapsedAfterDecode) continue
+            const start =
+              nowAfterDecode + Math.max(0, at - elapsedAfterDecode) / 1000
+            const src = ctx.createBufferSource()
+            src.buffer = buffer
+            const env = ctx.createGain()
+            env.gain.value = 0.9 * level
+            src.connect(env)
+            env.connect(gain)
+            src.start(start)
+          }
+        })
+        .catch(synthFallback)
+    } else {
+      synthFallback()
     }
 
     // Rising blips on each zoom step
