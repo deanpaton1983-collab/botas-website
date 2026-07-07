@@ -5,10 +5,16 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 /* ────────────────────────────────────────────────────────────────
    BOTAS cinematic intro
-   Phase 1 (0–1.0s)    : static / grain, "INCOMING TRANSMISSION"
-   Phase 2 (1.0–6.8s)  : morse code (audio + visual) decodes the
-                         title letter-by-letter over archival images
-   Phase 3 (6.8–8.9s)  : sonar ping reveal, tagline, fade to site
+   Phase 1 (0–1.0s)     : static / grain, "INCOMING TRANSMISSION"
+   Phase 2 (1.0–6.8s)   : morse code (audio + visual) decodes the
+                          title letter-by-letter over archival images
+   Phase 3 (~6.8–8.4s)  : sonar ping reveal, title glow, tagline
+   Phase 4 (radar)      : radar scope + sweep (with radar audio)
+                          paints the North Atlantic — US & British
+                          coastlines and the convoy route
+   Phase 5 (uk)         : sweep continues, zoom into Great Britain
+   Phase 6 (lcr)        : zoom into the Liverpool City Region —
+                          pulsing contact dot on Birkenhead (Woodside)
    Audio: WebAudio oscillator. Starts automatically if the browser
    allows; otherwise unlocks on first click / tap / keypress.
    ──────────────────────────────────────────────────────────────── */
@@ -32,7 +38,7 @@ const TITLE_LINES = ['BATTLE', 'OF THE', 'ATLANTIC']
 
 const UNIT = 34 // ms per morse unit (~30 wpm) → full title ≈ 5.8s
 const STATIC_MS = 1000
-const REVEAL_HOLD_MS = 2100
+const REVEAL_HOLD_MS = 1600
 
 type Tone = { start: number; dur: number }
 type LetterEvent = { reveal: number; code: string; char: string }
@@ -60,7 +66,26 @@ function buildSchedule() {
 
 const SCHEDULE = buildSchedule()
 const MORSE_END = STATIC_MS + SCHEDULE.total
-const TOTAL_MS = MORSE_END + REVEAL_HOLD_MS
+
+/* ── radar / map timeline ── */
+const SWEEP_MS = 1700 // one full radar rotation
+const RADAR_MS = SWEEP_MS * 2 // Atlantic scene
+const UK_MS = 2300 // Great Britain scene
+const LCR_MS = 3400 // Liverpool City Region scene
+
+const RADAR_START = MORSE_END + REVEAL_HOLD_MS
+const UK_START = RADAR_START + RADAR_MS
+const LCR_START = UK_START + UK_MS
+const TOTAL_MS = LCR_START + LCR_MS
+
+type Phase = 'signal' | 'title' | 'radar' | 'uk' | 'lcr'
+const PHASE_ORDER: Record<Phase, number> = {
+  signal: 0,
+  title: 1,
+  radar: 2,
+  uk: 3,
+  lcr: 4,
+}
 
 const IMAGES = [
   {
@@ -83,11 +108,20 @@ const IMG_SWITCH = [
   STATIC_MS + SCHEDULE.total * 0.66,
 ]
 
+const TEAL = '#7ECECE'
+const AMBER = '#c4832a'
+
+const CAPTIONS: Record<'radar' | 'uk' | 'lcr', string> = {
+  radar: 'The North Atlantic · Allied Convoy Routes',
+  uk: 'Great Britain · The Western Approaches',
+  lcr: 'Woodside, Birkenhead · Museum Location',
+}
+
 export default function LoadingScreen() {
   const [visible, setVisible] = useState(true)
   const [decoded, setDecoded] = useState(0)
   const [beep, setBeep] = useState(false)
-  const [reveal, setReveal] = useState(false)
+  const [phase, setPhase] = useState<Phase>('signal')
   const [imgIndex, setImgIndex] = useState(0)
   const [soundOn, setSoundOn] = useState(false)
   const [audioReady, setAudioReady] = useState(false)
@@ -100,6 +134,13 @@ export default function LoadingScreen() {
   const finishedRef = useRef(false)
   const enabledAtRef = useRef(0)
 
+  const atLeast = useCallback(
+    (p: Phase) => PHASE_ORDER[phase] >= PHASE_ORDER[p],
+    [phase]
+  )
+  const reveal = atLeast('title')
+  const mapPhase = atLeast('radar')
+
   /* ── audio ── */
 
   const scheduleTones = useCallback((fromElapsed: number) => {
@@ -109,6 +150,8 @@ export default function LoadingScreen() {
     scheduledRef.current = true
 
     const now = ctx.currentTime
+
+    // Morse tones
     for (const tone of SCHEDULE.tones) {
       const at = STATIC_MS + tone.start
       if (at + tone.dur <= fromElapsed) continue
@@ -128,25 +171,54 @@ export default function LoadingScreen() {
       osc.stop(end + 0.02)
     }
 
-    // Sonar ping at the reveal
-    if (MORSE_END > fromElapsed) {
-      const pingAt = now + (MORSE_END - fromElapsed) / 1000
-      for (const [delay, level] of [
-        [0, 0.22],
-        [0.55, 0.07],
-      ] as const) {
-        const osc = ctx.createOscillator()
-        const env = ctx.createGain()
-        osc.type = 'sine'
-        osc.frequency.setValueAtTime(1250, pingAt + delay)
-        osc.frequency.exponentialRampToValueAtTime(680, pingAt + delay + 0.9)
-        env.gain.setValueAtTime(level, pingAt + delay)
-        env.gain.exponentialRampToValueAtTime(0.0001, pingAt + delay + 0.9)
-        osc.connect(env)
-        env.connect(gain)
-        osc.start(pingAt + delay)
-        osc.stop(pingAt + delay + 1)
-      }
+    // Pitched ping helper (sonar / radar / blips)
+    const ping = (
+      atMs: number,
+      f0: number,
+      f1: number,
+      dur: number,
+      level: number
+    ) => {
+      if (atMs + dur * 1000 <= fromElapsed) return
+      const t0 = now + Math.max(0, atMs - fromElapsed) / 1000
+      const osc = ctx.createOscillator()
+      const env = ctx.createGain()
+      osc.type = 'sine'
+      osc.frequency.setValueAtTime(f0, t0)
+      osc.frequency.exponentialRampToValueAtTime(f1, t0 + dur)
+      env.gain.setValueAtTime(level, t0)
+      env.gain.exponentialRampToValueAtTime(0.0001, t0 + dur)
+      osc.connect(env)
+      env.connect(gain)
+      osc.start(t0)
+      osc.stop(t0 + dur + 0.05)
+    }
+
+    // Sonar ping at the title reveal (+ faint echo)
+    ping(MORSE_END, 1250, 680, 0.9, 0.22)
+    ping(MORSE_END + 550, 1250, 680, 0.9, 0.07)
+
+    // Radar sweep pings — one per rotation, for the whole map sequence
+    const mapTotal = RADAR_MS + UK_MS + LCR_MS
+    const sweeps = Math.floor(mapTotal / SWEEP_MS)
+    for (let i = 0; i <= sweeps; i++) {
+      const at = RADAR_START + i * SWEEP_MS
+      if (at > TOTAL_MS - 400) break
+      ping(at, 1350, 720, 0.75, Math.max(0.08, 0.17 - i * 0.015))
+      ping(at + 420, 1350, 720, 0.75, 0.045) // faint echo
+    }
+
+    // Rising blips on each zoom step
+    ping(UK_START, 480, 940, 0.35, 0.1)
+    ping(LCR_START, 480, 940, 0.35, 0.1)
+
+    // "Contact" blips when the Birkenhead dot appears
+    for (const [d, lv] of [
+      [0, 0.18],
+      [140, 0.14],
+      [280, 0.18],
+    ] as const) {
+      ping(LCR_START + 950 + d, 985, 960, 0.09, lv)
     }
   }, [])
 
@@ -212,7 +284,7 @@ export default function LoadingScreen() {
 
     if (reducedMotion) {
       setDecoded(SCHEDULE.letters.length)
-      setReveal(true)
+      setPhase('title')
       const t = setTimeout(finish, 1800)
       return () => clearTimeout(t)
     }
@@ -237,7 +309,19 @@ export default function LoadingScreen() {
       )
 
       setImgIndex(e >= IMG_SWITCH[1] ? 2 : e >= IMG_SWITCH[0] ? 1 : 0)
-      if (e >= MORSE_END) setReveal(true)
+
+      setPhase(
+        e >= LCR_START
+          ? 'lcr'
+          : e >= UK_START
+            ? 'uk'
+            : e >= RADAR_START
+              ? 'radar'
+              : e >= MORSE_END
+                ? 'title'
+                : 'signal'
+      )
+
       if (e >= TOTAL_MS) {
         finish()
         return
@@ -270,6 +354,23 @@ export default function LoadingScreen() {
 
   let letterIdx = -1
 
+  const coast = {
+    stroke: TEAL,
+    strokeWidth: 1.4,
+    fill: 'rgba(126,206,206,0.05)',
+    strokeLinejoin: 'round' as const,
+    strokeLinecap: 'round' as const,
+    vectorEffect: 'non-scaling-stroke' as const,
+  }
+  const openCoast = { ...coast, fill: 'none' }
+
+  const sceneTransition = { duration: 1.5, ease: 'easeInOut' as const }
+  const drawIn = (active: boolean, delay = 0) => ({
+    initial: { pathLength: 0 },
+    animate: { pathLength: active ? 1 : 0 },
+    transition: { duration: 1.6, delay, ease: 'easeInOut' as const },
+  })
+
   return (
     <AnimatePresence>
       {visible && (
@@ -280,13 +381,13 @@ export default function LoadingScreen() {
           exit={{ opacity: 0, transition: { duration: 0.9, ease: 'easeInOut' } }}
           aria-label="Battle of the Atlantic Story — introduction"
         >
-          {/* Archival imagery, Ken Burns drift */}
+          {/* Archival imagery, Ken Burns drift (dims under the radar) */}
           {IMAGES.map((img, i) => (
             <motion.div
               key={img.src}
               className="absolute inset-0"
               initial={{ opacity: 0 }}
-              animate={{ opacity: imgIndex === i ? 1 : 0 }}
+              animate={{ opacity: imgIndex === i ? (mapPhase ? 0.18 : 1) : 0 }}
               transition={{ duration: 1.4, ease: 'easeInOut' }}
             >
               <motion.img
@@ -335,12 +436,13 @@ export default function LoadingScreen() {
 
           {/* Sonar ping burst on reveal */}
           {reveal &&
+            !mapPhase &&
             [0, 1, 2].map((i) => (
               <motion.div
                 key={`ring-${i}`}
                 className="absolute left-1/2 top-1/2 rounded-full border pointer-events-none"
                 style={{
-                  borderColor: '#7ECECE',
+                  borderColor: TEAL,
                   translateX: '-50%',
                   translateY: '-50%',
                 }}
@@ -351,18 +453,22 @@ export default function LoadingScreen() {
             ))}
 
           {/* Teal flash at reveal */}
-          {reveal && (
+          {reveal && !mapPhase && (
             <motion.div
               className="absolute inset-0 pointer-events-none"
-              style={{ backgroundColor: '#7ECECE' }}
+              style={{ backgroundColor: TEAL }}
               initial={{ opacity: 0.18 }}
               animate={{ opacity: 0 }}
               transition={{ duration: 0.7, ease: 'easeOut' }}
             />
           )}
 
-          {/* ── Content ── */}
-          <div className="relative z-10 flex h-full flex-col items-center justify-center px-6">
+          {/* ── Title / morse content (fades out for the radar) ── */}
+          <motion.div
+            className="relative z-10 flex h-full flex-col items-center justify-center px-6"
+            animate={{ opacity: mapPhase ? 0 : 1, y: mapPhase ? -24 : 0 }}
+            transition={{ duration: 0.7, ease: 'easeInOut' }}
+          >
             {/* Transmission header */}
             <motion.div
               className="mb-8 flex items-center gap-3"
@@ -373,8 +479,8 @@ export default function LoadingScreen() {
               <span
                 className="inline-block h-2 w-2 rounded-full transition-colors duration-75"
                 style={{
-                  backgroundColor: beep ? '#7ECECE' : 'rgba(126,206,206,0.25)',
-                  boxShadow: beep ? '0 0 12px 2px #7ECECE' : 'none',
+                  backgroundColor: beep ? TEAL : 'rgba(126,206,206,0.25)',
+                  boxShadow: beep ? `0 0 12px 2px ${TEAL}` : 'none',
                 }}
               />
               <motion.span
@@ -387,8 +493,8 @@ export default function LoadingScreen() {
               <span
                 className="inline-block h-2 w-2 rounded-full transition-colors duration-75"
                 style={{
-                  backgroundColor: beep ? '#7ECECE' : 'rgba(126,206,206,0.25)',
-                  boxShadow: beep ? '0 0 12px 2px #7ECECE' : 'none',
+                  backgroundColor: beep ? TEAL : 'rgba(126,206,206,0.25)',
+                  boxShadow: beep ? `0 0 12px 2px ${TEAL}` : 'none',
                 }}
               />
             </motion.div>
@@ -407,7 +513,7 @@ export default function LoadingScreen() {
                         className="inline-block"
                         style={{
                           minWidth: ch === ' ' ? '0.4em' : undefined,
-                          color: isCurrent ? '#7ECECE' : undefined,
+                          color: isCurrent ? TEAL : undefined,
                           textShadow: reveal
                             ? '0 0 30px rgba(126,206,206,0.55)'
                             : isCurrent
@@ -421,7 +527,7 @@ export default function LoadingScreen() {
                         }}
                         transition={{ duration: 0.18, ease: 'easeOut' }}
                       >
-                        {ch === ' ' ? ' ' : ch}
+                        {ch === ' ' ? ' ' : ch}
                       </motion.span>
                     )
                   })}
@@ -429,16 +535,16 @@ export default function LoadingScreen() {
               ))}
             </h1>
 
-            {/* Live morse readout */}
+            {/* Live morse readout / tagline */}
             <div className="mt-8 flex min-h-[2rem] items-center justify-center">
               {!reveal && currentLetter ? (
                 <div className="flex items-center gap-4">
-                  <span className="font-montserrat text-xs font-bold uppercase tracking-[0.3em]" style={{ color: '#7ECECE' }}>
+                  <span className="font-montserrat text-xs font-bold uppercase tracking-[0.3em]" style={{ color: TEAL }}>
                     {currentLetter.char}
                   </span>
                   <span
                     className="font-mono text-lg tracking-[0.35em]"
-                    style={{ color: beep ? '#7ECECE' : 'rgba(126,206,206,0.45)' }}
+                    style={{ color: beep ? TEAL : 'rgba(126,206,206,0.45)' }}
                   >
                     {currentLetter.code.split('').map((s, i) => (
                       <span key={i}>{s === '.' ? '·' : '—'}</span>
@@ -454,7 +560,7 @@ export default function LoadingScreen() {
                 >
                   <motion.span
                     className="block h-px w-24"
-                    style={{ backgroundColor: '#c4832a' }}
+                    style={{ backgroundColor: AMBER }}
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: 1 }}
                     transition={{ duration: 0.6, delay: 0.35 }}
@@ -465,7 +571,398 @@ export default function LoadingScreen() {
                 </motion.div>
               ) : null}
             </div>
-          </div>
+          </motion.div>
+
+          {/* ── Radar scope + map zoom sequence ── */}
+          {mapPhase && (
+            <motion.div
+              className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-5 px-6 pointer-events-none"
+              initial={{ opacity: 0, scale: 0.94 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.9, ease: 'easeOut' }}
+            >
+              <div
+                className="relative"
+                style={{ width: 'min(72vmin, 540px)', height: 'min(72vmin, 540px)' }}
+              >
+                {/* Scope glow */}
+                <div
+                  className="absolute -inset-6 rounded-full"
+                  style={{
+                    background:
+                      'radial-gradient(circle, rgba(126,206,206,0.12) 0%, rgba(126,206,206,0.04) 55%, transparent 72%)',
+                  }}
+                />
+
+                {/* Map area, clipped to the scope circle */}
+                <div
+                  className="absolute rounded-full overflow-hidden"
+                  style={{
+                    inset: '2.5%',
+                    backgroundColor: 'rgba(6,20,32,0.88)',
+                    boxShadow: 'inset 0 0 60px rgba(126,206,206,0.08)',
+                  }}
+                >
+                  {/* Chart grid */}
+                  <svg viewBox="0 0 400 400" className="absolute inset-0 h-full w-full" aria-hidden="true">
+                    {[50, 100, 150, 200, 250, 300, 350].map((p) => (
+                      <g key={p} stroke={TEAL} strokeOpacity="0.07" strokeWidth="0.6">
+                        <line x1={p} y1="0" x2={p} y2="400" />
+                        <line x1="0" y1={p} x2="400" y2={p} />
+                      </g>
+                    ))}
+                  </svg>
+
+                  {/* ── Scene 1: North Atlantic ── */}
+                  <motion.div
+                    className="absolute inset-0"
+                    style={{ transformOrigin: '86.5% 35.5%' }}
+                    animate={{
+                      scale: atLeast('uk') ? 3.4 : 1,
+                      opacity: atLeast('uk') ? 0 : 1,
+                    }}
+                    transition={sceneTransition}
+                  >
+                    <svg viewBox="0 0 400 400" className="h-full w-full">
+                      {/* North American eastern seaboard */}
+                      <motion.path
+                        d="M 26 396 L 34 352 L 40 322 L 38 296 L 46 268 L 44 258 L 56 252 L 62 250 L 70 242 L 78 236 L 90 226 L 100 220 L 96 210 L 108 212 L 120 206 L 128 200 L 136 196 L 130 184 L 124 168 L 120 148 L 112 128 L 106 112 L 98 96"
+                        {...openCoast}
+                        {...drawIn(true, 0.15)}
+                      />
+                      {/* Greenland */}
+                      <motion.path
+                        d="M 148 40 L 170 30 L 190 36 L 200 46 L 192 64 L 182 80 L 172 92 L 162 78 L 152 60 Z"
+                        {...coast}
+                        {...drawIn(true, 0.5)}
+                      />
+                      {/* Iceland */}
+                      <motion.path
+                        d="M 266 54 L 278 44 L 292 50 L 288 62 L 272 63 Z"
+                        {...coast}
+                        {...drawIn(true, 0.7)}
+                      />
+                      {/* Ireland */}
+                      <motion.path
+                        d="M 316 138 L 328 132 L 334 142 L 332 156 L 322 164 L 313 156 L 313 144 Z"
+                        {...coast}
+                        {...drawIn(true, 0.95)}
+                      />
+                      {/* Great Britain */}
+                      <motion.path
+                        d="M 344 98 L 352 104 L 350 118 L 355 132 L 352 146 L 358 158 L 364 156 L 362 170 L 353 177 L 341 179 L 335 170 L 342 160 L 336 150 L 340 138 L 334 128 L 338 112 Z"
+                        {...coast}
+                        {...drawIn(true, 1.05)}
+                      />
+                      {/* France / Iberia */}
+                      <motion.path
+                        d="M 352 188 L 340 193 L 330 201 L 326 215 L 321 238 L 318 262 L 318 288 L 325 301 L 337 305 L 352 301"
+                        {...openCoast}
+                        {...drawIn(true, 1.2)}
+                      />
+                      {/* Convoy route: Halifax → Liverpool */}
+                      <motion.path
+                        d="M 94 222 Q 210 126 346 148"
+                        fill="none"
+                        stroke={AMBER}
+                        strokeWidth="1.3"
+                        strokeDasharray="5 6"
+                        vectorEffect="non-scaling-stroke"
+                        {...drawIn(true, 1.5)}
+                      />
+                      {/* Convoy blips */}
+                      {[
+                        [150, 182],
+                        [216, 158],
+                        [284, 146],
+                      ].map(([x, y], i) => (
+                        <motion.circle
+                          key={i}
+                          cx={x}
+                          cy={y}
+                          r="2.2"
+                          fill={AMBER}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: [0, 1, 0.5, 1] }}
+                          transition={{ duration: 1.2, delay: 1.9 + i * 0.25 }}
+                        />
+                      ))}
+                      <motion.text
+                        x="60"
+                        y="300"
+                        className="font-montserrat"
+                        fill={TEAL}
+                        fillOpacity="0.75"
+                        fontSize="10"
+                        fontWeight="700"
+                        letterSpacing="2.5"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1.1, duration: 0.6 }}
+                      >
+                        NORTH AMERICA
+                      </motion.text>
+                      <motion.text
+                        x="300"
+                        y="212"
+                        className="font-montserrat"
+                        fill={TEAL}
+                        fillOpacity="0.75"
+                        fontSize="10"
+                        fontWeight="700"
+                        letterSpacing="2.5"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1.6, duration: 0.6 }}
+                      >
+                        BRITAIN
+                      </motion.text>
+                    </svg>
+                  </motion.div>
+
+                  {/* ── Scene 2: Great Britain & Ireland ── */}
+                  <motion.div
+                    className="absolute inset-0"
+                    style={{ transformOrigin: '61% 58%' }}
+                    initial={{ scale: 0.38, opacity: 0 }}
+                    animate={{
+                      scale: atLeast('lcr') ? 3.6 : atLeast('uk') ? 1 : 0.38,
+                      opacity: atLeast('lcr') ? 0 : atLeast('uk') ? 1 : 0,
+                    }}
+                    transition={sceneTransition}
+                  >
+                    <svg viewBox="0 0 400 400" className="h-full w-full">
+                      {/* Great Britain */}
+                      <motion.path
+                        d="M 185 20 L 200 28 L 214 44 L 232 58 L 258 68 L 277 78 L 264 100 L 250 124 L 264 132 L 282 152 L 302 182 L 322 206 L 338 228 L 345 252 L 360 262 L 390 270 L 381 300 L 378 330 L 352 344 L 320 338 L 291 350 L 255 356 L 221 362 L 186 372 L 166 378 L 190 351 L 212 340 L 232 330 L 246 324 L 226 318 L 200 314 L 178 307 L 190 290 L 200 278 L 196 258 L 194 240 L 210 236 L 228 239 L 243 233 L 240 218 L 240 202 L 231 184 L 222 176 L 205 168 L 191 152 L 196 140 L 178 128 L 168 108 L 160 84 L 170 58 Z"
+                        {...coast}
+                        {...drawIn(atLeast('uk'), 0.2)}
+                      />
+                      {/* Ireland */}
+                      <motion.path
+                        d="M 148 188 L 156 220 L 154 256 L 150 282 L 120 300 L 88 312 L 60 306 L 36 292 L 42 250 L 46 200 L 70 172 L 96 158 L 124 164 Z"
+                        {...coast}
+                        {...drawIn(atLeast('uk'), 0.45)}
+                      />
+                      {/* Liverpool contact ring */}
+                      <motion.circle
+                        cx="243"
+                        cy="232"
+                        r="10"
+                        fill="none"
+                        stroke={AMBER}
+                        strokeWidth="1.4"
+                        vectorEffect="non-scaling-stroke"
+                        initial={{ opacity: 0, scale: 0.4 }}
+                        animate={
+                          atLeast('uk')
+                            ? { opacity: [0, 1, 0.5, 1], scale: 1 }
+                            : { opacity: 0 }
+                        }
+                        transition={{ duration: 0.9, delay: 1.0 }}
+                        style={{ transformOrigin: '243px 232px' }}
+                      />
+                      <motion.circle
+                        cx="243"
+                        cy="232"
+                        r="3"
+                        fill={AMBER}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: atLeast('uk') ? 1 : 0 }}
+                        transition={{ duration: 0.4, delay: 1.1 }}
+                      />
+                      <motion.text
+                        x="262"
+                        y="228"
+                        className="font-montserrat"
+                        fill={AMBER}
+                        fontSize="10"
+                        fontWeight="700"
+                        letterSpacing="2"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: atLeast('uk') ? 1 : 0 }}
+                        transition={{ duration: 0.5, delay: 1.25 }}
+                      >
+                        LIVERPOOL
+                      </motion.text>
+                    </svg>
+                  </motion.div>
+
+                  {/* ── Scene 3: Liverpool City Region ── */}
+                  <motion.div
+                    className="absolute inset-0"
+                    initial={{ scale: 0.34, opacity: 0 }}
+                    animate={{
+                      scale: atLeast('lcr') ? 1 : 0.34,
+                      opacity: atLeast('lcr') ? 1 : 0,
+                    }}
+                    transition={sceneTransition}
+                  >
+                    <svg viewBox="0 0 400 400" className="h-full w-full">
+                      {/* Wirral peninsula: Dee shore → north coast → Mersey west bank */}
+                      <motion.path
+                        d="M 118 396 L 106 348 L 96 302 L 78 258 L 62 216 L 48 178 L 40 160 L 66 150 L 96 144 L 126 140 L 150 140 L 160 148 L 166 172 L 170 190 L 174 206 L 170 226 L 168 248 L 174 268 L 182 288 L 204 314 L 232 336 L 268 352 L 310 362 L 356 368 L 398 372"
+                        {...openCoast}
+                        {...drawIn(atLeast('lcr'), 0.25)}
+                      />
+                      {/* Sefton / Liverpool shore: Formby → Crosby → Mersey east bank */}
+                      <motion.path
+                        d="M 252 4 L 242 36 L 230 74 L 218 112 L 206 140 L 197 158 L 196 178 L 197 194 L 202 218 L 210 240 L 224 262 L 242 278 L 268 294 L 302 306 L 338 314 L 372 318 L 398 320"
+                        {...openCoast}
+                        {...drawIn(atLeast('lcr'), 0.45)}
+                      />
+                      {/* Place labels */}
+                      {(
+                        [
+                          { x: 84, y: 232, t: 'WIRRAL', d: 0.9 },
+                          { x: 244, y: 200, t: 'LIVERPOOL', d: 1.0 },
+                          { x: 236, y: 328, t: 'RIVER MERSEY', d: 1.1, r: 14 },
+                          { x: 66, y: 118, t: 'LIVERPOOL BAY', d: 1.2 },
+                        ] as { x: number; y: number; t: string; d: number; r?: number }[]
+                      ).map((l) => (
+                        <motion.text
+                          key={l.t}
+                          x={l.x}
+                          y={l.y}
+                          className="font-montserrat"
+                          fill={TEAL}
+                          fillOpacity="0.7"
+                          fontSize="9.5"
+                          fontWeight="700"
+                          letterSpacing="2.2"
+                          transform={l.r ? `rotate(${l.r} ${l.x} ${l.y})` : undefined}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: atLeast('lcr') ? 1 : 0 }}
+                          transition={{ duration: 0.5, delay: l.d }}
+                        >
+                          {l.t}
+                        </motion.text>
+                      ))}
+                      {/* Birkenhead — museum contact */}
+                      <motion.g
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: atLeast('lcr') ? 1 : 0 }}
+                        transition={{ duration: 0.5, delay: 0.95 }}
+                      >
+                        {[0, 1].map((i) => (
+                          <motion.circle
+                            key={i}
+                            cx="174"
+                            cy="206"
+                            r="6"
+                            fill="none"
+                            stroke={AMBER}
+                            strokeWidth="1.5"
+                            vectorEffect="non-scaling-stroke"
+                            initial={{ scale: 0.5, opacity: 0.9 }}
+                            animate={{ scale: 4.2, opacity: 0 }}
+                            transition={{
+                              duration: 1.8,
+                              delay: 1.0 + i * 0.9,
+                              repeat: Infinity,
+                              repeatDelay: 0,
+                              ease: 'easeOut',
+                            }}
+                            style={{ transformOrigin: '174px 206px' }}
+                          />
+                        ))}
+                        <circle cx="174" cy="206" r="4.5" fill={AMBER} />
+                        <circle cx="174" cy="206" r="9" fill="none" stroke={AMBER} strokeWidth="1" strokeOpacity="0.6" vectorEffect="non-scaling-stroke" />
+                        {/* Callout */}
+                        <line x1="168" y1="199" x2="118" y2="162" stroke={AMBER} strokeWidth="0.8" strokeOpacity="0.7" vectorEffect="non-scaling-stroke" />
+                        <text
+                          x="114"
+                          y="150"
+                          textAnchor="middle"
+                          className="font-montserrat"
+                          fill={AMBER}
+                          fontSize="11"
+                          fontWeight="800"
+                          letterSpacing="2.4"
+                        >
+                          BIRKENHEAD
+                        </text>
+                        <text
+                          x="114"
+                          y="163"
+                          textAnchor="middle"
+                          className="font-montserrat"
+                          fill="#f2ede4"
+                          fillOpacity="0.85"
+                          fontSize="7.5"
+                          fontWeight="700"
+                          letterSpacing="1.8"
+                        >
+                          WOODSIDE
+                        </text>
+                      </motion.g>
+                    </svg>
+                  </motion.div>
+
+                  {/* Rotating radar sweep */}
+                  <motion.div
+                    className="absolute inset-0 rounded-full"
+                    style={{
+                      background: `conic-gradient(from 0deg, rgba(126,206,206,0.5) 0deg, rgba(126,206,206,0.22) 3deg, rgba(126,206,206,0.1) 32deg, transparent 64deg)`,
+                      mixBlendMode: 'screen',
+                    }}
+                    initial={{ rotate: 0 }}
+                    animate={{ rotate: 360 }}
+                    transition={{
+                      duration: SWEEP_MS / 1000,
+                      repeat: Infinity,
+                      ease: 'linear',
+                    }}
+                  />
+                </div>
+
+                {/* Scope frame: outer ring, range rings, ticks, crosshairs */}
+                <svg viewBox="0 0 400 400" className="absolute inset-0 h-full w-full" aria-hidden="true">
+                  <circle cx="200" cy="200" r="195" fill="none" stroke={TEAL} strokeOpacity="0.7" strokeWidth="1.6" />
+                  <circle cx="200" cy="200" r="190" fill="none" stroke={TEAL} strokeOpacity="0.2" strokeWidth="0.8" />
+                  {[63, 127].map((r) => (
+                    <circle key={r} cx="200" cy="200" r={r} fill="none" stroke={TEAL} strokeOpacity="0.14" strokeWidth="0.8" />
+                  ))}
+                  <line x1="200" y1="10" x2="200" y2="390" stroke={TEAL} strokeOpacity="0.1" strokeWidth="0.8" />
+                  <line x1="10" y1="200" x2="390" y2="200" stroke={TEAL} strokeOpacity="0.1" strokeWidth="0.8" />
+                  {Array.from({ length: 36 }).map((_, i) => {
+                    const a = (i * 10 * Math.PI) / 180
+                    const long = i % 3 === 0
+                    const r1 = long ? 183 : 188
+                    return (
+                      <line
+                        key={i}
+                        x1={200 + r1 * Math.sin(a)}
+                        y1={200 - r1 * Math.cos(a)}
+                        x2={200 + 194 * Math.sin(a)}
+                        y2={200 - 194 * Math.cos(a)}
+                        stroke={TEAL}
+                        strokeOpacity={long ? 0.45 : 0.22}
+                        strokeWidth="1"
+                      />
+                    )
+                  })}
+                  <circle cx="200" cy="200" r="2.4" fill={TEAL} fillOpacity="0.9" />
+                </svg>
+              </div>
+
+              {/* Caption under the scope */}
+              <div className="flex min-h-[1.5rem] items-center justify-center">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={phase}
+                    className="font-montserrat text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-offwhite/80 text-center"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.45 }}
+                  >
+                    {CAPTIONS[(phase === 'signal' || phase === 'title' ? 'radar' : phase) as 'radar' | 'uk' | 'lcr']}
+                  </motion.span>
+                </AnimatePresence>
+              </div>
+            </motion.div>
+          )}
 
           {/* Sound toggle / hint */}
           <button
