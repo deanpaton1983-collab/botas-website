@@ -11,6 +11,7 @@ const navLinks = [
   { href: '/museum', label: 'The Museum' },
   { href: '/u-boat', label: 'The U-Boat' },
   { href: '/history', label: 'History' },
+  { href: '/atlantic', label: 'Battle at Sea' },
   { href: '/memorial', label: 'The Memorial' },
   { href: '/news', label: 'News' },
   { href: '/contact', label: 'Contact' },
