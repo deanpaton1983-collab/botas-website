@@ -20,13 +20,9 @@ const colourways = [
     bg: '#F5ECD7',
     text: '#B85C38',
     accent: '#E07B45',
-    link: '/news',
+    link: '/museum',
     linkLabel: 'Explore the Exhibition',
     code: 'SC 48',
-    img: '/images/1280px-Casablanca_convoy.jpg',
-    imgAlt: 'An Allied convoy at sea, seen from the air',
-    imgCaption: 'An Allied convoy at sea',
-    imgCredit: 'US Navy',
   },
   {
     id: 'warfare-at-sea',
@@ -39,10 +35,6 @@ const colourways = [
     link: '/u-boat',
     linkLabel: 'Discover U-534',
     code: 'ON 67',
-    img: '/images/Depth_charges_explode_astern_of_HMS_STARLING_of_the_2nd_Escort_Group_in_the_Atlantic,_January_1944._A21992.jpg',
-    imgAlt: 'Depth charges exploding astern of HMS Starling in the Atlantic, January 1944',
-    imgCaption: 'Depth charges astern of HMS Starling, 1944',
-    imgCredit: '© IWM A 21992',
   },
   {
     id: 'signals-secrets',
@@ -52,13 +44,9 @@ const colourways = [
     bg: '#B85C38',
     text: '#F5ECD7',
     accent: '#E07B45',
-    link: '/news',
+    link: '/history',
     linkLabel: 'Uncover the Intelligence War',
     code: 'HX 236',
-    img: '/images/A_convoy_conference_in_progress,_August_1942._A11796.jpg',
-    imgAlt: 'A convoy conference in progress, August 1942 - masters and naval officers planning the crossing',
-    imgCaption: 'A convoy conference in progress, 1942',
-    imgCredit: '© IWM A 11796',
   },
   {
     id: 'life-at-sea',
@@ -71,10 +59,6 @@ const colourways = [
     link: '/memorial',
     linkLabel: 'Remember Those Who Served',
     code: 'SL 125',
-    img: '/images/Officers_on_the_bridge.jpg',
-    imgAlt: 'Officers keeping watch on the bridge of an escort vessel in the Atlantic',
-    imgCaption: 'Officers on the bridge of an escort vessel',
-    imgCredit: '© IWM',
   },
 ]
 
@@ -232,7 +216,7 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 2.9, duration: 0.8 }}
           >
-            The Battle of the Atlantic Story Experience is the world's first museum dedicated to the longest continuous military campaign of World War II - centred around the U-534 submarine, the only U-boat raised from the seabed after combat - and home to the world's largest memorial to the Atlantic Campaign.
+            The Battle of the Atlantic Story Experience is the world's first museum dedicated to the longest continuous military campaign of World War II - centred around U-534, the only U-boat raised from the seabed after combat - and home to the world's largest memorial to the Atlantic Campaign.
           </motion.p>
 
           <motion.div
@@ -319,7 +303,13 @@ export default function HomePage() {
               className="font-montserrat text-lg leading-relaxed max-w-3xl mx-auto mb-6"
               style={{ color: 'rgba(248, 244, 238, 0.8)' }}
             >
-                From 1939 to 1945, the Battle of the Atlantic determined the survival of Britain and the outcome of the Second World War. Without victory at sea, there would have been no D-Day and liberation of Europe. The war would have been lost. The Battle of the Atlantic museum exists so the story is never forgotten, and is told through the artefacts, voices and experiences of those who bravely lived through the battle. At the heart of the museum, is the U-534, the last U-boat to leave Germany before the surrender. The submarine was sunk on 5 May 1945 and raised from the Kattegat seabed in 1993. The U-534 is now the centre piece of this new museum and is preserved in Woodside.
+                From 1939 to 1945, the Battle of the Atlantic determined the survival of Britain and the outcome of the Second World War. Without victory at sea, there would have been no D-Day and liberation of Europe. The war would have been lost. The Battle of the Atlantic Story exists so that this is never forgotten. The story is told through the artefacts, voices and experiences of those who bravely lived through the battle.
+            </p>
+            <p
+              className="font-montserrat text-lg leading-relaxed max-w-3xl mx-auto mb-6"
+              style={{ color: 'rgba(248, 244, 238, 0.8)' }}
+            >
+                At the heart of the museum is U-534, the last U-boat to leave Germany before the surrender. The submarine was sunk on 5 May 1945 and raised from the Kattegat seabed in 1993.
             </p>
             <Link
               href="/history"
@@ -537,56 +527,6 @@ export default function HomePage() {
                       <span>→</span>
                     </Link>
                   </div>
-
-                  {/* Archival photograph - presented like a filed record */}
-                  <div className="flex-shrink-0 w-full lg:w-[420px]">
-                    <div
-                      className="relative shadow-2xl transition-transform duration-500 hover:rotate-0"
-                      style={{ transform: `rotate(${i % 2 === 0 ? '-1.5' : '1.5'}deg)` }}
-                    >
-                      <div
-                        className="p-3 pb-2"
-                        style={{ background: '#F5ECD7' }}
-                      >
-                        <ParallaxImage
-                          src={zone.img}
-                          alt={zone.imgAlt}
-                          aspectRatio="3/2"
-                          strength={5}
-                          sizes="(max-width: 1024px) 100vw, 420px"
-                        />
-                        <div className="flex items-center justify-between pt-2 px-1">
-                          <p
-                            className="font-mono"
-                            style={{ fontSize: 10, color: '#2D4F5C', letterSpacing: '0.06em' }}
-                          >
-                            {zone.imgCaption}
-                          </p>
-                          <p
-                            className="font-mono flex-shrink-0 ml-3"
-                            style={{ fontSize: 9, color: '#9BA8A8', letterSpacing: '0.08em' }}
-                          >
-                            {zone.imgCredit}
-                          </p>
-                        </div>
-                      </div>
-                      {/* Convoy code stamp */}
-                      <div
-                        className="absolute -top-3 -right-3 px-3 py-1.5 shadow-lg"
-                        style={{
-                          background: zone.accent,
-                          transform: 'rotate(4deg)',
-                        }}
-                      >
-                        <p
-                          className="font-mono font-bold text-xs uppercase"
-                          style={{ color: '#F8F4EE', letterSpacing: '0.15em' }}
-                        >
-                          Convoy {zone.code}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -686,7 +626,7 @@ export default function HomePage() {
                   className="font-montserrat text-lg leading-relaxed mb-6"
                   style={{ color: 'rgba(248, 244, 238, 0.85)' }}
                 >
-                  Commissioned in December 1942, U-534 was one of the last U-boats to leave Germany before the surrender. On 5 May 1945, just days before VE Day, she was intercepted by RAF Liberators from No. 86 Squadron and sunk in the Kattegat. She lay on the seabed for nearly five decades before her remarkable recovery in 1993. Now carefully preserved in sections in the Wirral, the U-534 offers a rare and extraordinary insight into life aboard a Second World War German U-boat, as well as the personal stories of the men who crewed her.
+                  Commissioned in December 1942, U-534 was one of the last U-boats to leave Germany before the surrender. On 5 May 1945, just days before VE Day, she was intercepted by RAF Liberators from No. 86 Squadron and sunk in the Kattegat. She lay on the seabed for nearly five decades before her remarkable recovery in 1993. Now carefully preserved in sections in the Wirral, U-534 offers a rare and extraordinary insight into life aboard a Second World War German U-boat, as well as the personal stories of the men who crewed her.
                 </p>
                 <Link
                   href="/u-boat"

@@ -4,7 +4,7 @@ import { visitorFaqs } from '@/data/faqs'
 export const metadata: Metadata = {
   title: 'Visit the Museum | WW2 Museum in Birkenhead, near Liverpool',
   description:
-    'Plan your visit to the Battle of the Atlantic Story - a new WW2 museum at Woodside, Birkenhead, minutes from Liverpool by Mersey Ferry. Four exhibition zones, the U-534 U-boat, family activities, and school visits. Opening 2027.',
+    'Plan your visit to the Battle of the Atlantic Story - a new WW2 museum at Woodside, Birkenhead, minutes from Liverpool by Mersey Ferry. Four exhibition zones, the U-boat U-534, family activities, and school visits. Opening 2027.',
   openGraph: {
     title: 'Visit the Museum | Battle of the Atlantic Story',
     description:

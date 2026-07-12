@@ -49,35 +49,6 @@ export default function Footer() {
               military campaign of World War II. Opening in 2027 at Woodside Ferry, Birkenhead, on the
               River Mersey opposite Liverpool.
             </p>
-            {/* Convoy identification card */}
-            <div
-              className="inline-flex items-stretch rounded overflow-hidden shadow-lg"
-              style={{ background: '#F5ECD7' }}
-            >
-              <div className="px-3 py-2">
-                <p
-                  className="font-mono text-slate-deep font-bold"
-                  style={{ fontSize: 9, letterSpacing: '0.15em', opacity: 0.5 }}
-                >
-                  CONVOY
-                </p>
-                <div className="mt-1 space-y-0.5">
-                  <div className="h-1 rounded" style={{ background: '#B85C38', width: 40 }} />
-                  <div className="h-0.5 rounded" style={{ background: '#9BA8A8', width: 30 }} />
-                </div>
-              </div>
-              <div
-                className="flex items-center justify-center px-3"
-                style={{ background: '#B85C38' }}
-              >
-                <span
-                  className="font-montserrat font-black text-white"
-                  style={{ fontSize: 13, letterSpacing: '0.02em' }}
-                >
-                  HX 236
-                </span>
-              </div>
-            </div>
           </div>
 
           {/* Centre: Navigation */}
@@ -139,22 +110,6 @@ export default function Footer() {
                 </a>
               </p>
             </address>
-
-            <div className="flex gap-4 mt-6">
-              {['Twitter', 'Facebook', 'Instagram'].map((social) => (
-                <a
-                  key={social}
-                  href="#"
-                  aria-label={social}
-                  className="w-9 h-9 border flex items-center justify-center transition-all duration-200 hover:bg-offwhite hover:border-offwhite hover:text-teal-primary"
-                  style={{ borderColor: 'rgba(248, 244, 238, 0.3)', color: 'rgba(248, 244, 238, 0.6)' }}
-                >
-                  <span className="font-montserrat font-bold text-xs">
-                    {social[0]}
-                  </span>
-                </a>
-              ))}
-            </div>
           </div>
         </div>
 

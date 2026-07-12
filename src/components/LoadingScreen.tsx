@@ -357,6 +357,11 @@ export default function LoadingScreen() {
     if (finishedRef.current) return
     finishedRef.current = true
     cancelAnimationFrame(rafRef.current)
+    try {
+      sessionStorage.setItem('botas-intro-seen', '1')
+    } catch {
+      /* storage unavailable — intro will simply replay */
+    }
     setVisible(false)
     const ctx = ctxRef.current
     if (ctx) {
@@ -381,6 +386,20 @@ export default function LoadingScreen() {
   // Decide, on mount, whether to show the gate. Reduced-motion visitors
   // skip the cinematic sequence (and its audio) entirely.
   useEffect(() => {
+    // Play the intro once per browsing session — returning to Home in the
+    // same session goes straight to the page.
+    let seen = false
+    try {
+      seen = sessionStorage.getItem('botas-intro-seen') === '1'
+    } catch {
+      /* storage unavailable */
+    }
+    if (seen) {
+      finishedRef.current = true
+      setVisible(false)
+      return
+    }
+
     const reducedMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)'
     ).matches

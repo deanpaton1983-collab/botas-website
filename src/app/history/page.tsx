@@ -64,9 +64,9 @@ const sections: { heading: string; paragraphs: React.ReactNode[] }[] = [
       <>
         The Allied answer to the U-boat threat was the convoy system: merchant
         ships crossing in organised groups, escorted by warships and, where
-        possible, aircraft. Convoys with codes such as HX, SC, ON, and SL
-        criss-crossed the ocean throughout the war, often through mountainous
-        seas and Arctic cold as well as under constant threat of attack.
+        possible, aircraft. Convoys crisscrossed the ocean throughout the war,
+        often through mountainous seas and Arctic cold, under constant threat
+        of attack.
       </>,
       <>
         Against them, German U-boats hunted in coordinated groups - the

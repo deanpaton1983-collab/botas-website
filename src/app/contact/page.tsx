@@ -1,7 +1,80 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import ScrollReveal from '@/components/ScrollReveal'
+
+// Formspree endpoint — replace YOUR_FORM_ID with the ID from
+// https://formspree.io once the free account is set up.
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID'
+
+function RegisterInterestForm() {
+  const [email, setEmail] = useState('')
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!email || status === 'sending') return
+    setStatus('sending')
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ email, message: 'Register interest — opening updates' }),
+      })
+      setStatus(res.ok ? 'sent' : 'error')
+    } catch {
+      setStatus('error')
+    }
+  }
+
+  if (status === 'sent') {
+    return (
+      <p
+        className="font-montserrat text-sm mt-4"
+        style={{ color: '#7ECECE' }}
+      >
+        Thank you — we&rsquo;ll be in touch when opening details are announced.
+      </p>
+    )
+  }
+
+  return (
+    <form onSubmit={submit} className="mt-4 flex flex-col sm:flex-row gap-3">
+      <label htmlFor="register-email" className="sr-only">
+        Email address
+      </label>
+      <input
+        id="register-email"
+        type="email"
+        name="email"
+        required
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Your email address"
+        className="flex-1 px-4 py-3 font-montserrat text-sm outline-none"
+        style={{
+          background: 'rgba(248,244,238,0.06)',
+          border: '1px solid rgba(126,206,206,0.3)',
+          color: '#F8F4EE',
+        }}
+      />
+      <button
+        type="submit"
+        disabled={status === 'sending'}
+        className="font-montserrat font-bold text-xs uppercase px-6 py-3 transition-opacity hover:opacity-85 disabled:opacity-50"
+        style={{ background: '#7ECECE', color: '#0d1f35', letterSpacing: '0.15em' }}
+      >
+        {status === 'sending' ? 'Sending…' : 'Register Interest'}
+      </button>
+      {status === 'error' && (
+        <p className="font-montserrat text-xs self-center" style={{ color: '#E07B45' }}>
+          Something went wrong — please try again or email us directly.
+        </p>
+      )}
+    </form>
+  )
+}
 
 export default function ContactPage() {
   return (
@@ -205,6 +278,7 @@ export default function ContactPage() {
                   >
                     Opening times and ticket prices will be announced closer to the opening date. Register your interest to be the first to hear.
                   </p>
+                  <RegisterInterestForm />
                 </div>
               </div>
             </ScrollReveal>
@@ -223,7 +297,7 @@ export default function ContactPage() {
                     { mode: 'Ferry', detail: 'Mersey Ferry from Pier Head Liverpool - 10 minutes' },
                     { mode: 'Bus', detail: 'Routes 432 and 433 from Hamilton Square' },
                     { mode: 'Train', detail: 'Hamilton Square, 5-minute walk' },
-                    { mode: 'Car', detail: 'CH41 6DU · Free visitor parking on site' },
+                    { mode: 'Car', detail: 'CH41 6DU' },
                   ].map((item) => (
                     <div key={item.mode} className="flex gap-3">
                       <span
