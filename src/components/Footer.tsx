@@ -8,7 +8,6 @@ const navLinks = [
   { href: '/museum', label: 'Visit the Museum' },
   { href: '/u-boat', label: 'U-534: The U-Boat' },
   { href: '/history', label: 'Battle of the Atlantic History' },
-  { href: '/atlantic', label: 'The Battle at Sea' },
   { href: '/memorial', label: 'Memorial' },
   { href: '/news', label: 'News' },
   { href: '/contact', label: 'Contact' },
