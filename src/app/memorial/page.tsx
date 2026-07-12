@@ -217,18 +217,41 @@ export default function MemorialPage() {
                   The memorial will be constructed using steel for strength and endurance and interwoven with genuine pieces of steel from a number of Battle of the Atlantic vessels including U-534. The surfaces are hand-patinated transforming the material to evoke the sense of waves, time, and memory, allowing the work to carry the atmosphere of the sea itself.
                 </p>
               </div>
-              {/* Memorial building image */}
-              <div
-                className="relative overflow-hidden"
-                style={{ aspectRatio: '4/3' }}
-              >
-                <Image
-                  src="/images/memorial-building.jpg"
-                  alt="Battle of the Atlantic memorial building at sunset"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
+              <div className="space-y-8">
+                {/* Memorial building image */}
+                <div
+                  className="relative overflow-hidden"
+                  style={{ aspectRatio: '4/3' }}
+                >
+                  <Image
+                    src="/images/memorial-building.jpg"
+                    alt="Battle of the Atlantic memorial building at sunset"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                </div>
+                {/* Emma Rodgers portrait */}
+                <figure>
+                  <div
+                    className="relative overflow-hidden"
+                    style={{ aspectRatio: '16/9' }}
+                  >
+                    <Image
+                      src="/images/emma-rogers.jpg"
+                      alt="Sculptor Emma Rodgers at work"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                    />
+                  </div>
+                  <figcaption
+                    className="font-mono text-xs mt-3"
+                    style={{ color: 'rgba(45, 79, 92, 0.55)', letterSpacing: '0.08em' }}
+                  >
+                    Emma Rodgers · Sculptor of the Battle of the Atlantic Memorial
+                  </figcaption>
+                </figure>
               </div>
             </div>
           </ScrollReveal>

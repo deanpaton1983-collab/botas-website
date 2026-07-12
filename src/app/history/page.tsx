@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import ScrollReveal from '@/components/ScrollReveal'
+import ParallaxImage from '@/components/ParallaxImage'
 
 export const metadata: Metadata = {
   title: 'What Was the Battle of the Atlantic? | History, Facts & Timeline',
@@ -35,7 +37,20 @@ const keyFacts = [
   { n: '2,000+', l: 'Ships in port on the Mersey at busy times' },
 ]
 
-const sections: { heading: string; paragraphs: React.ReactNode[] }[] = [
+type SectionImage = {
+  /** insert after this paragraph index (0-based) */
+  after: number
+  src: string
+  alt: string
+  caption?: string
+  credit?: string
+}
+
+const sections: {
+  heading: string
+  paragraphs: React.ReactNode[]
+  images?: SectionImage[]
+}[] = [
   {
     heading: 'The Longest Campaign of the Second World War',
     paragraphs: [
@@ -56,6 +71,15 @@ const sections: { heading: string; paragraphs: React.ReactNode[] }[] = [
         later wrote that the U-boat peril was the only thing that ever really
         frightened him during the war.
       </>,
+    ],
+    images: [
+      {
+        after: 1,
+        src: '/images/convoy_forms_in_bedford_basin.jpg',
+        alt: 'Merchant ships of an Atlantic convoy assembling in Bedford Basin, Halifax, Nova Scotia',
+        caption:
+          'A convoy assembles in Bedford Basin, Halifax, before the Atlantic crossing',
+      },
     ],
   },
   {
@@ -80,6 +104,23 @@ const sections: { heading: string; paragraphs: React.ReactNode[] }[] = [
         the U-boat arm - Germany lost 41 boats in a single month and withdrew
         from the North Atlantic convoy routes. The lifeline held.
       </>,
+    ],
+    images: [
+      {
+        after: 0,
+        src: '/images/Depth_charges_explode_astern_of_HMS_STARLING_of_the_2nd_Escort_Group_in_the_Atlantic,_January_1944._A21992.jpg',
+        alt: 'Depth charges exploding astern of HMS Starling of the 2nd Escort Group in the Atlantic, January 1944',
+        caption:
+          'Depth charges explode astern of HMS Starling of the 2nd Escort Group, January 1944',
+        credit: '© IWM A 21992',
+      },
+      {
+        after: 1,
+        src: '/images/Vickers_Wellington_Leigh_Light.jpg',
+        alt: 'A Leigh Light searchlight fitted beneath an RAF Vickers Wellington aircraft',
+        caption:
+          'The Leigh Light - a powerful searchlight that let RAF aircraft attack surfaced U-boats at night',
+      },
     ],
   },
   {
@@ -118,6 +159,15 @@ const sections: { heading: string; paragraphs: React.ReactNode[] }[] = [
         is being created.
       </>,
     ],
+    images: [
+      {
+        after: 0,
+        src: '/images/A_convoy_conference_in_progress,_August_1942._A11796.jpg',
+        alt: 'Naval officers and merchant ship masters at a convoy conference, August 1942',
+        caption: 'A convoy conference in progress, August 1942',
+        credit: '© IWM A 11796',
+      },
+    ],
   },
   {
     heading: 'The Human Cost - On Both Sides',
@@ -141,6 +191,16 @@ const sections: { heading: string; paragraphs: React.ReactNode[] }[] = [
         conflict.
       </>,
     ],
+    images: [
+      {
+        after: 0,
+        src: '/images/Leaning_against_a_depth_charge_thrower,_the_quarterdeck_lookout_on_board_HMS_VISCOUNT_searches_the_sea_for_submarines,_1942._A13362.jpg',
+        alt: 'The quarterdeck lookout on board HMS Viscount searching the sea for submarines, 1942',
+        caption:
+          'The quarterdeck lookout on HMS Viscount searches the sea for submarines, 1942',
+        credit: '© IWM A 13362',
+      },
+    ],
   },
   {
     heading: 'U-534: A Survivor of the Final Days',
@@ -158,6 +218,15 @@ const sections: { heading: string; paragraphs: React.ReactNode[] }[] = [
         who crewed the U-boats.
       </>,
     ],
+    images: [
+      {
+        after: 0,
+        src: '/images/U-boat_Warfare_1939-1945_C3780.jpg',
+        alt: 'A German U-boat running on the surface during the Second World War',
+        caption: 'A German U-boat at sea, 1939–45',
+        credit: '© IWM C 3780',
+      },
+    ],
   },
 ]
 
@@ -169,6 +238,24 @@ export default function HistoryPage() {
         className="relative py-36 overflow-hidden"
         style={{ backgroundColor: '#2D4F5C' }}
       >
+        {/* Archival convoy photograph background */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/Convoy_WS-12_en_route_to_Cape_Town,_1941.jpg"
+            alt="Convoy WS-12 en route to Cape Town, 1941"
+            fill
+            priority
+            className="object-cover"
+            sizes="100vw"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(to bottom, rgba(45,79,92,0.82) 0%, rgba(45,79,92,0.68) 50%, rgba(45,79,92,0.92) 100%)',
+            }}
+          />
+        </div>
         <div className="absolute inset-0 naval-grid-dashed pointer-events-none" />
         <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/3 pointer-events-none">
           <svg width="500" height="500" viewBox="0 0 500 500" aria-hidden="true">
@@ -199,6 +286,7 @@ export default function HistoryPage() {
               fontSize: 'clamp(2rem, 5vw, 4rem)',
               letterSpacing: '0.08em',
               lineHeight: 1.05,
+              textShadow: '0 4px 40px rgba(0,0,0,0.45)',
             }}
           >
             What Was the Battle
@@ -207,7 +295,7 @@ export default function HistoryPage() {
           </h1>
           <p
             className="font-montserrat text-lg max-w-2xl leading-relaxed"
-            style={{ color: 'rgba(248, 244, 238, 0.8)' }}
+            style={{ color: 'rgba(248, 244, 238, 0.85)' }}
           >
             The six-year struggle for control of the Atlantic Ocean - the
             longest continuous military campaign of the Second World War, and
@@ -288,13 +376,28 @@ export default function HistoryPage() {
                   {section.heading}
                 </h2>
                 {section.paragraphs.map((p, j) => (
-                  <p
-                    key={j}
-                    className="font-montserrat text-base lg:text-lg leading-relaxed mb-5 last:mb-0"
-                    style={{ color: 'rgba(248,244,238,0.82)' }}
-                  >
-                    {p}
-                  </p>
+                  <div key={j}>
+                    <p
+                      className="font-montserrat text-base lg:text-lg leading-relaxed mb-5 last:mb-0"
+                      style={{ color: 'rgba(248,244,238,0.82)' }}
+                    >
+                      {p}
+                    </p>
+                    {section.images
+                      ?.filter((img) => img.after === j)
+                      .map((img) => (
+                        <ParallaxImage
+                          key={img.src}
+                          src={img.src}
+                          alt={img.alt}
+                          caption={img.caption}
+                          credit={img.credit}
+                          aspectRatio="16/9"
+                          sizes="(max-width: 768px) 100vw, 768px"
+                          className="my-8"
+                        />
+                      ))}
+                  </div>
                 ))}
               </div>
             </ScrollReveal>
