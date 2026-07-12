@@ -25,7 +25,7 @@ const SLIDES = [
   },
 ]
 
-const SLIDE_MS = 6000
+const SLIDE_MS = 4500
 
 export default function HeroSlideshow() {
   const [index, setIndex] = useState(0)
