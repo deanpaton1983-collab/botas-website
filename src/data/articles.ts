@@ -12,6 +12,46 @@ export interface ArticleContent {
 }
 
 export const articleContent: Record<number, ArticleContent> = {
+  12: {
+    id: 12,
+    category: 'museum',
+    date: 'July 2026',
+    title: 'Big Heritage Uses AI to Unlock Thousands of Unseen Documents from U-534',
+    subtitle: 'A new Archive Intelligence System is opening up a century-old collection that has never been catalogued, translated, or made accessible to researchers and the public',
+    readTime: '6 min read',
+    convoyCode: 'AI 26',
+    image: '/images/ai-archive-u534.jpg',
+    imageAlt: 'Handwritten Sütterlin-script archive documents recovered from U-534',
+    sections: [
+      {
+        body: 'Big Heritage is using artificial intelligence to open up one of its most significant untapped resources: the archive recovered from U-534, the German U-boat which has been acquired by the company as the centrepiece of a new Battle of the Atlantic visitor attraction set to open in Birkenhead next year.\n\nThe collection contains thousands of documents, many of which have never been catalogued, translated, or made accessible to researchers and the public, and Big Heritage is now applying AI tools to change that.',
+      },
+      {
+        heading: 'Cracking a Century-Old Code',
+        body: 'Big Heritage is now using AI-assisted translation to begin working through these records, opening the door to material that includes operational documents, personal correspondence, and other detail from the U-boat’s history.\n\nMany of the hand-written documents are written in Sütterlin, an historical form of German handwriting that fell out of everyday use decades ago and that very few people today can read. Until now, this has meant that a huge proportion of the collection has remained effectively locked away, its contents unknown even to the team caring for it.',
+      },
+      {
+        heading: 'Building an Archive Intelligence System',
+        body: 'To support this work, Big Heritage has built its own Archive Intelligence System for the U-Boat Story collection. The system brings together collection management with an AI-powered search tool that lets users search across archived documents using plain, natural language, rather than needing to know precise catalogue references or search terms in advance.\n\nAs the AI Sütterlin translation work progresses, this searchability will become increasingly valuable, allowing previously inaccessible material to be found and cross-referenced.',
+      },
+      {
+        heading: 'The AI Specialist Leading the Work',
+        body: 'This work is being led by Dajshay Sivakumar, who joined Big Heritage in June as AI Specialist. Dajshay is currently completing an MSc in Advanced Data Science and Artificial Intelligence at the University of Liverpool, with a background in machine learning, data analytics, data mining and visualisation, and the design and implementation of AI systems.\n\nHe designed and built the Archive Intelligence System, and is leading the effort to translate the Sütterlin-script records within the U-534 collection, alongside ensuring the thousands of documents and objects can be rapidly catalogued and shared free online for others to access.\n\nDajshay said: “There are thousands of documents in this collection that simply haven’t been read yet, some of them for the best part of a century. Being able to apply AI to both the translation and the searchability of this archive means we can start to properly understand what’s in there, and make it something researchers and visitors can actually explore, rather than a box of paper nobody can get into.”',
+      },
+      {
+        heading: 'No Longer Limited',
+        body: 'Dean Paton, Chief Executive Officer at Big Heritage, said: “The U-534 archive is an extraordinary resource, but its scale and the language barrier have kept much of it out of reach for years. What Dajshay has built means we’re no longer limited by that. We can start surfacing material that’s been sitting unread since the war, and make it searchable and accessible in a way that simply wasn’t possible before.”',
+      },
+      {
+        heading: 'Blank Papers, New Identities',
+        body: 'One early discovery has been the translation of a pile of papers discovered fused together after 50 years under the water that turned out to be blank birth certificates and identification documents purporting to be from Romania and Poland, which the team now believe were carried on U-534 to allow crew to fabricate new identities at the very end of the war.\n\nDean said: “We have interviews with crew from U-534 where one sailor said they left port as the war was coming to a close and so they pilfered useful toolboxes and engineering kit so they could potentially use these to start a new life elsewhere. The discovery of these new documents adds credence to this but also indicates this may have been more than just a last-minute decision.”',
+      },
+      {
+        heading: 'What’s Next',
+        body: 'The Archive Intelligence System will continue to be developed as translation work on the U-534 collection progresses, with Big Heritage planning to eventually offer the archive system as a free, open source model for other museums to use.',
+      },
+    ],
+  },
   10: {
     id: 10,
     category: 'museum',

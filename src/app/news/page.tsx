@@ -7,6 +7,16 @@ import ScrollReveal from '@/components/ScrollReveal'
 
 const articles = [
   {
+    id: 12,
+    date: 'July 2026',
+    title: 'Big Heritage Uses AI to Unlock Thousands of Unseen Documents from U-534',
+    excerpt: 'Big Heritage has built its own Archive Intelligence System to begin AI-assisted translation of thousands of uncatalogued U-534 documents, many written in Sütterlin, a historical German handwriting few today can read.',
+    readTime: '6 min read',
+    convoyCode: 'AI 26',
+    image: '/images/ai-archive-u534.jpg',
+    imageAlt: 'Handwritten Sütterlin-script archive documents recovered from U-534',
+  },
+  {
     id: 11,
     date: 'July 2026',
     title: 'Pier Head Memorial Service to Honour WWII Naval Hero Captain Johnnie Walker',
